@@ -12,7 +12,7 @@ set :model_manager, "doctrine"
 # Or: `propel`
 role :web, domain # Your HTTP server, Apache/etc
 role :app, domain, :primary => true # This may be the same as your `Web` server
-set :keep_releases, 3
+set :keep_releases, 2
 set :use_sudo, false
 set :ssh_options, { :forward_agent => true }
 # Be more verbose by uncommenting the following line
