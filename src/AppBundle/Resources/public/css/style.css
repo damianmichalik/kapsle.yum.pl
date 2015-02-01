@@ -21,3 +21,25 @@ footer {
 form.navbar-form {
     padding: 10px 15px !important;
 }
+.listing {
+    margin: 0px;
+    padding: 0px;
+    list-style: outside none none;
+}
+.listing li .item {
+    padding: 0px 18px 20px;
+}
+.listing li .item a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+.item a .product-name {
+    clear: both;;
+    color: #000;
+}
+.item a .img-thumb {
+    display: block;
+    margin: 0px auto;
+    max-width: 100%;
+}

@@ -1,5 +1,22 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block pageContainer %}
-Hello!
+
+<ul class="listing row">
+    
+    {% for cap in pagination %}
+    <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">     
+        <div class="item">
+            <a href="http://m.riccardo.pl/ona/buty-damskie/baleriny/balerinki-mel-by-melissa-mel-pop-viii-sp-black-beige-31538-51496">                
+                <img class="img-thumb img-responsive" src="http://img.riccardo.pl/images/products/33600/balerinki-mel-by-melissa-mel-pop-viii-sp-black-beige-31538-51496_54cb47cf04947_p_lising.jpg" alt="BALERINKI MEL BY MELISSA MEL POP VIII SP BLACK BEIGE" border="0">                
+                <span class="product-name">{{ cap.name }}</span>
+            </a>
+        </div>        
+    </li>
+    {% endfor %}
+    
+</ul>
+    
+{{ knp_pagination_render(pagination) }}    
+
 {% endblock %}

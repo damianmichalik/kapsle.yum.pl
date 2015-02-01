@@ -6,8 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction($page)
     {
-        return $this->render('AppBundle:Default:index.html.twig');
+        $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');                
+        $allCaps = $CapsRepo->findAll();
+        
+        $limit = 2;
+        
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($allCaps, $page, $limit);
+        
+        return $this->render('AppBundle:Default:index.html.twig', array(
+            'pagination' => $pagination
+        ));
     }
 }

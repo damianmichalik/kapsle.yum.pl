@@ -18,22 +18,23 @@
                 </div>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search">
+                      <input type="text" class="form-control" placeholder="Szukaj...">
                     </div>
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"><span></button>
                   </form>
             </div>
         </header>
         <div class="container">
-            <div id="header">
-                
-            </div>
             {% block pageContainer %}{% endblock %}
         </div>
         <footer>
             <div class="container">
-                <p>Copyright &copy 2015 Damian 12345</p>
+                <p>Copyright &copy 2015 Damian</p>
             </div>
         </footer>
+                
+        <script src="{{ asset('bundles/app/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
+        
     </body>
 </html>
