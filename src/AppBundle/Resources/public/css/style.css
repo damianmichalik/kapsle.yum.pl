@@ -43,3 +43,7 @@ form.navbar-form {
     margin: 0px auto;
     max-width: 100%;
 }
+#caps-card h1 {
+    font: 1.286em;
+    margin: 8px 0px 6px;
+}

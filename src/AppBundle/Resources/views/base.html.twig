@@ -16,15 +16,22 @@
                         <a href="{{ path('app_homepage') }}">Mój katalog kapsli</a>
                     </h1>
                 </div>
-                <form class="navbar-form navbar-right" role="search">
+                <form class="navbar-form navbar-right" action="{{ path('caps_search') }}" role="search">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Szukaj...">
+                        <input value="{{ searchParam is defined ? searchParam : '' }}" type="text" class="form-control" name="search" placeholder="Szukaj...">
                     </div>
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"><span></button>
-                  </form>
+                </form>                    
             </div>
         </header>
         <div class="container">
+            
+            <ol class="breadcrumb">
+                <li><a href="{{ path('app_homepage') }}">Home</a></li>
+                {% block breadcrumb %}
+                {% endblock %}
+            </ol>
+            
             {% block pageContainer %}{% endblock %}
         </div>
         <footer>

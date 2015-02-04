@@ -11,7 +11,7 @@ class DefaultController extends Controller
         $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');                
         $allCaps = $CapsRepo->findAll();
         
-        $limit = 2;
+        $limit = $this->container->getParameter('pagination_limit');
         
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($allCaps, $page, $limit);

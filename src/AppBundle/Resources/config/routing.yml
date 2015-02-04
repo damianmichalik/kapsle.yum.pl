@@ -5,3 +5,16 @@ app_homepage:
     defaults:
         _controller: AppBundle:Default:index
         page: 1 
+        
+caps_details:
+    path: /kapsel/{slug}
+    defaults:
+        _controller: AppBundle:Caps:capsDetails
+        
+caps_search:
+    path: /szukaj/{page}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Caps:search
+        page: 1     

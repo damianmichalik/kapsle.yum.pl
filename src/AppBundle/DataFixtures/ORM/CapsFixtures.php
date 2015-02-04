@@ -29,6 +29,24 @@ class CapsFixtures extends AbstractFixture implements OrderedFixtureInterface {
             ),
             array(
                 'name' => 'Kapsel 5'
+            ),
+            array(
+                'name' => 'Kapsel 5'
+            ),
+            array(
+                'name' => 'Kapsel 5'
+            ),
+            array(
+                'name' => 'Kapsel 5'
+            ),
+            array(
+                'name' => 'Kapsel 5'
+            ),
+            array(
+                'name' => 'Kapsel 5'
+            ),
+            array(
+                'name' => 'Kapsel 5'
             )
         );
         

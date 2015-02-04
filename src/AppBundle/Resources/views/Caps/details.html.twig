@@ -1,0 +1,13 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block breadcrumb %}
+    <li>{{ cap.name }}</li>
+{% endblock %}
+
+{% block pageContainer %}
+
+    <section id="caps-card">
+        <h1>{{ cap.name }}</h1>
+    </section>
+
+{% endblock %}
