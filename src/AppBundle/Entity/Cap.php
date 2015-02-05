@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CapRepository")
  * @ORM\Table(name="caps", options={"collate"="utf8_polish_ci", "charset"="utf8"}) 
  */
 class Cap {

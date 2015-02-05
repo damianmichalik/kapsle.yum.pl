@@ -29,11 +29,7 @@ class CapsController extends Controller {
         
         $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');    
         
-        $searchResults = $CapsRepo->createQueryBuilder('c')
-            ->where('c.name LIKE :name')
-            ->setParameter('name', '%'.$searchParam.'%')
-            ->getQuery()
-            ->getArrayResult();
+        $searchResults = $CapsRepo->searchCaps($searchParam);
         
         $limit = $this->container->getParameter('pagination_limit');
         
