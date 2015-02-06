@@ -1,0 +1,84 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block pageContent %}
+
+<div class="content-box-large">
+    
+    <div class="panel-heading">
+        <div class="panel-title">Zarządzanie kapslami</div>
+    </div>
+    
+    {#<div class="panel-body">            
+        <a href="{{ path('kwatery_admin_slides_form_action') }}" class="btn btn-success btn-sm">Dodaj nowy slajd</a>        
+    </div>#}
+
+    <div class="panel-body">
+        
+        <div class="row form-row">
+            <form action="{{ path('admin_caps_list') }}" method="get" class="form-inline">
+                <div class="col-xs-6">
+                    <div id="example_length" class="form-group dataTables_length">                        
+                        <select class="form-control" size="1" name="limit" id="limit">
+                            {% for limit in limits %}
+                                <option {{ currLimit == limit ? 'selected="selected"':'' }} value="{{ limit }}">
+                                    {{ limit }}
+                                </option>
+                            {% endfor %}
+                        </select> 
+                        <label>                            
+                            rekordów na stronie
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group float-right">                  
+                        <label>Szukaj:</label> <input class="form-control"  type="text" value="{{ queryParams['searchKeyword'] }}" name="searchKeyword">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'ID', 'p.id') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Nazwa', 'p.title') }}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cap in pagination %}
+                    <tr>
+                        <td>{{ cap.id }}</td>
+                        <td>{{ cap.name }}</td>
+                        <td>
+                            {#<div class="btn-group">
+                                <a title="Pokaż" href="{{ path('kwatery_admin_show_slide', {'id' : slide.id} ) }}" class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                </a>
+                                <a title="Edytuj" href="{{ path('kwatery_admin_slides_form_action', {'id' : slide.id}) }}" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                                {% set tokenName = csrfProvider.generateCsrfToken(deleteTokenName|format(slide.id)) %}
+                                {% set deleteUrl = path('kwatery_admin_delete_slide', {'id': slide.id, 'token': tokenName}) %}
+                                <a title="Usuń" href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmAction="Czy na pewno chcesz usunąć wybrany rekord?">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </div>#}
+                        </td>                
+                    </tr>
+                    {% endfor %}                    
+                </tbody>
+            </table>
+                
+            {{ knp_pagination_render(pagination, 'AdminBundle:Pagination:admin_pagination.html.twig') }}
+
+        </div>
+
+    </div>
+    
+</div>
+
+{% endblock %}

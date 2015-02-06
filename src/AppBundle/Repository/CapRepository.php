@@ -17,4 +17,22 @@ class CapRepository extends EntityRepository {
         return $searchResults;        
     }
     
+    public function getQueryBuilder ($params = array())
+    {
+        $qb = $this->createQueryBuilder('c')
+                ->select('c');
+        
+        if(!empty($params['orderBy'])) {
+            $orderDir = !empty($params['orderDir']) ? $params['orderDir'] : null;
+            $qb->orderBy($params['orderBy'], $orderDir);
+        }
+        
+        if (!empty($params['searchKeyword'])) {
+            $qb->andWhere('c.name LIKE :searchParam')
+                    ->setParameter('searchParam', '%'.$params['searchKeyword'].'%');
+        }
+        
+        return $qb;
+    }
+    
 }

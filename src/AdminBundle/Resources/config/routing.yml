@@ -1,0 +1,11 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+    
+admin_caps_list:
+    path: /kapsle/{page}
+    defaults:
+        page: 1
+        _controller: AdminBundle:Caps:index
+    requirements:
+        page: \d+
