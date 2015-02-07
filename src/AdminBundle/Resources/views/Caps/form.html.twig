@@ -1,0 +1,27 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block pageContent %}
+
+<div class="content-box-large">
+    
+    <div class="panel-heading">
+        {% if slideId is not null %}
+            <div class="panel-title">Edycja kapsla #{{ slideId }}</div>
+        {% else %}
+            <div class="panel-title">Nowy kapsel</div>
+        {% endif %}
+    </div>
+
+    <div class="panel-body">
+            
+            {% form_theme form with 'AdminBundle:Form:form_theme.html.twig' %}
+        
+            {{ form(form) }}
+                    
+            <a href="{{ path('admin_caps_list') }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
+
+    </div>
+
+</div>
+
+{% endblock %}

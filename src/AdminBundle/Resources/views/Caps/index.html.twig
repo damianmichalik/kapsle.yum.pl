@@ -8,9 +8,9 @@
         <div class="panel-title">Zarządzanie kapslami</div>
     </div>
     
-    {#<div class="panel-body">            
-        <a href="{{ path('kwatery_admin_slides_form_action') }}" class="btn btn-success btn-sm">Dodaj nowy slajd</a>        
-    </div>#}
+    <div class="panel-body">            
+        <a href="{{ path('admin_cap_form_action') }}" class="btn btn-success btn-sm">Dodaj nowy kapsel</a>        
+    </div>
 
     <div class="panel-body">
         
@@ -54,19 +54,19 @@
                         <td>{{ cap.id }}</td>
                         <td>{{ cap.name }}</td>
                         <td>
-                            {#<div class="btn-group">
-                                <a title="Pokaż" href="{{ path('kwatery_admin_show_slide', {'id' : slide.id} ) }}" class="btn btn-info btn-sm">
+                            <div class="btn-group">
+                                <a title="Pokaż" href="{{ path('admin_show_cap', {'id' : cap.id} ) }}" class="btn btn-info btn-sm">
                                     <span class="glyphicon glyphicon-eye-open"></span>
                                 </a>
-                                <a title="Edytuj" href="{{ path('kwatery_admin_slides_form_action', {'id' : slide.id}) }}" class="btn btn-primary btn-sm">
+                                <a title="Edytuj" href="{{ path('admin_cap_form_action', {'id' : cap.id}) }}" class="btn btn-primary btn-sm">
                                     <span class="glyphicon glyphicon-edit"></span>
                                 </a>
-                                {% set tokenName = csrfProvider.generateCsrfToken(deleteTokenName|format(slide.id)) %}
-                                {% set deleteUrl = path('kwatery_admin_delete_slide', {'id': slide.id, 'token': tokenName}) %}
+                                {% set tokenName = csrfProvider.generateCsrfToken(deleteTokenName|format(cap.id)) %}
+                                {% set deleteUrl = path('admin_delete_cap', {'id': cap.id, 'token': tokenName}) %}
                                 <a title="Usuń" href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmAction="Czy na pewno chcesz usunąć wybrany rekord?">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
-                            </div>#}
+                            </div>
                         </td>                
                     </tr>
                     {% endfor %}                    

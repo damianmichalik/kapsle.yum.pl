@@ -4,6 +4,8 @@ namespace AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Cap;
+use AdminBundle\Form\Type\CapType;
 
 class CapsController extends Controller {
     
@@ -36,6 +38,81 @@ class CapsController extends Controller {
             'limits' => $limits,
             'currLimit' => $limit
         ));
+    }
+    
+    public function deleteAction($id, $token) 
+    {
+        
+        $tokenName = sprintf($this->delete_token_name, $id);
+        $csrfProvider = $this->get('form.csrf_provider');
+        
+        if(!$csrfProvider->isCsrfTokenValid($tokenName, $token)){
+            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
+            
+        }else{
+            
+            $slide = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($slide);
+            $em->flush();
+            
+            $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
+        }
+        
+        return $this->redirect($this->generateUrl('admin_caps_list'));
+    }
+    
+    public function formAction(Request $Request, $id = NULL) {
+        
+        if(null == $id){
+            $cap = new Cap();
+            $newCapForm = true;
+        } else {
+            $cap = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
+        }
+        
+        $form = $this->createForm(new CapType(), $cap);
+        
+        $form->handleRequest($Request);
+        if($form->isValid()){
+
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($cap);
+            $em->flush();
+            
+            $message = (isset($newCapForm)) ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
+            $this->get('session')->getFlashBag()->add('success', $message);
+
+            return $this->redirect($this->generateUrl('admin_caps_list'));
+        } 
+        
+        return $this->render('AdminBundle:Caps:form.html.twig', array(
+            'form' => $form->createView(),
+            'slideId' => $id
+        ));
+        
+    }
+    
+    public function showAction($id) 
+    {
+        
+        $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');                
+        
+        $cap = $CapsRepo->find($id);
+        
+        if ($cap === null) {
+            $this->get('session')->getFlashBag()->add('error', 'Rekord nie został znaleziony');
+            
+            return $this->redirect($this->generateUrl('admin_caps_list'));
+        }
+        
+        return $this->render('AdminBundle:Caps:show.html.twig', array(
+            'cap' => $cap,
+            'deleteTokenName' => $this->delete_token_name,
+            'csrfProvider' => $this->get('form.csrf_provider')
+        ));
+        
     }
     
 }

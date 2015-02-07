@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CapRepository")
  * @ORM\Table(name="caps", options={"collate"="utf8_polish_ci", "charset"="utf8"}) 
+ * @ORM\HasLifecycleCallbacks
  */
 class Cap {
     
@@ -70,6 +71,27 @@ class Cap {
         return $this;
     }
 
-
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preSave(){
+        
+//        if(null !== $this->getImageFile()){
+//            
+//            if(null !== $this->image){
+//                $this->imageTemp = $this->image;
+//            }
+//
+//            $slug = \Kwatery\AdminBundle\Libs\Utils::sluggify($this->getName());
+//            $fileName = $slug . '_' . uniqid();
+//            
+//            $this->image = $fileName.'.'.$this->getImageFile()->guessExtension();
+//        }
+        
+        if(null == $this->createDate){
+            $this->createDate = new \DateTime();
+        }
+    }
     
 }

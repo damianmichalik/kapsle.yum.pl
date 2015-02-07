@@ -9,3 +9,25 @@ admin_caps_list:
         _controller: AdminBundle:Caps:index
     requirements:
         page: \d+
+        
+admin_delete_cap:
+    path: /kapsle/usun/{id}/{token}
+    defaults:
+        _controller: AdminBundle:Caps:delete
+    requirements:
+        id: \d+        
+
+admin_cap_form_action:
+    pattern: /kapsle/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Caps:form 
+        id: null            
+       
+admin_show_cap:
+    pattern: /kapsle/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Caps:show 
