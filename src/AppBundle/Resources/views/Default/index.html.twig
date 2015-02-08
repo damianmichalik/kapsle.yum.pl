@@ -8,7 +8,7 @@
         <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">     
             <div class="item">
                 <a href="{{ path('caps_details', {'slug' : cap.slug}) }}">                
-                    <img class="img-thumb img-responsive" src="http://img.riccardo.pl/images/products/33600/balerinki-mel-by-melissa-mel-pop-viii-sp-black-beige-31538-51496_54cb47cf04947_p_lising.jpg" alt="{{ cap.name }}" border="0">                
+                    <img class="img-thumb img-responsive" src="{{ asset(cap.thumb) }}" alt="{{ cap.name }}" border="0">                
                     <span class="product-name">{{ cap.name }}</span>
                 </a>
             </div>        

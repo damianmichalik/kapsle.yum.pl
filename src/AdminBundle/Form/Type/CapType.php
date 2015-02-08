@@ -19,10 +19,10 @@ class CapType extends AbstractType {
                 'label' => 'Nazwa',
                 'required'  => false,
             ))
-//            ->add('imageFile', 'file', array(
-//                'label' => 'Zdjęcie',
-//                'required'  => false
-//            ))   
+            ->add('imageFile', 'file', array(
+                'label' => 'Zdjęcie',
+                'required'  => false
+            ))   
             ->add('save', 'submit', array(
                 'label' => 'Zapisz'
             ));   
