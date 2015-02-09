@@ -1,2 +1,3 @@
 parameters:
     admin.pagination_limit: 2
+    admin.limits: [2, 5, 10, 15, 20]

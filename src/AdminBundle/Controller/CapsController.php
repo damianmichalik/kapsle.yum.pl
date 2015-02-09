@@ -21,7 +21,7 @@ class CapsController extends Controller {
         $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
         $allCaps = $CapsRepo->getQueryBuilder($queryParams);
         
-        $limits = array(2, 5, 10, 15);
+        $limits = $this->container->getParameter('admin.limits');
         
         $paginationLimit = $this->container->getParameter('admin.pagination_limit');
         
