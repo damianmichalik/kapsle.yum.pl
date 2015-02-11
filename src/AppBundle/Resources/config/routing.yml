@@ -18,3 +18,11 @@ caps_search:
     defaults:
         _controller: AppBundle:Caps:search
         page: 1     
+        
+caps_login:
+    path: /login
+    defaults:
+        _controller: AppBundle:Login:login
+    
+_check_path:
+    path: /login-check
