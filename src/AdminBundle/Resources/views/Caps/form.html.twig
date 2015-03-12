@@ -18,7 +18,7 @@
         
             {{ form(form) }}
                     
-            <a href="{{ path('admin_caps_list') }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
+            <a href="{{ path('admin_caps_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
 
     </div>
 

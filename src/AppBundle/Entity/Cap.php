@@ -65,6 +65,11 @@ class Cap {
      */
     private $createDate;
     
+    /**
+     * @ORM\Column(name="update_date", type="datetime")
+     */
+    private $updateDate;
+    
     public function getId() {
         return $this->id;
     }
@@ -125,6 +130,7 @@ class Cap {
 
     public function setImageFile(UploadedFile $imageFile) {
         $this->imageFile = $imageFile;
+        $this->updateDate = new \DateTime();
         return $this;
     }
 

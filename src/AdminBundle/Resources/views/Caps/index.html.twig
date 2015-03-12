@@ -9,7 +9,7 @@
     </div>
     
     <div class="panel-body">            
-        <a href="{{ path('admin_cap_form_action') }}" class="btn btn-success btn-sm">Dodaj nowy kapsel</a>        
+        <a href="{{ path('admin_cap_form_action', app.request.query.all|merge({'page' : page})) }}" class="btn btn-success btn-sm">Dodaj nowy kapsel</a>        
     </div>
 
     <div class="panel-body">
@@ -58,11 +58,11 @@
                                 <a title="Pokaż" href="{{ path('admin_show_cap', {'id' : cap.id} ) }}" class="btn btn-info btn-sm">
                                     <span class="glyphicon glyphicon-eye-open"></span>
                                 </a>
-                                <a title="Edytuj" href="{{ path('admin_cap_form_action', {'id' : cap.id}) }}" class="btn btn-primary btn-sm">
+                                <a title="Edytuj" href="{{ path('admin_cap_form_action', app.request.query.all|merge({'id': cap.id, 'page' : page})) }}" class="btn btn-primary btn-sm">
                                     <span class="glyphicon glyphicon-edit"></span>
                                 </a>
                                 {% set tokenName = csrfProvider.generateCsrfToken(deleteTokenName|format(cap.id)) %}
-                                {% set deleteUrl = path('admin_delete_cap', {'id': cap.id, 'token': tokenName}) %}
+                                {% set deleteUrl = path('admin_delete_cap', app.request.query.all|merge({'id': cap.id, 'token': tokenName, 'page' : page})) %}
                                 <a title="Usuń" href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmAction="Czy na pewno chcesz usunąć wybrany rekord?">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>

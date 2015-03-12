@@ -36,11 +36,12 @@ class CapsController extends Controller {
             'csrfProvider' => $this->get('form.csrf_provider'),
             'queryParams' => $queryParams,
             'limits' => $limits,
-            'currLimit' => $limit
+            'currLimit' => $limit,
+            'page' => $page
         ));
     }
     
-    public function deleteAction($id, $token) 
+    public function deleteAction(Request $Request, $id, $token) 
     {
         
         $tokenName = sprintf($this->delete_token_name, $id);
@@ -59,7 +60,7 @@ class CapsController extends Controller {
             $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
         }
         
-        return $this->redirect($this->generateUrl('admin_caps_list'));
+        return $this->redirect($this->generateUrl('admin_caps_list', $Request->query->all()));
     }
     
     public function formAction(Request $Request, $id = NULL) {
@@ -84,7 +85,7 @@ class CapsController extends Controller {
             $message = (isset($newCapForm)) ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
             $this->get('session')->getFlashBag()->add('success', $message);
 
-            return $this->redirect($this->generateUrl('admin_caps_list'));
+            return $this->redirect($this->generateUrl('admin_caps_list', $Request->query->all()));
         } 
         
         return $this->render('AdminBundle:Caps:form.html.twig', array(
