@@ -1,5 +1,5 @@
 #Auth messages
-"Bad credentials": "Błędne dane logowania"
+"Bad credentials.": "Błędne dane logowania"
 "User account is disabled.": "Twoje konto zostało zablokowane permanentnie"
 "User account is locked.": "Twoje konto zostało zablokowane"
 "User account has expired.": "Twoje konto wygasło"
