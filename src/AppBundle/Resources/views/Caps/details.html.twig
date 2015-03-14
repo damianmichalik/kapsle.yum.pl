@@ -8,6 +8,14 @@
 
     <section id="caps-card">
         <h1>{{ cap.name }}</h1>
+        <hr>
+        <p>
+            <span class="glyphicon glyphicon-time"></span> Dodany {{ cap.createDate|date('Y-m-d H:i') }}
+        </p>
+        <hr>
+        <p>            
+            <img src="{{ asset(cap.image) }}" alt="{{ cap.name }}">
+        </p>        
     </section>
 
 {% endblock %}
