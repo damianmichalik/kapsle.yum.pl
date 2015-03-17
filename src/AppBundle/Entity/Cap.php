@@ -47,13 +47,16 @@ class Cap {
     
     /**
      * 
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *      groups = {"NewCap"}
+     * )
      * @Assert\Image(
      *      minWidth = 166,
      *      minHeight = 166,
      *      maxWidth = 1920,
      *      maxHeight = 1080,
-     *      maxSize = "1M"
+     *      maxSize = "1M",
+     *      groups = {"NewCap"}
      * )
      */
     private $imageFile;
