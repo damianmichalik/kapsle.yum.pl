@@ -41,7 +41,8 @@ class CapsController extends Controller {
         
         return $this->render('AppBundle:Default:index.html.twig', array(
             'pagination' => $pagination,
-            'searchParam' => $searchParam
+            'searchParam' => $searchParam,
+            'pageTitle' => 'Wyniki wyszukiwania dla frazy: "' . $searchParam . '"'
         ));
     }
 }

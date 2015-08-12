@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/app/css/style.css') }}" rel="stylesheet">
-        <title>Mój katalog kapsli</title>
+        <title>{% spaceless %}{% block headTitle %}Mój katalog kapsli{% endblock %}{% endspaceless %}</title>      
     </head>
     <body>
         <header class="navbar">
@@ -16,12 +16,19 @@
                         <a href="{{ path('app_homepage') }}">Mój katalog kapsli</a>
                     </h1>
                 </div>
-                <form class="navbar-form navbar-right" action="{{ path('caps_search') }}" role="search">
-                    <div class="form-group">
-                        <input value="{{ searchParam is defined ? searchParam : '' }}" type="text" class="form-control" name="search" placeholder="Szukaj...">
+                <div class="navbar-form navbar-right">
+                    <form action="{{ path('caps_search') }}" role="search">
+                        <div class="form-group">
+                            <input value="{{ searchParam is defined ? searchParam : '' }}" type="text" class="form-control" name="search" placeholder="Szukaj...">
+                        </div>
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </form>  
+                    <div class="rss">
+                        <a href="{{ path('caps_rss') }}">
+                            <img src="{{ asset('bundles/app/images/feed-icon-28x28.png') }}" alt="RSS">
+                        </a>
                     </div>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </form>                    
+                </div>        
             </div>
         </header>
         <div class="container">
@@ -35,9 +42,25 @@
             {% block pageContainer %}{% endblock %}
         </div>
         <footer>
-            <div class="container">
-                <p>Copyright &copy; 2015 Damian</p>
+            
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                {{ newest_capses() }}
             </div>
+            
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            {% if hideFooterSubscriberForm is not defined %}
+                {{ print_subscribe_form() }}
+            {% endif %}
+            </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="text-right">                                                            
+                    Copyright &copy; 2015 Damian
+                </p>
+            </div>
+            
+            
+            
         </footer>
                 
         <script src="{{ asset('bundles/app/js/jquery.min.js') }}"></script>

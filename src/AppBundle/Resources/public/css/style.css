@@ -17,9 +17,14 @@ footer {
     border-top: 1px solid #e5e5e5;
     margin-top: 70px;
     padding: 20px 0;
+    height: 100%;
+    overflow: hidden;
 }
-form.navbar-form {
+div.navbar-form {
     padding: 10px 15px !important;
+}
+div.navbar-form form {
+    float: left;
 }
 .listing {
     margin: 0px;
@@ -47,4 +52,21 @@ form.navbar-form {
 #caps-card h1 {
     font: 1.286em;
     margin: 8px 0px 6px;
+}
+#footer-newsletter-container {
+    padding-bottom: 10px;
+}
+#footer-newsletter-container label {
+    font-weight: normal;
+    margin-right: 5px;
+}
+.rss {
+    display: block;
+    float: right;
+    margin-left: 5px;
+}
+.rss a {
+    display: block; 
+}.rss a img {
+    display: block; 
 }

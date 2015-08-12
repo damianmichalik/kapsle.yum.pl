@@ -1,0 +1,11 @@
+<h4>Najnowsze kapsle</h4>
+
+<ul>
+{% for cap in capses %}
+    <li class="list-unstyled">
+        <a href="{{ path('caps_details', {'slug' : cap.slug}) }}">
+            {{ cap.name }}
+        </a>
+    </li>
+{% endfor %}
+</ul>

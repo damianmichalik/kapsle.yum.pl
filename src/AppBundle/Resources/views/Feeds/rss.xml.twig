@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Moje kapsle</title>
+        <link>{{ url('app_homepage') }}</link>
+        <description>Katalog Kapsli.</description>
+        <language>pl</language>
+        <pubDate>{{ "now"|date('D, d M Y H:i:s O') }}</pubDate>
+        <lastBuildDate>{{ "now"|date('D, d M Y H:i:s O') }}</lastBuildDate>        
+        {% for cap in caps %}
+        <item>
+            <title>{{ cap.name }}</title>
+            <link>{{ url('caps_details', {'slug' : cap.slug}) }}</link>
+            <description>{{ cap.name }}</description>
+            <pubDate>{{ cap.createDate|date('D, d M Y H:i:s O') }}</pubDate>
+            <guid>{{ cap.id }}</guid>
+        </item>
+        {% endfor %}
+   </channel>
+</rss>

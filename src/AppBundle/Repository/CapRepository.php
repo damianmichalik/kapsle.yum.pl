@@ -35,4 +35,11 @@ class CapRepository extends EntityRepository {
         return $qb;
     }
     
+    public function getNewestCaps ($limit)
+    {
+        $searchResults = $this->findBy(array(), array('createDate' => 'DESC'), $limit);
+        
+        return $searchResults;        
+    }
+    
 }

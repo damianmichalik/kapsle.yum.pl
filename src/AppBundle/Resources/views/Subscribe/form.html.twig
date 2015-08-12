@@ -1,0 +1,29 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block pageContainer %}
+
+<div class="row">
+    
+    <div class="container" id="newsletter-container">
+        <h4>Newsletter</h4>
+
+        {% form_theme subscribeForm 'bootstrap_3_horizontal_layout.html.twig' %}
+
+        {{ form_start(subscribeForm) }}
+                   
+            {{ form_row(subscribeForm.name) }}
+
+            {{ form_row(subscribeForm.email) }}
+            
+            <div class="form-row">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default btn-success">Zapisz</button>
+                </div>
+            </div>
+                                     
+        {{ form_end(subscribeForm) }}
+    </div>
+    
+</div>
+    
+{% endblock %}

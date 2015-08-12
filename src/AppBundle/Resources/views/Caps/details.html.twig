@@ -1,5 +1,9 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block headTitle %}
+    {{ cap.name ~ ' | ' ~ parent() }}
+{% endblock %}
+
 {% block breadcrumb %}
     <li>{{ cap.name }}</li>
 {% endblock %}
@@ -7,14 +11,14 @@
 {% block pageContainer %}
 
     <section id="caps-card">
-        <h1>{{ cap.name }}</h1>
+        <h2>{{ cap.name }}</h2>
         <hr>
         <p>
             <span class="glyphicon glyphicon-time"></span> Dodany {{ cap.createDate|date('Y-m-d H:i') }}
         </p>
         <hr>
         <p>            
-            <img src="{{ asset(cap.image) }}" alt="{{ cap.name }}">
+            <img class="img-responsive" src="{{ asset(cap.image) }}" alt="{{ cap.name }}">
         </p>        
     </section>
 

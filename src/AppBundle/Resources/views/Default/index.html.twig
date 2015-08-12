@@ -1,26 +1,40 @@
 {% extends 'AppBundle::base.html.twig' %}
 
-{% block pageContainer %}
+{% block headTitle %}
+    {% if pageTitle is defined %} 
+        {{ pageTitle ~ ' | ' ~ parent() }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
 
-<ul class="listing row">
+{% block pageContainer %}
     
-    {% for cap in pagination %}
-        <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">     
-            <div class="item">
-                <a href="{{ path('caps_details', {'slug' : cap.slug}) }}">                
-                    <img class="img-thumb img-responsive" src="{{ asset(cap.thumb) }}" alt="{{ cap.name }}">                
-                    <span class="product-name">{{ cap.name }}</span>
-                </a>
-            </div>        
-        </li>
-        
-        {% if loop.index0 % 3 == 2 %}
-            <li class="line col-xs-12 col-sm-12 col-md-12 col-lg-12"></li>
-        {% endif %}
-            
-    {% endfor %}
+    {% if pageTitle is defined %} 
+        <h3>{{ pageTitle }}</h3>
+    {% endif %}
+
+    <p>Ilość kapsli: <strong>{{ pagination.getTotalItemCount }}</strong></p>  
     
-</ul>
+    <ul class="listing row">        
+
+        {% for cap in pagination %}
+            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">     
+                <div class="item">
+                    <a href="{{ path('caps_details', {'slug' : cap.slug}) }}">                
+                        <img class="img-thumb img-responsive" src="{{ asset(cap.thumb) }}" alt="{{ cap.name }}">                
+                        <span class="product-name">{{ cap.name }}</span>
+                    </a>
+                </div>        
+            </li>
+
+            {% if loop.index0 % 3 == 2 %}
+                <li class="line col-xs-12 col-sm-12 col-md-12 col-lg-12"></li>
+            {% endif %}
+
+        {% endfor %}
+
+    </ul>
     
 {{ knp_pagination_render(pagination, 'AppBundle:Pagination:pagination.html.twig') }}    
 
