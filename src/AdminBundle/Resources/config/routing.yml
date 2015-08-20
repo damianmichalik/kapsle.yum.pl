@@ -31,3 +31,33 @@ admin_show_cap:
         id: \d+
     defaults:
         _controller: AdminBundle:Caps:show 
+        
+admin_countries_list:
+    path: /kraje/{page}
+    defaults:
+        page: 1
+        _controller: AdminBundle:Countries:index
+    requirements:
+        page: \d+   
+        
+admin_show_country:
+    pattern: /kraj/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Countries:show         
+        
+admin_delete_country:
+    path: /kraj/usun/{id}/{token}
+    defaults:
+        _controller: AdminBundle:Countries:delete
+    requirements:
+        id: \d+        
+
+admin_country_form_action:
+    pattern: /kraj/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Countries:form 
+        id: null           
