@@ -60,4 +60,34 @@ admin_country_form_action:
         id: \d+
     defaults:
         _controller: AdminBundle:Countries:form 
-        id: null           
+        id: null      
+        
+admin_breweries_list:
+    path: /browar/{page}
+    defaults:
+        page: 1
+        _controller: AdminBundle:Breweries:index
+    requirements:
+        page: \d+   
+        
+admin_show_brewery:
+    pattern: /browar/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Breweries:show         
+        
+admin_delete_brewery:
+    path: /browar/usun/{id}/{token}
+    defaults:
+        _controller: AdminBundle:Breweries:delete
+    requirements:
+        id: \d+        
+
+admin_brewery_form_action:
+    pattern: /browar/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Breweries:form 
+        id: null            

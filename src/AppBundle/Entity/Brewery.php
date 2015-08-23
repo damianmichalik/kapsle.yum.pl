@@ -31,6 +31,33 @@ class Brewery {
     private $name;
     
     /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      max = 255
+     * )
+     */
+    private $city;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      max = 255
+     * )
+     */
+    private $address;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      max = 255
+     * )
+     */
+    private $postcode;
+    
+    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=120, unique=true)
      */
@@ -176,5 +203,86 @@ class Brewery {
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Brewery
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Brewery
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set postcode
+     *
+     * @param string $postcode
+     * @return Brewery
+     */
+    public function setPostcode($postcode)
+    {
+        $this->postcode = $postcode;
+
+        return $this;
+    }
+
+    /**
+     * Get postcode
+     *
+     * @return string 
+     */
+    public function getPostcode()
+    {
+        return $this->postcode;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preSave(){
+        
+        if(null == $this->createDate){
+            $this->createDate = new \DateTime();
+        }
+        $this->updateDate = new \DateTime();
     }
 }
