@@ -12,6 +12,11 @@ header h1 a:hover, header h1 a:focus {
     color: #9D9D9D;
     text-decoration: none;
 }
+header #search-form-wrapper {
+    margin-top: 20px;
+    overflow: hidden;
+    height: 100%;
+}
 footer {
     background-color: #f5f5f5;
     border-top: 1px solid #e5e5e5;
@@ -60,13 +65,14 @@ div.navbar-form form {
     font-weight: normal;
     margin-right: 5px;
 }
-.rss {
-    display: block;
-    float: right;
-    margin-left: 5px;
+footer ul {
+    padding-left: 10px;
 }
-.rss a {
+.social a img {
     display: block; 
-}.rss a img {
-    display: block; 
+    float: left;
+    margin-right: 10px;
+}
+.clear {
+    clear: both;    
 }
