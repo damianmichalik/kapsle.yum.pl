@@ -1,24 +1,47 @@
 {% extends 'AdminBundle::base.html.twig' %}
 
 {% block pageContent %}
-
-<div class="content-box-large">
     
-    <div class="panel-heading">
-        {% if slideId is not null %}
-            <div class="panel-title">Edycja kapsla #{{ slideId }}</div>
-        {% else %}
-            <div class="panel-title">Nowy kapsel</div>
-        {% endif %}
+    
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            {% if slideId is not null %}
+                Edycja kapsla #{{ slideId }}
+            {% else %}
+                Nowy kapsel
+            {% endif %}
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="glyphicon glyphicon-dashboard"></i>  
+                <a href="{{ path('admin_homepage') }}">Kokpit</a>
+            </li>            
+            <li>
+                <i class="glyphicon glyphicon-list"></i> 
+                <a href="{{ path('admin_caps_list') }}">Zarządzanie kapslami</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> 
+                {% if slideId is not null %}
+                    Edycja kapsla #{{ slideId }}
+                {% else %}
+                    Nowy kapsel
+                {% endif %}
+            </li>
+        </ol>    
     </div>
+</div>    
 
-    <div class="panel-body">
+<div class="row">
+
+    <div class="col-lg-6">
             
-            {% form_theme form with 'AdminBundle:Form:form_theme.html.twig' %}
-        
-            {{ form(form) }}
-                    
-            <a href="{{ path('admin_caps_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
+        {% form_theme form with 'AdminBundle:Form:form_theme.html.twig' %}
+
+        {{ form(form) }}
+
+        <a href="{{ path('admin_caps_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
 
     </div>
 

@@ -1,0 +1,16 @@
+.dm-custom-table {
+    margin-top: 10px;
+}
+.dm-table-action {
+    margin-bottom: 20px;
+}
+.clear {
+    clear: both;
+}
+.no-padding {
+    padding: 0px !important;
+}
+footer {
+    color: white;
+    margin: 10px 0;
+}
