@@ -44,7 +44,7 @@ div.navbar-form form {
     display: block;
     text-decoration: none;
 }
-.item a .product-name {
+.item a .item-name {
     clear: both;;
     color: #000;
 }
@@ -75,4 +75,7 @@ footer ul {
 }
 .clear {
     clear: both;    
+}
+.breweries-index p {
+    margin: 0px 3px 0px 6px;
 }

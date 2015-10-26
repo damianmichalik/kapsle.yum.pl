@@ -1,0 +1,29 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block headTitle %}
+    {{ brewery.name ~ ' | ' ~ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('breweries_index') }}">Browary</a></li>
+    <li>{{ brewery.name }}</li>
+{% endblock %}
+
+{% block pageContainer %}
+
+    <section id="caps-card">
+        <h2>{{ brewery.name }}</h2>
+        <hr>
+        <p>
+            <span class="glyphicon glyphicon-time"></span> Dodany {{ brewery.createDate|date('Y-m-d H:i') }}
+        </p>
+        <hr>  
+        <p>{{ brewery.country.name }}</p>
+        <p>{{ brewery.postcode }}, {{ brewery.city }}</p>        
+        <p>{{ brewery.address }}</p>
+        <br>
+        {{ mapHtml|raw }}
+        {{ mapJS|raw }}
+    </section>
+
+{% endblock %}

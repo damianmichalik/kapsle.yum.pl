@@ -19,6 +19,9 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
+            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new AdminBundle\AdminBundle(),
         );
 

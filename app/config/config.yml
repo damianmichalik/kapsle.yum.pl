@@ -74,3 +74,17 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+ivory_google_map:
+    geocoder:
+        enabled: true
+        class: "Ivory\GoogleMap\Services\Geocoding\Geocoder"
+        provider:
+            class: "Ivory\GoogleMap\Services\Geocoding\GeocoderProvider"
+            locale: "pl"
+        adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
+        
+doctrine_cache:
+    providers:
+        my_file_system_cache:
+            type: file_system

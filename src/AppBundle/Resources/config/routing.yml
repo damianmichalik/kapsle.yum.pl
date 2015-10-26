@@ -28,6 +28,19 @@ caps_login:
     path: /login
     defaults:
         _controller: AppBundle:Login:login
+
+breweries_index:
+    path: /browary/{page}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Breweries:index
+        page: 1 
+
+breweries_details:
+    path: /browar/{slug}
+    defaults:
+        _controller: AppBundle:Breweries:details
     
 _check_path:
     path: /login-check

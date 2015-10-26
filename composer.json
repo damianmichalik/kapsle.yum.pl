@@ -20,7 +20,10 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "gedmo/doctrine-extensions": "dev-master",
-        "knplabs/knp-paginator-bundle": "~2.4"
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "egeloen/google-map-bundle": "~2.2",
+        "sensio/buzz-bundle": "~1.0",
+        "doctrine/doctrine-cache-bundle": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
