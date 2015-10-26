@@ -6,7 +6,8 @@
         <!-- Bootstrap -->
         <link href="{{ asset('bundles/admin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <!-- styles -->
-        <link href="{{ asset('bundles/admin/css/styles.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/app/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/login.css') }}" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -16,40 +17,41 @@
         <![endif]-->
     </head>
     <body>
-        <div class="header">
+        
+        <header class="navbar">
+            <div class="container">
+                <div class="nav navbar-nav">
+                    <h1>
+                        <a href="{{ path('app_homepage') }}">Mój katalog kapsli</a>
+                    </h1>
+                </div>
+            </div>
+        </header>
+           
+        <section class="login-container">            
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <!-- Logo -->
-                        <div class="logo">
-                            <h1><a href="{{ path('admin_homepage') }}">Mój katalog kapsli</a></h1>
-                        </div>
+
+                    <div class="col-md-4 col-md-offset-4">
+                        {% block pageContent %}{% endblock %}
                     </div>
+
                 </div>
-            </div>
-        </div>
-
-        <div class="page-content container">
-            <div class="row">
-
-                <div class="col-md-4 col-md-offset-4">
-                    {% block pageContent %}{% endblock %}
-                </div>
-
-            </div>
-        </div>
-
+            </div>      
+        </section>            
 
         <footer>
             <div class="container">
-
-                <div class="copy text-center">
-                    Copyright 2015 <a href='#'>Damian</a>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-right">                                                            
+                            Copyright &copy; 2015 Damian
+                        </p>
+                    </div>
                 </div>
-
             </div>
-        </footer>
-
+        </footer>   
+                        
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{{ asset('bundles/admin/js/jquery.js') }}"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
