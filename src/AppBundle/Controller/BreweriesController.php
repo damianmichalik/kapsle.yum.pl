@@ -3,10 +3,8 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Ivory\GoogleMap\Map;
-use Ivory\GoogleMap\MapTypeId;
+use AppBundle\Utils\Maps\Brewery as BreweryMap;
 use Ivory\GoogleMap\Helper\MapHelper;
-use Ivory\GoogleMap\Overlays\InfoWindow;
 
 class BreweriesController extends Controller {
     
@@ -34,66 +32,19 @@ class BreweriesController extends Controller {
         
         if ($BreweryItem === null) {
             throw $this->createNotFoundException('Nie znaleziono podanego rekordu');
-        }                
+        }  
         
-        $map = new Map();
-
-        $map->setPrefixJavascriptVariable('map_');
-        $map->setHtmlContainerId('map_canvas');
-
-        $map->setAsync(false);
-        //$map->setAutoZoom(true);
+        $geocoderCache = $this->container->get('geocoder_cache');
         
-        $geocoder = $this->get('ivory_google_map.geocoder');
-        
-        $cache = $this->container->get('doctrine_cache.providers.my_file_system_cache');
-        $response = $cache->fetch("brewery_".md5($slug));
-        if ($response === false) {
-            $response = $geocoder->geocode($BreweryItem->getAddress().', '.$BreweryItem->getPostcode().' '.$BreweryItem->getCity().', ' . $BreweryItem->getCountry()->getName());
-            $cache->save("brewery_".md5($slug), $response);
-        }                
+        $cacheKey = "brewery_map_".$BreweryItem->getId();
+        $address = $BreweryItem->getAddress().', '.$BreweryItem->getPostcode().' '.$BreweryItem->getCity().', ' . $BreweryItem->getCountry()->getName();
+        $response = $geocoderCache->getGeocodedData($address, $cacheKey);             
                 
-        foreach($response->getResults() as $result)
-        {
-            
-            $infoWindow = new InfoWindow();
-            $infoWindow->setContent($BreweryItem->getName());
-            
-            // Request the google map merker service
-            $marker = $this->get('ivory_google_map.marker');
-
-            // Position the marker
-            $marker->setPosition($result->getGeometry()->getLocation());
-            $map->setCenter($result->getGeometry()->getLocation());
-            $marker->setInfoWindow($infoWindow);
-            
-            // Add the marker to the map
-            $map->addMarker($marker);
-        }
-
-        
-        $map->setMapOption('zoom', 12);
-
-        $map->setBound(-2.1, -3.9, 2.6, 1.4, true, true);
-
-        $map->setMapOption('mapTypeId', MapTypeId::ROADMAP);
-        $map->setMapOption('mapTypeId', 'roadmap');
-
-        $map->setMapOption('disableDefaultUI', true);
-        $map->setMapOption('disableDoubleClickZoom', true);
-        $map->setMapOptions(array(
-            'disableDefaultUI'       => true,
-            'disableDoubleClickZoom' => true,
-        ));
-
-        $map->setStylesheetOption('width', '300px');
-        $map->setStylesheetOption('height', '300px');
-        $map->setStylesheetOptions(array(
-            'width'  => '300px',
-            'height' => '300px',
-        ));
-
-        $map->setLanguage('pl');
+        $map = new BreweryMap();
+        $map->setMapZoom(12);
+        $map->setMapDimension(300, 300);        
+        $map->setMarkerService($this->get('ivory_google_map.marker'));
+        $map->addMarkersByGeocodedAddresses($response->getResults(), $BreweryItem->getName());               
         
         $mapHelper = new MapHelper();
         

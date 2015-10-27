@@ -4,3 +4,7 @@ services:
         arguments: ["@doctrine", "@service_container", @router]
         tags:
             - { name : twig.extension }
+    geocoder_cache:
+        class: AppBundle\Utils\Services\Geocoder\Cache
+        arguments: ["@service_container"]
+            
