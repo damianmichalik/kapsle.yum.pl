@@ -6,6 +6,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/app/css/style.css') }}" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="{{ asset('bundles/app/images/favicons/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('bundles/app/images/favicons/favicon.ico') }}" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('bundles/app/images/favicons/apple-icon-57x57.png') }}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('bundles/app/images/favicons/apple-icon-60x60.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicons/apple-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('bundles/app/images/favicons/apple-icon-76x76.png') }}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('bundles/app/images/favicons/apple-icon-114x114.png') }}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('bundles/app/images/favicons/apple-icon-120x120.png') }}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('bundles/app/images/favicons/apple-icon-144x144.png') }}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('bundles/app/images/favicons/apple-icon-152x152.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('bundles/app/images/favicons/apple-icon-180x180.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('bundles/app/images/favicons/android-icon-192x192.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bundles/app/images/favicons/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('bundles/app/images/favicons/favicon-96x96.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('bundles/app/images/favicons/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('bundles/app/images/favicons/manifest.json') }}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{{ asset('bundles/app/images/favicons/ms-icon-144x144.png') }}">
+        <meta name="theme-color" content="#ffffff">
+        
         <title>{% spaceless %}{% block headTitle %}Mój katalog kapsli{% endblock %}{% endspaceless %}</title>      
     </head>
     <body>
@@ -17,9 +38,10 @@
                     </h1>
                 </div>
                 <div id="search-form-wrapper">        
-                    <form class="navbar-form navbar-right" action="{{ path('caps_search') }}" role="search">
+                    <form id="caps-search-form" class="navbar-form navbar-right" action="{{ path('caps_search') }}" role="search">
+                        <input disabled="disabled" type="hidden" id="autocomplete-url" name="autocomplete_url" value="{{ path('caps_ajax_autocomplete') }}">
                         <div class="form-group">
-                            <input value="{{ searchParam is defined ? searchParam : '' }}" type="text" class="form-control" name="search" placeholder="Szukaj...">
+                            <input id="caps-search-keyword" value="{{ searchParam is defined ? searchParam : '' }}" type="text" class="form-control" name="search" placeholder="Szukaj...">
                         </div>
                         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                     </form> 
@@ -73,6 +95,8 @@
                 
         <script src="{{ asset('bundles/app/js/jquery.min.js') }}"></script>
         <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/jquery.autocomplete.js') }}"></script>        
+        <script src="{{ asset('bundles/app/js/custom.js') }}"></script>        
         
     </body>
 </html>

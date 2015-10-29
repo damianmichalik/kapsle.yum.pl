@@ -26,25 +26,25 @@ class BreweriesController extends Controller {
     
     public function detailsAction ($slug) 
     {
-        $BreweriesRepo = $this->getDoctrine()->getRepository('AppBundle:Brewery');    
-        
-        $BreweryItem = $BreweriesRepo->findOneBySlug($slug);
-        
+        $BreweriesRepo = $this->getDoctrine()->getRepository('AppBundle:Brewery');           
+        $BreweryItem = $BreweriesRepo->findOneBySlug($slug);        
         if ($BreweryItem === null) {
             throw $this->createNotFoundException('Nie znaleziono podanego rekordu');
-        }  
+        } 
         
-        $geocoderCache = $this->container->get('geocoder_cache');
+        $geocoderCache = $this->container->get('geocoder_cache');        
         
-        $cacheKey = "brewery_map_".$BreweryItem->getId();
-        $address = $BreweryItem->getAddress().', '.$BreweryItem->getPostcode().' '.$BreweryItem->getCity().', ' . $BreweryItem->getCountry()->getName();
-        $response = $geocoderCache->getGeocodedData($address, $cacheKey);             
-                
-        $map = new BreweryMap();
-        $map->setMapZoom(12);
-        $map->setMapDimension('100%', '300px');        
-        $map->setMarkerService($this->get('ivory_google_map.marker'));
-        $map->addMarkersByGeocodedAddresses($response->getResults(), $BreweryItem->getName());               
+        $cacheKey = "brewery_map_".$BreweryItem->getId();        
+        $address = $BreweryItem->getAddressToGeocode();        
+        $geocodedAddresses = $geocoderCache->getGeocodedData($address, $cacheKey);                             
+        
+        $map = new BreweryMap($this->container->get('ivory_google_map.marker'));   
+        
+        $mapInfo = $this->renderView('AppBundle:Breweries:mapInfo.html.twig', array(
+            'brewery' => $BreweryItem
+        ));
+        
+        $map->addMarkersByGeocodedAddresses($geocodedAddresses->getResults(), $mapInfo);               
         
         $mapHelper = new MapHelper();
         

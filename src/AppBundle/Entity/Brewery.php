@@ -285,4 +285,12 @@ class Brewery {
         }
         $this->updateDate = new \DateTime();
     }
+    
+    public function getAddressToGeocode()
+    {
+        $addressToGeocode = $this->getAddress() . ', ' . 
+                $this->getPostcode() .' ' . $this->getCity() . 
+                ', ' . $this->getCountry()->getName();    
+        return $addressToGeocode;
+    }
 }

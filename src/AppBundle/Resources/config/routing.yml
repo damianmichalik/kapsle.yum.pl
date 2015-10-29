@@ -24,6 +24,11 @@ caps_search:
         _controller: AppBundle:Caps:search
         page: 1     
         
+caps_ajax_autocomplete:
+    path: /autocomplete
+    defaults:
+        _controller: AppBundle:Caps:autocomplete          
+        
 caps_login:
     path: /login
     defaults:
