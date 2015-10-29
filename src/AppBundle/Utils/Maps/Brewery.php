@@ -42,11 +42,11 @@ class Brewery extends Map {
 
     public function setMapDimension($width, $height) 
     {
-        $this->setStylesheetOption('width', (int)$width . 'px');
-        $this->setStylesheetOption('height', (int)$height . 'px');
+        $this->setStylesheetOption('width', $width);
+        $this->setStylesheetOption('height', $height);
         $this->setStylesheetOptions(array(
-            'width'  => (int)$width . 'px',
-            'height' => (int)$height . 'px'
+            'width'  => $width,
+            'height' => $height
         ));
     }
     

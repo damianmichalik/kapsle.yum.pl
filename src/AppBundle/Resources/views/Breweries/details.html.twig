@@ -12,18 +12,23 @@
 {% block pageContainer %}
 
     <section id="caps-card">
-        <h2>{{ brewery.name }}</h2>
-        <hr>
-        <p>
-            <span class="glyphicon glyphicon-time"></span> Dodany {{ brewery.createDate|date('Y-m-d H:i') }}
-        </p>
-        <hr>  
-        <p>{{ brewery.country.name }}</p>
-        <p>{{ brewery.postcode }}, {{ brewery.city }}</p>        
-        <p>{{ brewery.address }}</p>
-        <br>
-        {{ mapHtml|raw }}
-        {{ mapJS|raw }}
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>{{ brewery.name }}</h2>        
+            <hr>
+            <p>
+                <span class="glyphicon glyphicon-time"></span> Dodany {{ brewery.createDate|date('Y-m-d H:i') }}
+            </p>
+            <hr>  
+        </div>  
+        <div class="col-md-6">  
+            {{ mapHtml|raw }}
+            {{ mapJS|raw }}
+        </div> 
+        <div class="col-md-6">    
+            <p>{{ brewery.country.name }}</p>
+            <p>{{ brewery.postcode }}, {{ brewery.city }}</p>        
+            <p>{{ brewery.address }}</p>
+        </div>       
     </section>
 
 {% endblock %}

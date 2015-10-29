@@ -26,7 +26,7 @@ class Cache {
         if ($result === false) {
             $result = $this->geocoder->geocode($address);
             $this->cache->save($cacheKey, $result);
-        }   
+        }  
         return $result;
     }
     

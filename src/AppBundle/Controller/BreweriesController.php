@@ -42,7 +42,7 @@ class BreweriesController extends Controller {
                 
         $map = new BreweryMap();
         $map->setMapZoom(12);
-        $map->setMapDimension(300, 300);        
+        $map->setMapDimension('100%', '300px');        
         $map->setMarkerService($this->get('ivory_google_map.marker'));
         $map->addMarkersByGeocodedAddresses($response->getResults(), $BreweryItem->getName());               
         
