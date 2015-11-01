@@ -7,8 +7,8 @@ parameters:
     database_user: michol12_kapsle
     database_password: qazwsx
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_host: smtp-uiphp.vipserv.org
+    mailer_user: kontakt@kapsle.yum.pl
+    mailer_password: zws6td8a
     locale: pl
     secret: ThisTokenIsNotSoSecretChangeIt

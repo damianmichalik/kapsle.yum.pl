@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Zapytanie z formularza kontaktowego</title>
+        <meta http-equiv=Content-Type content="text/html; charset=iso-8859-2" />
+    </head>
+    <body>
+        <table align="center" border="0" width="600">
+            <tr>
+                <td>
+                    <h1>Nowe zapytanie z dnia: {{ "now"|date("Y-m-d H:i") }}</h1>
+                    <table border="1" cellpadding="10">
+                        <tr>
+                            <th>Imię</th>
+                            <td>{{ formData.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ formData.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pytanie</th>
+                            <td>{{ formData.content }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

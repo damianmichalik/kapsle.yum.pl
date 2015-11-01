@@ -46,6 +46,11 @@ breweries_details:
     path: /browar/{slug}
     defaults:
         _controller: AppBundle:Breweries:details
+        
+contact:
+    path: /kontakt
+    defaults:
+        _controller: AppBundle:Contact:index
     
 _check_path:
     path: /login-check

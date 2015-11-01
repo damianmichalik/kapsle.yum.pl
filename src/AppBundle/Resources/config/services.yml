@@ -7,4 +7,7 @@ services:
     geocoder_cache:
         class: AppBundle\Utils\Services\Geocoder\Cache
         arguments: ["@service_container"]
+    contact_mailer:
+        class: AppBundle\Utils\Services\Mailer\ContactMailer
+        arguments: [@mailer, "%from_email%", "%from_name%", "%admin_email%"]    
             

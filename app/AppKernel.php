@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use AppBundle\DependencyInjection\Compiler\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 class AppKernel extends Kernel
 {
@@ -39,4 +41,10 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
+    
+    protected function getContainerBuilder()
+    {
+        return new ContainerBuilder(new ParameterBag($this->getKernelParameters()));
+    }
+    
 }
