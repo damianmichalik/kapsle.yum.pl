@@ -73,6 +73,35 @@ class Cap {
      */
     private $updateDate;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="Brewery", inversedBy="caps")
+     * @ORM\JoinColumn(name="brewery_id", referencedColumnName="id")
+     */
+    protected $brewery;
+    
+    /**
+     * Set brewery
+     *
+     * @param \AppBundle\Entity\Brewery $brewery
+     * @return Brewery
+     */
+    public function setBrewery(\AppBundle\Entity\Brewery $brewery = null)
+    {
+        $this->brewery = $brewery;
+
+        return $this;
+    }
+
+    /**
+     * Get brewery
+     *
+     * @return \AppBundle\Entity\Brewery 
+     */
+    public function getBrewery()
+    {
+        return $this->brewery;
+    }
+    
     public function getId() {
         return $this->id;
     }

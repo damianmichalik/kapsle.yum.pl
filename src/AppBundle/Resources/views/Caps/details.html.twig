@@ -19,7 +19,12 @@
         <hr>
         <p>            
             <img class="img-responsive" src="{{ asset(cap.image) }}" alt="{{ cap.name }}">
-        </p>        
+        </p>       
+        {% if cap.brewery is not null %}
+        <p>
+            Browar: <a href="{{ path('breweries_details', {'slug' : cap.brewery.slug}) }}"><strong>{{ cap.brewery.name }}</strong></a>            
+        </p>
+        {% endif %}
     </section>
 
 {% endblock %}

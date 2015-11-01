@@ -79,6 +79,11 @@ class Brewery {
      */
     protected $country;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Cap", mappedBy="brewery")
+     */
+    protected $caps;
+    
 
     /**
      * Get id
@@ -292,5 +297,38 @@ class Brewery {
                 $this->getPostcode() .' ' . $this->getCity() . 
                 ', ' . $this->getCountry()->getName();    
         return $addressToGeocode;
+    }
+    
+    /**
+     * Add breweries
+     *
+     * @param \AppBundle\Entity\Cap Cap
+     * @return Brewery
+     */
+    public function addCap(\AppBundle\Entity\Cap $caps)
+    {
+        $this->caps[] = $caps;
+
+        return $this;
+    }
+
+    /**
+     * Remove caps
+     *
+     * @param \AppBundle\Entity\Cap $caps
+     */
+    public function removeCap(\AppBundle\Entity\Cap $caps)
+    {
+        $this->caps->removeElement($caps);
+    }
+
+    /**
+     * Get caps
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCaps()
+    {
+        return $this->caps;
     }
 }

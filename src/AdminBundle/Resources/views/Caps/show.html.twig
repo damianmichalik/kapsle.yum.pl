@@ -40,6 +40,12 @@
                         <th>Nazwa</th>
                         <td>{{ cap.name }}</td>
                     </tr>
+                    {% if cap.brewery is not null %}
+                    <tr>
+                        <th>Browar</th>
+                        <td>{{ cap.brewery.name }}</td>
+                    </tr>
+                    {% endif %}
                     <tr>
                         <th>Zdjęcie</th>
                         <td><img src="{{ asset(cap.thumb) }}"></td>

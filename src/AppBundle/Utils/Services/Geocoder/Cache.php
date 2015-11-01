@@ -21,7 +21,7 @@ class Cache {
     }
     
     public function getFromCache($address, $cacheKey)
-    {
+    {        
         $result = $this->cache->fetch($cacheKey);
         if ($result === false) {
             $result = $this->geocoder->geocode($address);

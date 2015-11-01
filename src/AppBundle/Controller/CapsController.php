@@ -27,7 +27,7 @@ class CapsController extends Controller {
     {
         $searchParam = $request->query->get('query');
         
-        $searchResults = $this->getSearchResults($searchParam)
+        $searchResults = $this->getUniqueSearchResults($searchParam)
                 ->getQuery()->getResult(); 
         
         $suggestions = $this->getJSONSuggestions($searchResults);
@@ -41,7 +41,7 @@ class CapsController extends Controller {
         
         foreach($searchResults as $item) {
             $suggestions[] = array(
-                'value' => $item->getName()
+                'value' => $item['name']
             );
         }
         
@@ -66,14 +66,30 @@ class CapsController extends Controller {
         ));
     }
     
-    private function getSearchResults($searchParam) 
+    private function getSearchResults($searchParam, $unique = false) 
     {
-        $queryParams = array(
-            'searchKeyword' => $searchParam
-        );
+        $queryParams = $this->prepareQueryParams($searchParam);
         
         $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
         $searchResults = $CapsRepo->getQueryBuilder($queryParams);
         return $searchResults;
     }
+    
+    private function getUniqueSearchResults($searchParam, $unique = false) 
+    {
+        $queryParams = $this->prepareQueryParams($searchParam);
+        
+        $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
+        $searchResults = $CapsRepo->getUniqueQueryBuilder($queryParams);
+        return $searchResults;
+    }
+    
+    private function prepareQueryParams($searchParam)
+    {
+        $queryParams = array(
+            'searchKeyword' => $searchParam
+        );
+        return $queryParams;
+    }
+    
 }

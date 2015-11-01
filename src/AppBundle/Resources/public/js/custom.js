@@ -9,4 +9,6 @@ jQuery(document).ready(function() {
         }
     });
     
+    jQuery('a[rel="external"]').attr("target", "_blank");
+    
 });

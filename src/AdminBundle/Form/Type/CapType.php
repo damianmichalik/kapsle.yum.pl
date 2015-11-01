@@ -19,11 +19,17 @@ class CapType extends AbstractType {
             ->add('name', 'text', array(
                 'label' => 'Nazwa',
                 'required'  => false,
+            ))  
+            ->add('brewery', 'entity', array(
+                'label' => 'Browar',
+                'class' => 'AppBundle\Entity\Brewery',
+                'property' => 'name',
+                'empty_value' => 'Wybierz browar'
             ))
             ->add('imageFile', 'file', array(
                 'label' => 'Zdjęcie',
                 'required'  => false
-            ))   
+            )) 
             ->add('save', 'submit', array(
                 'label' => 'Zapisz'
             ));   
