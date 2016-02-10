@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Brewery;
 use AdminBundle\Form\Type\BreweryType;
+use Symfony\Component\Security\Csrf\CsrfToken;
 
 class BreweriesController extends Controller {
     
@@ -33,7 +34,7 @@ class BreweriesController extends Controller {
         return $this->render('AdminBundle:Breweries:index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->delete_token_name,
-            'csrfProvider' => $this->get('form.csrf_provider'),
+            'csrfProvider' => $this->get('security.csrf.token_manager'),
             'queryParams' => $queryParams,
             'limits' => $limits,
             'currLimit' => $limit,
@@ -45,12 +46,11 @@ class BreweriesController extends Controller {
     {
         
         $tokenName = sprintf($this->delete_token_name, $id);
-        $csrfProvider = $this->get('form.csrf_provider');
+        $csrfProvider = $this->get('security.csrf.token_manager');
         
-        if(!$csrfProvider->isCsrfTokenValid($tokenName, $token)){
-            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
-            
-        }else{
+        if(!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
+            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');         
+        } else {
             
             $slide = $this->getDoctrine()->getRepository('AppBundle:Brewery')->find($id);
             $em = $this->getDoctrine()->getManager();
@@ -79,7 +79,7 @@ class BreweriesController extends Controller {
         return $this->render('AdminBundle:Breweries:show.html.twig', array(
             'brewery' => $brewery,
             'deleteTokenName' => $this->delete_token_name,
-            'csrfProvider' => $this->get('form.csrf_provider')
+            'csrfProvider' => $this->get('security.csrf.token_manager')
         ));
         
     }
@@ -93,7 +93,7 @@ class BreweriesController extends Controller {
             $brewery = $this->getDoctrine()->getRepository('AppBundle:Brewery')->find($id);
         }
         
-        $form = $this->createForm(new BreweryType(), $brewery);
+        $form = $this->createForm(BreweryType::class, $brewery);
 
         $form->handleRequest($Request);
         if($form->isValid()){

@@ -21,13 +21,6 @@ class AppExtension extends \Twig_Extension {
     protected $container;
     
     /**
-     *
-     * @var \Twig_Environment
-     * @param ContainerInterface $container
-     */
-    private $environment;
-    
-    /**
      * @var Router
      */
     protected $router;
@@ -42,11 +35,6 @@ class AppExtension extends \Twig_Extension {
         $this->doctrine = $doctrine;
         $this->router = $router;
     }
-
-    
-    public function initRuntime (\Twig_Environment $environment) {
-        $this->environment = $environment;
-    }
     
     public function getName() {
         return 'app_extension';
@@ -54,29 +42,41 @@ class AppExtension extends \Twig_Extension {
     
     public function getFunctions () {
         return array(
-            new \Twig_SimpleFunction('print_subscribe_form', array($this, 'printSubscribeForm'), array('is_safe' => array('html'))),            
-            new \Twig_SimpleFunction('newest_capses', array($this, 'newestCapses'), array('is_safe' => array('html'))),            
+            new \Twig_SimpleFunction('print_subscribe_form', 
+                    array($this, 'printSubscribeForm'), 
+                    array(
+                        'is_safe' => array('html'),
+                        'needs_environment' => true
+                    )
+            ),            
+            new \Twig_SimpleFunction('newest_capses', 
+                    array($this, 'newestCapses'), 
+                    array(
+                        'is_safe' => array('html'),
+                        'needs_environment' => true
+                    )
+            ),            
         );
     }
     
-    public function printSubscribeForm () {
+    public function printSubscribeForm (\Twig_Environment $env) {
         
         $subscribeForm = $this->container->get('form.factory')
                 ->createBuilder(new SubscriberType())
                 ->setAction($this->router->generate('subscribe'))
                 ->getForm();
         
-        return $this->environment->render('AppBundle:Partials:subscribeForm.html.twig', array(
+        return $env->render('AppBundle:Partials:subscribeForm.html.twig', array(
             'subscribeForm' => $subscribeForm->createView()
         ));
         
     }
     
-    public function newestCapses ()
+    public function newestCapses (\Twig_Environment $env)
     {
         $capsRepo = $this->doctrine->getRepository('AppBundle:Cap');
         $newestCapses = $capsRepo->getNewestCaps(5);
-        return $this->environment->render('AppBundle:Partials:newestCapses.html.twig', array(
+        return $env->render('AppBundle:Partials:newestCapses.html.twig', array(
             'capses' => $newestCapses
         ));
     }

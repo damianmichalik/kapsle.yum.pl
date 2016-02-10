@@ -27,7 +27,8 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
-
+    assets: ~
+    
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
@@ -74,15 +75,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-ivory_google_map:
-    geocoder:
-        enabled: true
-        class: "Ivory\GoogleMap\Services\Geocoding\Geocoder"
-        provider:
-            class: "Ivory\GoogleMap\Services\Geocoding\GeocoderProvider"
-            locale: "pl"
-        adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
         
 doctrine_cache:
     providers:

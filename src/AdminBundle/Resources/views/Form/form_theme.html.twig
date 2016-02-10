@@ -28,7 +28,7 @@
         
 {% block form_label %}
 {% spaceless %}
-    {% if label is not sameas(false) %}
+    {% if label is not same as(false) %}
         {% if not compound %}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {% endif %}
@@ -63,13 +63,13 @@
     
 {% block choice_widget_collapsed %}
 {% spaceless %}
-    {% if required and empty_value is none and not empty_value_in_choices %}
+    {% if required and placeholder is none and not empty_value_in_choices %}
         {% set required = false %}
     {% endif %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim }) %}
     <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
-        {% if empty_value is not none %}
-            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+        {% if placeholder is not none %}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder|trans({}, translation_domain) }}</option>
         {% endif %}
         {% if preferred_choices|length > 0 %}
             {% set options = preferred_choices %}

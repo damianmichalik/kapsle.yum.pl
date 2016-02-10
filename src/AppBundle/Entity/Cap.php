@@ -75,7 +75,7 @@ class Cap {
     
     /**
      * @ORM\ManyToOne(targetEntity="Brewery", inversedBy="caps")
-     * @ORM\JoinColumn(name="brewery_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="brewery_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $brewery;
     

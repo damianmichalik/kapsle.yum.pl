@@ -18,7 +18,7 @@ admin_delete_cap:
         id: \d+        
 
 admin_cap_form_action:
-    pattern: /kapsle/form/{id}
+    path: /kapsle/form/{id}
     requirements:
         id: \d+
     defaults:
@@ -26,7 +26,7 @@ admin_cap_form_action:
         id: null            
        
 admin_show_cap:
-    pattern: /kapsle/pokaz/{id}
+    path: /kapsle/pokaz/{id}
     requirements:
         id: \d+
     defaults:
@@ -41,7 +41,7 @@ admin_countries_list:
         page: \d+   
         
 admin_show_country:
-    pattern: /kraj/pokaz/{id}
+    path: /kraj/pokaz/{id}
     requirements:
         id: \d+
     defaults:
@@ -55,7 +55,7 @@ admin_delete_country:
         id: \d+        
 
 admin_country_form_action:
-    pattern: /kraj/form/{id}
+    path: /kraj/form/{id}
     requirements:
         id: \d+
     defaults:
@@ -71,7 +71,7 @@ admin_breweries_list:
         page: \d+   
         
 admin_show_brewery:
-    pattern: /browar/pokaz/{id}
+    path: /browar/pokaz/{id}
     requirements:
         id: \d+
     defaults:
@@ -85,9 +85,14 @@ admin_delete_brewery:
         id: \d+        
 
 admin_brewery_form_action:
-    pattern: /browar/form/{id}
+    path: /browar/form/{id}
     requirements:
         id: \d+
     defaults:
         _controller: AdminBundle:Breweries:form 
         id: null            
+        
+admin_cache:
+    path: /cache
+    defaults: 
+        _controller: AdminBundle:Cache:index

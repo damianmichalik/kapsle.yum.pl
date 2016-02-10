@@ -4,6 +4,9 @@ namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class LoginType extends AbstractType {
         
@@ -12,9 +15,9 @@ class LoginType extends AbstractType {
     }
     
     public function buildForm (FormBuilderInterface $builder, array $options) {
-        $builder->add('username','text',array('label' => 'Login'))
-                ->add('password','password',array('label' => 'Hasło'))
-                ->add('save','submit',array('label' => 'Zaloguj'));
+        $builder->add('username',TextType::class,array('label' => 'Login'))
+                ->add('password', PasswordType::class,array('label' => 'Hasło'))
+                ->add('save',SubmitType::class,array('label' => 'Zaloguj'));
     }
 
 }

@@ -4,45 +4,49 @@ namespace AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use \AppBundle\Repository\CountryRepository;
 
 class BreweryType extends AbstractType {
-    
-    public function getName() {
-        return 'brewery';
-    }
     
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         $builder
-            ->add('name', 'text', array(
+            ->add('name', TextType::class, array(
                 'label' => 'Nazwa',
                 'required'  => false,
             )) 
-            ->add('city', 'text', array(
+            ->add('city', TextType::class, array(
                 'label' => 'Miasto',
                 'required'  => false,
             )) 
-            ->add('address', 'text', array(
+            ->add('address', TextType::class, array(
                 'label' => 'Adres',
                 'required'  => false,
             )) 
-            ->add('postcode', 'text', array(
+            ->add('postcode', TextType::class, array(
                 'label' => 'Kod pocztowy',
                 'required'  => false,
             )) 
-            ->add('country', 'entity', array(
+            ->add('country', EntityType::class, array(
                 'label' => 'Kraj',
                 'class' => 'AppBundle\Entity\Country',
-                'property' => 'name',
-                'empty_value' => 'Wybierz kraj'
+                'choice_label' => 'name',
+                'placeholder' => 'Wybierz kraj',
+                'query_builder' => function (CountryRepository $cr) {
+                    return $cr->createQueryBuilder('c')
+                        ->orderBy('c.name', 'ASC');
+                }
             ))
-            ->add('save', 'submit', array(
+            ->add('save', SubmitType::class, array(
                 'label' => 'Zapisz'
             ));   
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Brewery'

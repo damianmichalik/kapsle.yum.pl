@@ -45,7 +45,7 @@
                         <td>
                             <div class="btn-group">                                
                                 <a href="{{ path('admin_brewery_form_action', {'id' : brewery.id}) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
-                                {% set tokenName = csrfProvider.generateCsrfToken(deleteTokenName|format(brewery.id)) %}
+                                {% set tokenName = csrfProvider.getToken(deleteTokenName|format(brewery.id)) %}
                                 {% set deleteUrl = path('admin_delete_brewery', {'id': brewery.id, 'token': tokenName}) %}
                                 <a href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmaction=""><span class="glyphicon glyphicon-trash"></span></a>
                             </div>

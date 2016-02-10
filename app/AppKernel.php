@@ -21,9 +21,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
-            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
-            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new AdminBundle\AdminBundle(),
         );
 
@@ -45,6 +43,21 @@ class AppKernel extends Kernel
     protected function getContainerBuilder()
     {
         return new ContainerBuilder(new ParameterBag($this->getKernelParameters()));
+    }
+    
+    public function getRootDir()
+    {
+        return __DIR__;
+    }
+
+    public function getCacheDir()
+    {
+        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+    }
+
+    public function getLogDir()
+    {
+        return dirname(__DIR__).'/var/logs';
     }
     
 }

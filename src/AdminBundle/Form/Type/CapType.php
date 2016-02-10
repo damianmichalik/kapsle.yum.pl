@@ -4,38 +4,43 @@ namespace AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use \AppBundle\Repository\BreweryRepository;
 
 class CapType extends AbstractType {
-    
-    public function getName() {
-        return 'cap';
-    }
     
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         $builder
-            ->add('name', 'text', array(
+            ->add('name', TextType::class, array(
                 'label' => 'Nazwa',
                 'required'  => false,
             ))  
-            ->add('brewery', 'entity', array(
+            ->add('brewery', EntityType::class, array(
                 'label' => 'Browar',
                 'class' => 'AppBundle\Entity\Brewery',
-                'property' => 'name',
-                'empty_value' => 'Wybierz browar'
+                'choice_label' => 'name',
+                'placeholder' => 'Wybierz browar',
+                'query_builder' => function (BreweryRepository $br) {
+                    return $br->createQueryBuilder('b')
+                        ->orderBy('b.name', 'ASC');
+                }
             ))
-            ->add('imageFile', 'file', array(
+            ->add('imageFile', FileType::class, array(
                 'label' => 'Zdjęcie',
                 'required'  => false
             )) 
-            ->add('save', 'submit', array(
+            ->add('save', SubmitType::class, array(
                 'label' => 'Zapisz'
             ));   
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Cap',

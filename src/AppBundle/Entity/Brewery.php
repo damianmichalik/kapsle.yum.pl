@@ -75,7 +75,7 @@ class Brewery {
     
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="breweries")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $country;
     

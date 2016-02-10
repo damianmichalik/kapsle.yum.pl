@@ -51,8 +51,6 @@
                 </div>
             </form>
         </div>
-                    
-        <br class="clear"> 
 
         <div class="table-responsive">
 
@@ -77,7 +75,7 @@
                                 <a title="Edytuj" href="{{ path('admin_country_form_action', app.request.query.all|merge({'id': country.id, 'page' : page})) }}" class="btn btn-primary btn-sm">
                                     <span class="glyphicon glyphicon-edit"></span>
                                 </a>
-                                {% set tokenName = csrfProvider.generateCsrfToken(deleteTokenName|format(country.id)) %}
+                                {% set tokenName = csrfProvider.getToken(deleteTokenName|format(country.id)) %}
                                 {% set deleteUrl = path('admin_delete_country', app.request.query.all|merge({'id': country.id, 'token': tokenName, 'page' : page})) %}
                                 <a title="Usuń" href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmAction="Czy na pewno chcesz usunąć wybrany rekord?">
                                     <span class="glyphicon glyphicon-trash"></span>

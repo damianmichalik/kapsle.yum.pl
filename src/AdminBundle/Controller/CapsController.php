@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Cap;
 use AdminBundle\Form\Type\CapType;
+use Symfony\Component\Security\Csrf\CsrfToken;
 
 class CapsController extends Controller {
     
@@ -33,7 +34,7 @@ class CapsController extends Controller {
         return $this->render('AdminBundle:Caps:index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->delete_token_name,
-            'csrfProvider' => $this->get('form.csrf_provider'),
+            'csrfProvider' => $this->get('security.csrf.token_manager'),
             'queryParams' => $queryParams,
             'limits' => $limits,
             'currLimit' => $limit,
@@ -45,12 +46,11 @@ class CapsController extends Controller {
     {
         
         $tokenName = sprintf($this->delete_token_name, $id);
-        $csrfProvider = $this->get('form.csrf_provider');
+        $csrfProvider = $this->get('security.csrf.token_manager');
         
-        if(!$csrfProvider->isCsrfTokenValid($tokenName, $token)){
-            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
-            
-        }else{
+        if(!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))){
+            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');           
+        } else {
             
             $slide = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
             $em = $this->getDoctrine()->getManager();
@@ -72,7 +72,7 @@ class CapsController extends Controller {
             $cap = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
         }
         
-        $form = $this->createForm(new CapType(), $cap);
+        $form = $this->createForm(CapType::class, $cap);
         
         $form->handleRequest($Request);
         if($form->isValid()){
@@ -111,7 +111,7 @@ class CapsController extends Controller {
         return $this->render('AdminBundle:Caps:show.html.twig', array(
             'cap' => $cap,
             'deleteTokenName' => $this->delete_token_name,
-            'csrfProvider' => $this->get('form.csrf_provider')
+            'csrfProvider' => $this->get('security.csrf.token_manager')
         ));
         
     }

@@ -1,7 +1,7 @@
 services:
     app_bundle.twig.extension:
         class: AppBundle\Twig\Extension\AppExtension
-        arguments: ["@doctrine", "@service_container", @router]
+        arguments: ["@doctrine", "@service_container", "@router"]
         tags:
             - { name : twig.extension }
     geocoder_cache:
@@ -9,5 +9,5 @@ services:
         arguments: ["@service_container"]
     contact_mailer:
         class: AppBundle\Utils\Services\Mailer\ContactMailer
-        arguments: [@mailer, "%from_email%", "%from_name%", "%admin_email%"]    
+        arguments: ["@mailer", "%from_email%", "%from_name%", "%admin_email%"]    
             

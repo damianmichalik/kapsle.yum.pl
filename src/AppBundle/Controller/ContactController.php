@@ -11,6 +11,9 @@ class ContactController extends Controller
     
     public function indexAction(Request $request) 
     {
+        
+        echo $this->container->getParameter('admin_email');
+        
         $contactForm = $this->createForm(new ContactType());
         
         $contactForm->handleRequest($request);
