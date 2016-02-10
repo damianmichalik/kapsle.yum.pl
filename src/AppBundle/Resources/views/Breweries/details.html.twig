@@ -24,8 +24,10 @@
             {{ mapHtml|raw }}
             {{ mapJS|raw }}
         </div> 
-        <div class="col-md-6">    
-            <p>{{ brewery.country.name }}</p>
+        <div class="col-md-6">  
+            {% if brewery.country is not null %}
+                <p>{{ brewery.country.name }}</p>
+            {% endif %}    
             <p>{{ brewery.postcode }}, {{ brewery.city }}</p>        
             <p>{{ brewery.address }}</p>
         </div>       

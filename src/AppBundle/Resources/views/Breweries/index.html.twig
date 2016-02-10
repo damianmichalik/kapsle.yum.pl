@@ -28,7 +28,9 @@
                     <a href="{{ path('breweries_details', {'slug' : brewery.slug}) }}">                                                      
                         <strong class="item-name">{{ brewery.name }}</strong>
                     </a>
-                    <p>{{ brewery.country.name }}</p>
+                    {% if brewery.country is not null %}
+                        <p>{{ brewery.country.name }}</p>
+                    {% endif %}    
                     <p>{{ brewery.city }}</p>
                 </div>        
             </li>
