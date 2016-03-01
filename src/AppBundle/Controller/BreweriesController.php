@@ -3,8 +3,6 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Utils\Maps\Brewery as BreweryMap;
-use Ivory\GoogleMap\Helper\MapHelper;
 
 class BreweriesController extends Controller {
     
@@ -32,26 +30,23 @@ class BreweriesController extends Controller {
             throw $this->createNotFoundException('Nie znaleziono podanego rekordu');
         } 
         
-        $geocoderCache = $this->container->get('geocoder_cache');        
-        
-        $cacheKey = "brewery_map_".$BreweryItem->getId();        
         $address = $BreweryItem->getAddressToGeocode();        
-        $geocodedAddresses = $geocoderCache->getGeocodedData($address, $cacheKey);                             
         
-        $map = new BreweryMap($this->container->get('ivory_google_map.marker'));   
+        $geocoderResult = $this->container
+            ->get('bazinga_geocoder.geocoder')
+            ->using('cache')->geocode($address);
         
-        $mapInfo = $this->renderView('AppBundle:Breweries:mapInfo.html.twig', array(
-            'brewery' => $BreweryItem
-        ));
-        
-        $map->addMarkersByGeocodedAddresses($geocodedAddresses->getResults(), $mapInfo);               
-        
-        $mapHelper = new MapHelper();
+        $lat = null;
+        $lng = null;
+        if ($geocoderResult->count() > 0) {
+            $lat = $geocoderResult->first()->getLatitude();
+            $lng = $geocoderResult->first()->getLongitude();
+        }
         
         return $this->render('AppBundle:Breweries:details.html.twig', array(
             'brewery' => $BreweryItem,
-            'mapHtml' => $mapHelper->renderHtmlContainer($map),
-            'mapJS' => $mapHelper->renderJavascripts($map) 
+            'lat' => $lat,
+            'lng' => $lng
         ));
     }
     

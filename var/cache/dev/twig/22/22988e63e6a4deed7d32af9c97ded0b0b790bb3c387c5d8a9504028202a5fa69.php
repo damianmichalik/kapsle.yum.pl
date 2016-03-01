@@ -15,8 +15,8 @@ class __TwigTemplate_c3847a896fc93b30af07e48af77db769671e21d84a910a652677e51a989
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_051a526fc86116096dcaec6e5259d7861e6a0ab1adb7d0f5862e56c1a3ff8f88 = $this->env->getExtension("native_profiler");
-        $__internal_051a526fc86116096dcaec6e5259d7861e6a0ab1adb7d0f5862e56c1a3ff8f88->enter($__internal_051a526fc86116096dcaec6e5259d7861e6a0ab1adb7d0f5862e56c1a3ff8f88_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AppBundle:Partials:nav.html.twig"));
+        $__internal_d12003286abc8724a3b5fb25632d5ad44ed9f77dca6815b531bd3da48668f65c = $this->env->getExtension("native_profiler");
+        $__internal_d12003286abc8724a3b5fb25632d5ad44ed9f77dca6815b531bd3da48668f65c->enter($__internal_d12003286abc8724a3b5fb25632d5ad44ed9f77dca6815b531bd3da48668f65c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AppBundle:Partials:nav.html.twig"));
 
         // line 1
         echo "<nav class=\"navbar navbar-default\" role=\"navigation\">
@@ -55,7 +55,7 @@ class __TwigTemplate_c3847a896fc93b30af07e48af77db769671e21d84a910a652677e51a989
     </div>    
 </nav>  ";
         
-        $__internal_051a526fc86116096dcaec6e5259d7861e6a0ab1adb7d0f5862e56c1a3ff8f88->leave($__internal_051a526fc86116096dcaec6e5259d7861e6a0ab1adb7d0f5862e56c1a3ff8f88_prof);
+        $__internal_d12003286abc8724a3b5fb25632d5ad44ed9f77dca6815b531bd3da48668f65c->leave($__internal_d12003286abc8724a3b5fb25632d5ad44ed9f77dca6815b531bd3da48668f65c_prof);
 
     }
 

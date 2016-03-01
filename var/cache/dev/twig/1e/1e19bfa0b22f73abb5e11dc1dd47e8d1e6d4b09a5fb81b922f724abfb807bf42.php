@@ -23,20 +23,20 @@ class __TwigTemplate_5f955f90162e864a98448b6bc0729a3fa8728529c0df088dde607d2c0a2
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_4811c55f82faf2e4a9c451f351816fdca2213fafa5767210ad72552f792f69dd = $this->env->getExtension("native_profiler");
-        $__internal_4811c55f82faf2e4a9c451f351816fdca2213fafa5767210ad72552f792f69dd->enter($__internal_4811c55f82faf2e4a9c451f351816fdca2213fafa5767210ad72552f792f69dd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AppBundle:Breweries:details.html.twig"));
+        $__internal_5d5191269c2b88ebc2549a903da8cd15fc3d7bd6fbd096cac5940521d23fcb8d = $this->env->getExtension("native_profiler");
+        $__internal_5d5191269c2b88ebc2549a903da8cd15fc3d7bd6fbd096cac5940521d23fcb8d->enter($__internal_5d5191269c2b88ebc2549a903da8cd15fc3d7bd6fbd096cac5940521d23fcb8d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AppBundle:Breweries:details.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_4811c55f82faf2e4a9c451f351816fdca2213fafa5767210ad72552f792f69dd->leave($__internal_4811c55f82faf2e4a9c451f351816fdca2213fafa5767210ad72552f792f69dd_prof);
+        $__internal_5d5191269c2b88ebc2549a903da8cd15fc3d7bd6fbd096cac5940521d23fcb8d->leave($__internal_5d5191269c2b88ebc2549a903da8cd15fc3d7bd6fbd096cac5940521d23fcb8d_prof);
 
     }
 
     // line 3
     public function block_headTitle($context, array $blocks = array())
     {
-        $__internal_1301060991add0300d1a3560f74cddf9ae422dae9396bcedd3e03b98b3d5b0e0 = $this->env->getExtension("native_profiler");
-        $__internal_1301060991add0300d1a3560f74cddf9ae422dae9396bcedd3e03b98b3d5b0e0->enter($__internal_1301060991add0300d1a3560f74cddf9ae422dae9396bcedd3e03b98b3d5b0e0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "headTitle"));
+        $__internal_e6a2b4726b2145dc8e1137628b2dd9ab8074275e87f691d66bb714f6751223c3 = $this->env->getExtension("native_profiler");
+        $__internal_e6a2b4726b2145dc8e1137628b2dd9ab8074275e87f691d66bb714f6751223c3->enter($__internal_e6a2b4726b2145dc8e1137628b2dd9ab8074275e87f691d66bb714f6751223c3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "headTitle"));
 
         // line 4
         echo "    ";
@@ -44,15 +44,15 @@ class __TwigTemplate_5f955f90162e864a98448b6bc0729a3fa8728529c0df088dde607d2c0a2
         echo "
 ";
         
-        $__internal_1301060991add0300d1a3560f74cddf9ae422dae9396bcedd3e03b98b3d5b0e0->leave($__internal_1301060991add0300d1a3560f74cddf9ae422dae9396bcedd3e03b98b3d5b0e0_prof);
+        $__internal_e6a2b4726b2145dc8e1137628b2dd9ab8074275e87f691d66bb714f6751223c3->leave($__internal_e6a2b4726b2145dc8e1137628b2dd9ab8074275e87f691d66bb714f6751223c3_prof);
 
     }
 
     // line 7
     public function block_breadcrumb($context, array $blocks = array())
     {
-        $__internal_3a6f586a56f6fa81da3417689e3ad86f7e23515c4ce67a2fc4af19b0228afc27 = $this->env->getExtension("native_profiler");
-        $__internal_3a6f586a56f6fa81da3417689e3ad86f7e23515c4ce67a2fc4af19b0228afc27->enter($__internal_3a6f586a56f6fa81da3417689e3ad86f7e23515c4ce67a2fc4af19b0228afc27_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "breadcrumb"));
+        $__internal_e8bb43f5ed710e6f660c87d7d367198bfabece20454ab8896c4d0917d3074c9e = $this->env->getExtension("native_profiler");
+        $__internal_e8bb43f5ed710e6f660c87d7d367198bfabece20454ab8896c4d0917d3074c9e->enter($__internal_e8bb43f5ed710e6f660c87d7d367198bfabece20454ab8896c4d0917d3074c9e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "breadcrumb"));
 
         // line 8
         echo "    <li><a href=\"";
@@ -64,15 +64,15 @@ class __TwigTemplate_5f955f90162e864a98448b6bc0729a3fa8728529c0df088dde607d2c0a2
         echo "</li>
 ";
         
-        $__internal_3a6f586a56f6fa81da3417689e3ad86f7e23515c4ce67a2fc4af19b0228afc27->leave($__internal_3a6f586a56f6fa81da3417689e3ad86f7e23515c4ce67a2fc4af19b0228afc27_prof);
+        $__internal_e8bb43f5ed710e6f660c87d7d367198bfabece20454ab8896c4d0917d3074c9e->leave($__internal_e8bb43f5ed710e6f660c87d7d367198bfabece20454ab8896c4d0917d3074c9e_prof);
 
     }
 
     // line 12
     public function block_pageContainer($context, array $blocks = array())
     {
-        $__internal_8b9cca33604a51308886e80e7f7a12831045a0d08dd87cc17848bd71473f4e6d = $this->env->getExtension("native_profiler");
-        $__internal_8b9cca33604a51308886e80e7f7a12831045a0d08dd87cc17848bd71473f4e6d->enter($__internal_8b9cca33604a51308886e80e7f7a12831045a0d08dd87cc17848bd71473f4e6d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "pageContainer"));
+        $__internal_06d417cad824a2fe63a8d2d9fc5ede5d85640f060a7d087fe349170474c610c9 = $this->env->getExtension("native_profiler");
+        $__internal_06d417cad824a2fe63a8d2d9fc5ede5d85640f060a7d087fe349170474c610c9->enter($__internal_06d417cad824a2fe63a8d2d9fc5ede5d85640f060a7d087fe349170474c610c9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "pageContainer"));
 
         // line 13
         echo "
@@ -91,29 +91,76 @@ class __TwigTemplate_5f955f90162e864a98448b6bc0729a3fa8728529c0df088dde607d2c0a2
             </p>
             <hr>  
         </div>  
-        <div class=\"col-md-6\">  
-            ";
+            
+        ";
         // line 24
-        echo (isset($context["mapHtml"]) ? $context["mapHtml"] : $this->getContext($context, "mapHtml"));
-        echo "
-            ";
-        // line 25
-        echo (isset($context["mapJS"]) ? $context["mapJS"] : $this->getContext($context, "mapJS"));
-        echo "
+        if (( !(null === (isset($context["lat"]) ? $context["lat"] : $this->getContext($context, "lat"))) &&  !(null === (isset($context["lng"]) ? $context["lng"] : $this->getContext($context, "lng"))))) {
+            echo "   
+        <div class=\"col-md-6\" id=\"map-wrapper\">              
+            <div id=\"map\"></div>
+            <script>
+            function initMap() {
+                var myLatLng = {lat: ";
+            // line 29
+            echo twig_escape_filter($this->env, (isset($context["lat"]) ? $context["lat"] : $this->getContext($context, "lat")), "html", null, true);
+            echo ", lng: ";
+            echo twig_escape_filter($this->env, (isset($context["lng"]) ? $context["lng"] : $this->getContext($context, "lng")), "html", null, true);
+            echo " };
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: myLatLng
+                });
+                
+                var contentString = '";
+            // line 36
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "name", array()), "html", null, true);
+            echo "';
+                
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: '";
+            // line 45
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "name", array()), "html", null, true);
+            echo "'
+                });
+                
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
+                
+            }
+            </script>
+            <script async defer src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCBSPNX08cXOYUZabQC6FjeZu0rQXJWzms&callback=initMap\"></script>               
         </div> 
-        <div class=\"col-md-6\">    
+        ";
+        }
+        // line 57
+        echo "        <div class=\"col-md-6\">  
+            ";
+        // line 58
+        if ( !(null === $this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "country", array()))) {
+            // line 59
+            echo "                <p>";
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "country", array()), "name", array()), "html", null, true);
+            echo "</p>
+            ";
+        }
+        // line 60
+        echo "    
             <p>";
-        // line 28
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "country", array()), "name", array()), "html", null, true);
-        echo "</p>
-            <p>";
-        // line 29
+        // line 61
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "postcode", array()), "html", null, true);
         echo ", ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "city", array()), "html", null, true);
         echo "</p>        
             <p>";
-        // line 30
+        // line 62
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["brewery"]) ? $context["brewery"] : $this->getContext($context, "brewery")), "address", array()), "html", null, true);
         echo "</p>
         </div>       
@@ -121,7 +168,7 @@ class __TwigTemplate_5f955f90162e864a98448b6bc0729a3fa8728529c0df088dde607d2c0a2
 
 ";
         
-        $__internal_8b9cca33604a51308886e80e7f7a12831045a0d08dd87cc17848bd71473f4e6d->leave($__internal_8b9cca33604a51308886e80e7f7a12831045a0d08dd87cc17848bd71473f4e6d_prof);
+        $__internal_06d417cad824a2fe63a8d2d9fc5ede5d85640f060a7d087fe349170474c610c9->leave($__internal_06d417cad824a2fe63a8d2d9fc5ede5d85640f060a7d087fe349170474c610c9_prof);
 
     }
 
@@ -137,7 +184,7 @@ class __TwigTemplate_5f955f90162e864a98448b6bc0729a3fa8728529c0df088dde607d2c0a2
 
     public function getDebugInfo()
     {
-        return array (  117 => 30,  111 => 29,  107 => 28,  101 => 25,  97 => 24,  89 => 19,  83 => 16,  78 => 13,  72 => 12,  63 => 9,  58 => 8,  52 => 7,  42 => 4,  36 => 3,  11 => 1,);
+        return array (  164 => 62,  158 => 61,  155 => 60,  149 => 59,  147 => 58,  144 => 57,  129 => 45,  117 => 36,  105 => 29,  97 => 24,  89 => 19,  83 => 16,  78 => 13,  72 => 12,  63 => 9,  58 => 8,  52 => 7,  42 => 4,  36 => 3,  11 => 1,);
     }
 }
 /* {% extends 'AppBundle::base.html.twig' %}*/
@@ -162,12 +209,44 @@ class __TwigTemplate_5f955f90162e864a98448b6bc0729a3fa8728529c0df088dde607d2c0a2
 /*             </p>*/
 /*             <hr>  */
 /*         </div>  */
-/*         <div class="col-md-6">  */
-/*             {{ mapHtml|raw }}*/
-/*             {{ mapJS|raw }}*/
+/*             */
+/*         {% if lat is not null and lng is not null %}   */
+/*         <div class="col-md-6" id="map-wrapper">              */
+/*             <div id="map"></div>*/
+/*             <script>*/
+/*             function initMap() {*/
+/*                 var myLatLng = {lat: {{ lat }}, lng: {{ lng }} };*/
+/* */
+/*                 var map = new google.maps.Map(document.getElementById('map'), {*/
+/*                     zoom: 12,*/
+/*                     center: myLatLng*/
+/*                 });*/
+/*                 */
+/*                 var contentString = '{{ brewery.name }}';*/
+/*                 */
+/*                 var infowindow = new google.maps.InfoWindow({*/
+/*                     content: contentString*/
+/*                 });*/
+/* */
+/*                 var marker = new google.maps.Marker({*/
+/*                     position: myLatLng,*/
+/*                     map: map,*/
+/*                     title: '{{ brewery.name }}'*/
+/*                 });*/
+/*                 */
+/*                 marker.addListener('click', function() {*/
+/*                     infowindow.open(map, marker);*/
+/*                 });*/
+/*                 */
+/*             }*/
+/*             </script>*/
+/*             <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBSPNX08cXOYUZabQC6FjeZu0rQXJWzms&callback=initMap"></script>               */
 /*         </div> */
-/*         <div class="col-md-6">    */
-/*             <p>{{ brewery.country.name }}</p>*/
+/*         {% endif %}*/
+/*         <div class="col-md-6">  */
+/*             {% if brewery.country is not null %}*/
+/*                 <p>{{ brewery.country.name }}</p>*/
+/*             {% endif %}    */
 /*             <p>{{ brewery.postcode }}, {{ brewery.city }}</p>        */
 /*             <p>{{ brewery.address }}</p>*/
 /*         </div>       */

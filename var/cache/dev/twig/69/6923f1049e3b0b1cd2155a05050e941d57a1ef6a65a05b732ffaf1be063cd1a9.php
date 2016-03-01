@@ -15,8 +15,8 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_553fc9607f1fb87012f43026ec020d61e7b262f5251f0ff09ba1c4171c2f1b91 = $this->env->getExtension("native_profiler");
-        $__internal_553fc9607f1fb87012f43026ec020d61e7b262f5251f0ff09ba1c4171c2f1b91->enter($__internal_553fc9607f1fb87012f43026ec020d61e7b262f5251f0ff09ba1c4171c2f1b91_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar.css.twig"));
+        $__internal_d1b03b34803e70f9892a61616b03a0330df1e6f22d5c303050bf4da04a93e088 = $this->env->getExtension("native_profiler");
+        $__internal_d1b03b34803e70f9892a61616b03a0330df1e6f22d5c303050bf4da04a93e088->enter($__internal_d1b03b34803e70f9892a61616b03a0330df1e6f22d5c303050bf4da04a93e088_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar.css.twig"));
 
         // line 2
         $context["colors"] = array("success" => "#4F805D", "warning" => "#A46A1F", "error" => "#B0413E");
@@ -26,9 +26,12 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
     background-color: #222;
     border-top-left-radius: 4px;
     bottom: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     display: none;
-    height: 30px;
-    padding: 6px 6px 0;
+    height: 36px;
+    padding: 6px;
     position: fixed;
     right: 0;
     z-index: 99999;
@@ -41,6 +44,7 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 .sf-minitoolbar img {
     max-height: 24px;
     max-width: 24px;
+    display: inline;
 }
 
 .sf-toolbarreset * {
@@ -62,6 +66,7 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
     position: fixed;
     right: 0;
     text-align: left;
+    text-transform: none;
     z-index: 99999;
 }
 .sf-toolbarreset abbr {
@@ -70,13 +75,11 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 }
 .sf-toolbarreset svg,
 .sf-toolbarreset img {
-    max-height: 20px;
-    max-width: 20px;
+    height: 20px;
 }
 
 .sf-toolbarreset .hide-button {
     background: #444;
-    cursor: pointer;
     display: block;
     position: absolute;
     top: 0;
@@ -211,40 +214,40 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 
 .sf-toolbar-block .sf-toolbar-status-green {
     background-color: ";
-        // line 192
+        // line 195
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "success", array());
         echo ";
 }
 .sf-toolbar-block .sf-toolbar-status-red {
     background-color: ";
-        // line 195
+        // line 198
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "error", array());
         echo ";
 }
 .sf-toolbar-block .sf-toolbar-status-yellow {
     background-color: ";
-        // line 198
+        // line 201
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "warning", array());
         echo ";
 }
 
 .sf-toolbar-block.sf-toolbar-status-green {
     background-color: ";
-        // line 202
+        // line 205
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "success", array());
         echo ";
     color: #FFF;
 }
 .sf-toolbar-block.sf-toolbar-status-red {
     background-color: ";
-        // line 206
+        // line 209
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "error", array());
         echo ";
     color: #FFF;
 }
 .sf-toolbar-block.sf-toolbar-status-yellow {
     background-color: ";
-        // line 210
+        // line 213
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "warning", array());
         echo ";
     color: #FFF;
@@ -401,9 +404,9 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 
 /* Override the setting when the toolbar is on the top */
 ";
-        // line 364
+        // line 367
         if (((isset($context["position"]) ? $context["position"] : $this->getContext($context, "position")) == "top")) {
-            // line 365
+            // line 368
             echo "    .sf-minitoolbar {
         border-bottom-left-radius: 4px;
         border-top-left-radius: 0;
@@ -424,18 +427,18 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
     }
 ";
         }
-        // line 384
+        // line 387
         echo "
 ";
-        // line 385
+        // line 388
         if ( !(isset($context["floatable"]) ? $context["floatable"] : $this->getContext($context, "floatable"))) {
-            // line 386
+            // line 389
             echo "    .sf-toolbarreset {
         position: static;
     }
 ";
         }
-        // line 390
+        // line 393
         echo "
 /* Responsive Design */
 .sf-toolbar-icon .sf-toolbar-label,
@@ -468,9 +471,6 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
     .sf-toolbar-block .sf-toolbar-icon img,
     .sf-toolbar-block .sf-toolbar-icon svg {
         top: 6px;
-    }
-    .sf-toolbar-block-config:hover .sf-toolbar-info {
-        right: 0;
     }
     .sf-toolbar-block-time .sf-toolbar-icon svg,
     .sf-toolbar-block-memory .sf-toolbar-icon svg {
@@ -532,7 +532,7 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 }
 ";
         
-        $__internal_553fc9607f1fb87012f43026ec020d61e7b262f5251f0ff09ba1c4171c2f1b91->leave($__internal_553fc9607f1fb87012f43026ec020d61e7b262f5251f0ff09ba1c4171c2f1b91_prof);
+        $__internal_d1b03b34803e70f9892a61616b03a0330df1e6f22d5c303050bf4da04a93e088->leave($__internal_d1b03b34803e70f9892a61616b03a0330df1e6f22d5c303050bf4da04a93e088_prof);
 
     }
 
@@ -548,7 +548,7 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 
     public function getDebugInfo()
     {
-        return array (  439 => 390,  433 => 386,  431 => 385,  428 => 384,  407 => 365,  405 => 364,  248 => 210,  241 => 206,  234 => 202,  227 => 198,  221 => 195,  215 => 192,  24 => 3,  22 => 2,);
+        return array (  442 => 393,  436 => 389,  434 => 388,  431 => 387,  410 => 368,  408 => 367,  251 => 213,  244 => 209,  237 => 205,  230 => 201,  224 => 198,  218 => 195,  24 => 3,  22 => 2,);
     }
 }
 /* {# when updating any of these colors, do the same in profiler.css.twig #}*/
@@ -558,9 +558,12 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 /*     background-color: #222;*/
 /*     border-top-left-radius: 4px;*/
 /*     bottom: 0;*/
+/*     -webkit-box-sizing: border-box;*/
+/*     -moz-box-sizing: border-box;*/
+/*     box-sizing: border-box;*/
 /*     display: none;*/
-/*     height: 30px;*/
-/*     padding: 6px 6px 0;*/
+/*     height: 36px;*/
+/*     padding: 6px;*/
 /*     position: fixed;*/
 /*     right: 0;*/
 /*     z-index: 99999;*/
@@ -573,6 +576,7 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 /* .sf-minitoolbar img {*/
 /*     max-height: 24px;*/
 /*     max-width: 24px;*/
+/*     display: inline;*/
 /* }*/
 /* */
 /* .sf-toolbarreset * {*/
@@ -594,6 +598,7 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 /*     position: fixed;*/
 /*     right: 0;*/
 /*     text-align: left;*/
+/*     text-transform: none;*/
 /*     z-index: 99999;*/
 /* }*/
 /* .sf-toolbarreset abbr {*/
@@ -602,13 +607,11 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 /* }*/
 /* .sf-toolbarreset svg,*/
 /* .sf-toolbarreset img {*/
-/*     max-height: 20px;*/
-/*     max-width: 20px;*/
+/*     height: 20px;*/
 /* }*/
 /* */
 /* .sf-toolbarreset .hide-button {*/
 /*     background: #444;*/
-/*     cursor: pointer;*/
 /*     display: block;*/
 /*     position: absolute;*/
 /*     top: 0;*/
@@ -972,9 +975,6 @@ class __TwigTemplate_3aa98cfad60598af8564e347f356fbcfe8e4f750eceaa8375096934f85c
 /*     .sf-toolbar-block .sf-toolbar-icon img,*/
 /*     .sf-toolbar-block .sf-toolbar-icon svg {*/
 /*         top: 6px;*/
-/*     }*/
-/*     .sf-toolbar-block-config:hover .sf-toolbar-info {*/
-/*         right: 0;*/
 /*     }*/
 /*     .sf-toolbar-block-time .sf-toolbar-icon svg,*/
 /*     .sf-toolbar-block-memory .sf-toolbar-icon svg {*/

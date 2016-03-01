@@ -41,6 +41,15 @@ class appDevDebugProjectContainer extends Container
             'assetic.request_listener' => 'getAssetic_RequestListenerService',
             'assets.context' => 'getAssets_ContextService',
             'assets.packages' => 'getAssets_PackagesService',
+            'bazinga_geocoder.dumper.geojson' => 'getBazingaGeocoder_Dumper_GeojsonService',
+            'bazinga_geocoder.dumper.gpx' => 'getBazingaGeocoder_Dumper_GpxService',
+            'bazinga_geocoder.dumper.kmp' => 'getBazingaGeocoder_Dumper_KmpService',
+            'bazinga_geocoder.dumper.wkb' => 'getBazingaGeocoder_Dumper_WkbService',
+            'bazinga_geocoder.dumper.wkt' => 'getBazingaGeocoder_Dumper_WktService',
+            'bazinga_geocoder.dumper_manager' => 'getBazingaGeocoder_DumperManagerService',
+            'bazinga_geocoder.geocoder' => 'getBazingaGeocoder_GeocoderService',
+            'bazinga_geocoder.geocoder.adapter' => 'getBazingaGeocoder_Geocoder_AdapterService',
+            'bazinga_geocoder.logger' => 'getBazingaGeocoder_LoggerService',
             'cache_clearer' => 'getCacheClearerService',
             'cache_warmer' => 'getCacheWarmerService',
             'config_cache_factory' => 'getConfigCacheFactoryService',
@@ -130,6 +139,7 @@ class appDevDebugProjectContainer extends Container
             'gedmo.listener.tree' => 'getGedmo_Listener_TreeService',
             'geocoder_cache' => 'getGeocoderCacheService',
             'http_kernel' => 'getHttpKernelService',
+            'kapsle_cache_adapter' => 'getKapsleCacheAdapterService',
             'kernel' => 'getKernelService',
             'kernel.class_cache.cache_warmer' => 'getKernel_ClassCache_CacheWarmerService',
             'knp_paginator' => 'getKnpPaginatorService',
@@ -146,6 +156,7 @@ class appDevDebugProjectContainer extends Container
             'monolog.handler.debug' => 'getMonolog_Handler_DebugService',
             'monolog.handler.main' => 'getMonolog_Handler_MainService',
             'monolog.logger.assetic' => 'getMonolog_Logger_AsseticService',
+            'monolog.logger.bazinga_geocoder' => 'getMonolog_Logger_BazingaGeocoderService',
             'monolog.logger.doctrine' => 'getMonolog_Logger_DoctrineService',
             'monolog.logger.event' => 'getMonolog_Logger_EventService',
             'monolog.logger.php' => 'getMonolog_Logger_PhpService',
@@ -272,6 +283,7 @@ class appDevDebugProjectContainer extends Container
             'doctrine.orm.default_result_cache' => 'doctrine_cache.providers.doctrine.orm.default_result_cache',
             'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
             'event_dispatcher' => 'debug.event_dispatcher',
+            'geocoder' => 'bazinga_geocoder.geocoder',
             'mailer' => 'swiftmailer.mailer.default',
             'session.storage' => 'session.storage.native',
             'swiftmailer.mailer' => 'swiftmailer.mailer.default',
@@ -409,6 +421,133 @@ class appDevDebugProjectContainer extends Container
     protected function getAssets_PackagesService()
     {
         return $this->services['assets.packages'] = new \Symfony\Component\Asset\Packages(new \Symfony\Component\Asset\PathPackage('', new \Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy(), $this->get('assets.context')), array());
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.dumper.geojson' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Geocoder\Dumper\GeoJson A Geocoder\Dumper\GeoJson instance.
+     */
+    protected function getBazingaGeocoder_Dumper_GeojsonService()
+    {
+        return $this->services['bazinga_geocoder.dumper.geojson'] = new \Geocoder\Dumper\GeoJson();
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.dumper.gpx' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Geocoder\Dumper\Gpx A Geocoder\Dumper\Gpx instance.
+     */
+    protected function getBazingaGeocoder_Dumper_GpxService()
+    {
+        return $this->services['bazinga_geocoder.dumper.gpx'] = new \Geocoder\Dumper\Gpx();
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.dumper.kmp' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Geocoder\Dumper\Kml A Geocoder\Dumper\Kml instance.
+     */
+    protected function getBazingaGeocoder_Dumper_KmpService()
+    {
+        return $this->services['bazinga_geocoder.dumper.kmp'] = new \Geocoder\Dumper\Kml();
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.dumper.wkb' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Geocoder\Dumper\Wkb A Geocoder\Dumper\Wkb instance.
+     */
+    protected function getBazingaGeocoder_Dumper_WkbService()
+    {
+        return $this->services['bazinga_geocoder.dumper.wkb'] = new \Geocoder\Dumper\Wkb();
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.dumper.wkt' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Geocoder\Dumper\Wkt A Geocoder\Dumper\Wkt instance.
+     */
+    protected function getBazingaGeocoder_Dumper_WktService()
+    {
+        return $this->services['bazinga_geocoder.dumper.wkt'] = new \Geocoder\Dumper\Wkt();
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.dumper_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Bazinga\Bundle\GeocoderBundle\DumperManager A Bazinga\Bundle\GeocoderBundle\DumperManager instance.
+     */
+    protected function getBazingaGeocoder_DumperManagerService()
+    {
+        return $this->services['bazinga_geocoder.dumper_manager'] = new \Bazinga\Bundle\GeocoderBundle\DumperManager(array('geojson' => new \Geocoder\Dumper\GeoJson(), 'gpx' => new \Geocoder\Dumper\Gpx(), 'kmp' => new \Geocoder\Dumper\Kml(), 'wkb' => new \Geocoder\Dumper\Wkb(), 'wkt' => new \Geocoder\Dumper\Wkt()));
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.geocoder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Bazinga\Bundle\GeocoderBundle\Geocoder\LoggableGeocoder A Bazinga\Bundle\GeocoderBundle\Geocoder\LoggableGeocoder instance.
+     */
+    protected function getBazingaGeocoder_GeocoderService()
+    {
+        $a = $this->get('bazinga_geocoder.geocoder.adapter');
+
+        $b = new \Geocoder\Provider\GoogleMaps($a, 'pl', NULL, true, 'AIzaSyDLySLAKcHZkxKQl_3tZCk-yrbXNWvPTkI');
+
+        $this->services['bazinga_geocoder.geocoder'] = $instance = new \Bazinga\Bundle\GeocoderBundle\Geocoder\LoggableGeocoder();
+
+        $instance->registerProviders(array(0 => $b, 1 => new \Bazinga\Bundle\GeocoderBundle\Provider\Cache($this->get('kapsle_cache_adapter'), $b, 86400, 'pl')));
+        $instance->using('google_maps');
+        $instance->setLogger($this->get('bazinga_geocoder.logger'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.geocoder.adapter' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\HttpAdapter\CurlHttpAdapter A Ivory\HttpAdapter\CurlHttpAdapter instance.
+     */
+    protected function getBazingaGeocoder_Geocoder_AdapterService()
+    {
+        return $this->services['bazinga_geocoder.geocoder.adapter'] = new \Ivory\HttpAdapter\CurlHttpAdapter();
+    }
+
+    /**
+     * Gets the 'bazinga_geocoder.logger' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger A Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger instance.
+     */
+    protected function getBazingaGeocoder_LoggerService()
+    {
+        return $this->services['bazinga_geocoder.logger'] = new \Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger($this->get('monolog.logger.bazinga_geocoder', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -569,7 +708,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDebug_DebugHandlersListenerService()
     {
-        return $this->services['debug.debug_handlers_listener'] = new \Symfony\Component\HttpKernel\EventListener\DebugHandlersListener(NULL, $this->get('monolog.logger.php', ContainerInterface::NULL_ON_INVALID_REFERENCE), NULL, NULL, true, NULL);
+        return $this->services['debug.debug_handlers_listener'] = new \Symfony\Component\HttpKernel\EventListener\DebugHandlersListener(NULL, $this->get('monolog.logger.php', ContainerInterface::NULL_ON_INVALID_REFERENCE), 28586, NULL, true, NULL);
     }
 
     /**
@@ -979,7 +1118,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_Type_ChoiceService()
     {
-        return $this->services['form.type.choice'] = new \Symfony\Component\Form\Extension\Core\Type\ChoiceType();
+        return $this->services['form.type.choice'] = new \Symfony\Component\Form\Extension\Core\Type\ChoiceType(new \Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator(new \Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator(new \Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory(), $this->get('property_accessor'))));
     }
 
     /**
@@ -1683,6 +1822,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'kapsle_cache_adapter' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Doctrine\Common\Cache\FileSystemCache A Doctrine\Common\Cache\FileSystemCache instance.
+     */
+    protected function getKapsleCacheAdapterService()
+    {
+        return $this->services['kapsle_cache_adapter'] = new \Doctrine\Common\Cache\FileSystemCache((__DIR__.'/doctrine/cache/file_system'));
+    }
+
+    /**
      * Gets the 'kernel' service.
      *
      * This service is shared.
@@ -1907,6 +2059,25 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'monolog.logger.bazinga_geocoder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bridge\Monolog\Logger A Symfony\Bridge\Monolog\Logger instance.
+     */
+    protected function getMonolog_Logger_BazingaGeocoderService()
+    {
+        $this->services['monolog.logger.bazinga_geocoder'] = $instance = new \Symfony\Bridge\Monolog\Logger('bazinga_geocoder');
+
+        $instance->pushHandler($this->get('monolog.handler.console'));
+        $instance->pushHandler($this->get('monolog.handler.main'));
+        $instance->pushHandler($this->get('monolog.handler.debug'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'monolog.logger.doctrine' service.
      *
      * This service is shared.
@@ -2115,6 +2286,7 @@ class appDevDebugProjectContainer extends Container
         $instance->add($c);
         $instance->add(new \Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector($this));
         $instance->add($this->get('data_collector.dump'));
+        $instance->add(new \Bazinga\Bundle\GeocoderBundle\DataCollector\GeocoderDataCollector($this->get('bazinga_geocoder.logger')));
         $instance->add($d);
 
         return $instance;
@@ -2345,7 +2517,7 @@ class appDevDebugProjectContainer extends Container
         $n = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($f, $k, array(), $a);
         $n->setOptions(array('login_path' => 'caps_login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
 
-        return $this->services['security.firewall.map.context.caps_secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $c), 'caps_secured_area', $a, $d), 2 => $l, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $g, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $k, 'caps_secured_area', $m, $n, array('check_path' => '_check_path', 'username_parameter' => 'login[username]', 'password_parameter' => 'login[password]', 'use_forward' => false, 'require_previous_session' => true, 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $a, $d, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '56b10ed30d84b8.34642950', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\SwitchUserListener($b, $c, $this->get('security.user_checker.caps_secured_area'), 'caps_secured_area', $h, $a, '_switch_user', 'ROLE_ALLOWED_TO_SWITCH', $d), 6 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $h, $j, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'caps_secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $k, 'caps_login', false), NULL, NULL, $a, false));
+        return $this->services['security.firewall.map.context.caps_secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $c), 'caps_secured_area', $a, $d), 2 => $l, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $g, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $k, 'caps_secured_area', $m, $n, array('check_path' => '_check_path', 'username_parameter' => 'login[username]', 'password_parameter' => 'login[password]', 'use_forward' => false, 'require_previous_session' => true, 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $a, $d, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '56d5dd3ea400f4.52353571', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\SwitchUserListener($b, $c, $this->get('security.user_checker.caps_secured_area'), 'caps_secured_area', $h, $a, '_switch_user', 'ROLE_ALLOWED_TO_SWITCH', $d), 6 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $h, $j, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'caps_secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $k, 'caps_login', false), NULL, NULL, $a, false));
     }
 
     /**
@@ -3291,7 +3463,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\StopwatchExtension($a, true));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\ExpressionExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpKernelExtension($this->get('fragment.handler')));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpFoundationExtension($b));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpFoundationExtension($b, $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig')), $this->get('security.csrf.token_manager', ContainerInterface::NULL_ON_INVALID_REFERENCE))));
         $instance->addExtension(new \Twig_Extension_Debug());
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
@@ -3365,6 +3537,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), 'Doctrine');
         $instance->addPath(($this->targetDirs[3].'/src/AppBundle/Resources/views'), 'App');
         $instance->addPath(($this->targetDirs[3].'/vendor/knplabs/knp-paginator-bundle/Resources/views'), 'KnpPaginator');
+        $instance->addPath(($this->targetDirs[3].'/vendor/willdurand/geocoder-bundle/Bazinga/Bundle/GeocoderBundle/Resources/views'), 'BazingaGeocoder');
         $instance->addPath(($this->targetDirs[3].'/src/AdminBundle/Resources/views'), 'Admin');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), 'Debug');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), 'WebProfiler');
@@ -3529,7 +3702,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getWebProfiler_Controller_ProfilerService()
     {
-        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), array('data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.ajax' => array(0 => 'ajax', 1 => '@WebProfiler/Collector/ajax.html.twig'), 'data_collector.form' => array(0 => 'form', 1 => '@WebProfiler/Collector/form.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.translation' => array(0 => 'translation', 1 => '@WebProfiler/Collector/translation.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => '@Security/Collector/security.html.twig'), 'data_collector.twig' => array(0 => 'twig', 1 => '@WebProfiler/Collector/twig.html.twig'), 'data_collector.doctrine' => array(0 => 'db', 1 => '@Doctrine/Collector/db.html.twig'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'data_collector.dump' => array(0 => 'dump', 1 => '@Debug/Profiler/dump.html.twig'), 'data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig')), 'bottom');
+        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), array('data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.ajax' => array(0 => 'ajax', 1 => '@WebProfiler/Collector/ajax.html.twig'), 'data_collector.form' => array(0 => 'form', 1 => '@WebProfiler/Collector/form.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.translation' => array(0 => 'translation', 1 => '@WebProfiler/Collector/translation.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => '@Security/Collector/security.html.twig'), 'data_collector.twig' => array(0 => 'twig', 1 => '@WebProfiler/Collector/twig.html.twig'), 'data_collector.doctrine' => array(0 => 'db', 1 => '@Doctrine/Collector/db.html.twig'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'data_collector.dump' => array(0 => 'dump', 1 => '@Debug/Profiler/dump.html.twig'), 'bazinga_geocoder.data_collector' => array(0 => 'geocoder', 1 => 'BazingaGeocoderBundle:Collector:geocoder'), 'data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig')), 'bottom');
     }
 
     /**
@@ -3668,7 +3841,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.blog_users'), $this->get('security.user_checker.caps_secured_area'), 'caps_secured_area', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('56b10ed30d84b8.34642950')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.blog_users'), $this->get('security.user_checker.caps_secured_area'), 'caps_secured_area', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('56d5dd3ea400f4.52353571')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -3853,7 +4026,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.root_dir' => ($this->targetDirs[3].'/app'),
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'ap_',
+            'kernel.name' => 'app',
             'kernel.cache_dir' => __DIR__,
             'kernel.logs_dir' => ($this->targetDirs[2].'/logs'),
             'kernel.bundles' => array(
@@ -3869,6 +4042,7 @@ class appDevDebugProjectContainer extends Container
                 'DoctrineFixturesBundle' => 'Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle',
                 'KnpPaginatorBundle' => 'Knp\\Bundle\\PaginatorBundle\\KnpPaginatorBundle',
                 'DoctrineCacheBundle' => 'Doctrine\\Bundle\\DoctrineCacheBundle\\DoctrineCacheBundle',
+                'BazingaGeocoderBundle' => 'Bazinga\\Bundle\\GeocoderBundle\\BazingaGeocoderBundle',
                 'AdminBundle' => 'AdminBundle\\AdminBundle',
                 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
@@ -4238,6 +4412,38 @@ class appDevDebugProjectContainer extends Container
             'knp_paginator.template.filtration' => 'KnpPaginatorBundle:Pagination:filtration.html.twig',
             'knp_paginator.template.sortable' => 'KnpPaginatorBundle:Pagination:sortable_link.html.twig',
             'knp_paginator.page_range' => 5,
+            'bazinga_geocoder.geocoder.class' => 'Geocoder\\ProviderAggregator',
+            'bazinga_geocoder.geocoder.loggable_class' => 'Bazinga\\Bundle\\GeocoderBundle\\Geocoder\\LoggableGeocoder',
+            'bazinga_geocoder.geocoder.default_adapter.class' => 'Ivory\\HttpAdapter\\CurlHttpAdapter',
+            'bazinga_geocoder.geocoder.provider.bing_maps.class' => 'Geocoder\\Provider\\BingMaps',
+            'bazinga_geocoder.geocoder.provider.free_geo_ip.class' => 'Geocoder\\Provider\\FreeGeoIp',
+            'bazinga_geocoder.geocoder.provider.google_maps.class' => 'Geocoder\\Provider\\GoogleMaps',
+            'bazinga_geocoder.geocoder.provider.google_maps_business.class' => 'Geocoder\\Provider\\GoogleMapsBusiness',
+            'bazinga_geocoder.geocoder.provider.host_ip.class' => 'Geocoder\\Provider\\HostIp',
+            'bazinga_geocoder.geocoder.provider.ip_info_db.class' => 'Geocoder\\Provider\\IpInfoDb',
+            'bazinga_geocoder.geocoder.provider.yahoo.class' => 'Geocoder\\Provider\\Yahoo',
+            'bazinga_geocoder.geocoder.provider.openstreetmap.class' => 'Geocoder\\Provider\\OpenStreetMap',
+            'bazinga_geocoder.geocoder.provider.geoip.class' => 'Geocoder\\Provider\\Geoip',
+            'bazinga_geocoder.geocoder.provider.mapquest.class' => 'Geocoder\\Provider\\MapQuest',
+            'bazinga_geocoder.geocoder.provider.yandex.class' => 'Geocoder\\Provider\\Yandex',
+            'bazinga_geocoder.geocoder.provider.geo_ips.class' => 'Geocoder\\Provider\\GeoIPs',
+            'bazinga_geocoder.geocoder.provider.geo_plugin.class' => 'Geocoder\\Provider\\GeoPlugin',
+            'bazinga_geocoder.geocoder.provider.maxmind.class' => 'Geocoder\\Provider\\MaxMind',
+            'bazinga_geocoder.geocoder.provider.maxmind_binary.class' => 'Geocoder\\Provider\\MaxMindBinary',
+            'bazinga_geocoder.geocoder.provider.opencage.class' => 'Geocoder\\Provider\\OpenCage',
+            'bazinga_geocoder.geocoder.provider.cache.class' => 'Bazinga\\Bundle\\GeocoderBundle\\Provider\\Cache',
+            'bazinga_geocoder.geocoder.provider.chain.class' => 'Geocoder\\Provider\\Chain',
+            'bazinga_geocoder.geocoder.provider.tom_tom.class' => 'Geocoder\\Provider\\TomTom',
+            'bazinga_geocoder.logger.class' => 'Bazinga\\Bundle\\GeocoderBundle\\Logger\\GeocoderLogger',
+            'bazinga_geocoder.data_collector.class' => 'Bazinga\\Bundle\\GeocoderBundle\\DataCollector\\GeocoderDataCollector',
+            'bazinga_geocoder.event_listener.fake_request.class' => 'Bazinga\\Bundle\\GeocoderBundle\\EventListener\\FakeRequestListener',
+            'bazinga_geocoder.dumper_manager.class' => 'Bazinga\\Bundle\\GeocoderBundle\\DumperManager',
+            'bazinga_geocoder.dumper.geojson.class' => 'Geocoder\\Dumper\\GeoJson',
+            'bazinga_geocoder.dumper.gpx.class' => 'Geocoder\\Dumper\\Gpx',
+            'bazinga_geocoder.dumper.kmp.class' => 'Geocoder\\Dumper\\Kml',
+            'bazinga_geocoder.dumper.wkb.class' => 'Geocoder\\Dumper\\Wkb',
+            'bazinga_geocoder.dumper.wkt.class' => 'Geocoder\\Dumper\\Wkt',
+            'bazinga_geocoder.default_provider' => 'google_maps',
             'web_profiler.debug_toolbar.position' => 'bottom',
             'web_profiler.debug_toolbar.intercept_redirects' => false,
             'web_profiler.debug_toolbar.mode' => 2,
@@ -4301,6 +4507,10 @@ class appDevDebugProjectContainer extends Container
                 'data_collector.dump' => array(
                     0 => 'dump',
                     1 => '@Debug/Profiler/dump.html.twig',
+                ),
+                'bazinga_geocoder.data_collector' => array(
+                    0 => 'geocoder',
+                    1 => 'BazingaGeocoderBundle:Collector:geocoder',
                 ),
                 'data_collector.config' => array(
                     0 => 'config',

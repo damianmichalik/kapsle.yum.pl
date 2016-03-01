@@ -15,8 +15,8 @@ class __TwigTemplate_ad7e4f37c2b789aac5ec705f0ba8f731483c5b403e8e6cb62ad22288124
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_182abf0742e0900bd38cc2a5f60a88c5f88eec6f5f4bf56b0c45560dec5f33d9 = $this->env->getExtension("native_profiler");
-        $__internal_182abf0742e0900bd38cc2a5f60a88c5f88eec6f5f4bf56b0c45560dec5f33d9->enter($__internal_182abf0742e0900bd38cc2a5f60a88c5f88eec6f5f4bf56b0c45560dec5f33d9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/profiler.css.twig"));
+        $__internal_503feadaf214f09f67bb4e1f5ce210ece5de921e83a7c44a8bd32536ef7d6b1b = $this->env->getExtension("native_profiler");
+        $__internal_503feadaf214f09f67bb4e1f5ce210ece5de921e83a7c44a8bd32536ef7d6b1b->enter($__internal_503feadaf214f09f67bb4e1f5ce210ece5de921e83a7c44a8bd32536ef7d6b1b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/profiler.css.twig"));
 
         // line 3
         $context["mixins"] = array("break_long_words" => "-ms-word-break: break-all; word-break: break-all; word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto;", "monospace_font" => "font-family: monospace; font-size: 13px; font-size-adjust: 0.5;", "sans_serif_font" => "font-family: Helvetica, Arial, sans-serif;", "subtle_border_and_shadow" => "background: #FFF; border: 1px solid #E0E0E0; box-shadow: 0px 0px 1px rgba(128, 128, 128, .2);");
@@ -691,6 +691,11 @@ tr.status-warning td {
     width: 50px;
     text-align: center;
 }
+#menu-profiler .label .icon img,
+#menu-profiler .label .icon svg {
+    height: 24px;
+    max-width: 24px;
+}
 #menu-profiler li a .label .icon svg path {
     fill: #DDD;
 }
@@ -746,19 +751,19 @@ tr.status-warning td {
 
 #menu-profiler .label-status-warning .count {
     background: ";
-        // line 676
+        // line 681
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "warning", array());
         echo ";
 }
 #menu-profiler .label-status-error .count {
     background: ";
-        // line 679
+        // line 684
         echo $this->getAttribute((isset($context["colors"]) ? $context["colors"] : $this->getContext($context, "colors")), "error", array());
         echo ";
 }
 
 ";
-        // line 684
+        // line 689
         echo "#timeline-control {
     background: #FFF;
     margin: 1em 0;
@@ -796,7 +801,7 @@ tr.status-warning td {
 }
 
 ";
-        // line 722
+        // line 727
         echo ".tab-navigation {
     margin: 0 0 1em 0;
     padding: 0;
@@ -850,7 +855,7 @@ tr.status-warning td {
 }
 
 ";
-        // line 776
+        // line 781
         echo ".sf-toggle-content {
     -moz-transition: display .25s ease;
     -webkit-transition: display .25s ease;
@@ -864,7 +869,7 @@ tr.status-warning td {
 }
 
 ";
-        // line 790
+        // line 795
         echo "#twig-dump pre {
     font-size: 12px;
     line-height: 1.7;
@@ -878,7 +883,7 @@ tr.status-warning td {
 #twig-dump .status-success { background: rgba(100, 189, 99, 0.2);     }
 
 ";
-        // line 804
+        // line 809
         echo "table.logs .metadata {
     color: #777;
     display: block;
@@ -900,7 +905,7 @@ table.logs .sf-call-stack abbr {
 }
 
 ";
-        // line 826
+        // line 831
         echo ".sql-runnable {
     background: #F5F5F5;
     margin: .5em 0;
@@ -908,7 +913,7 @@ table.logs .sf-call-stack abbr {
 }
 .queries-table pre {
     ";
-        // line 832
+        // line 837
         echo $this->getAttribute((isset($context["mixins"]) ? $context["mixins"] : $this->getContext($context, "mixins")), "break_long_words", array());
         echo "
     margin: 0;
@@ -916,7 +921,7 @@ table.logs .sf-call-stack abbr {
 }
 
 ";
-        // line 839
+        // line 844
         echo "#collector-content .sf-dump {
     margin-bottom: 2em;
 }
@@ -924,7 +929,7 @@ table.logs .sf-call-stack abbr {
 #collector-content .sf-dump code,
 #collector-content .sf-dump samp {
     ";
-        // line 845
+        // line 850
         echo $this->getAttribute((isset($context["mixins"]) ? $context["mixins"] : $this->getContext($context, "mixins")), "monospace_font", array());
         echo "
 }
@@ -971,10 +976,10 @@ table.logs .sf-call-stack abbr {
 }
 
 ";
-        // line 891
+        // line 896
         echo "#search-results td {
     ";
-        // line 892
+        // line 897
         echo $this->getAttribute((isset($context["mixins"]) ? $context["mixins"] : $this->getContext($context, "mixins")), "sans_serif_font", array());
         echo "
     vertical-align: middle;
@@ -989,7 +994,7 @@ table.logs .sf-call-stack abbr {
 }
 
 ";
-        // line 906
+        // line 911
         echo "
 .visible-small {
     display: none;
@@ -1039,7 +1044,7 @@ table.logs .sf-call-stack abbr {
 }
 ";
         
-        $__internal_182abf0742e0900bd38cc2a5f60a88c5f88eec6f5f4bf56b0c45560dec5f33d9->leave($__internal_182abf0742e0900bd38cc2a5f60a88c5f88eec6f5f4bf56b0c45560dec5f33d9_prof);
+        $__internal_503feadaf214f09f67bb4e1f5ce210ece5de921e83a7c44a8bd32536ef7d6b1b->leave($__internal_503feadaf214f09f67bb4e1f5ce210ece5de921e83a7c44a8bd32536ef7d6b1b_prof);
 
     }
 
@@ -1055,7 +1060,7 @@ table.logs .sf-call-stack abbr {
 
     public function getDebugInfo()
     {
-        return array (  993 => 906,  978 => 892,  975 => 891,  928 => 845,  920 => 839,  912 => 832,  904 => 826,  882 => 804,  868 => 790,  854 => 776,  800 => 722,  762 => 684,  756 => 679,  750 => 676,  660 => 588,  624 => 552,  597 => 525,  588 => 516,  585 => 514,  579 => 509,  546 => 477,  542 => 476,  538 => 475,  519 => 458,  483 => 422,  460 => 399,  434 => 373,  417 => 356,  411 => 351,  405 => 348,  382 => 327,  362 => 308,  359 => 307,  305 => 254,  293 => 244,  288 => 240,  284 => 239,  280 => 238,  253 => 214,  232 => 196,  217 => 183,  203 => 170,  194 => 164,  169 => 142,  160 => 135,  123 => 99,  120 => 98,  114 => 93,  41 => 23,  36 => 20,  32 => 16,  29 => 12,  27 => 11,  24 => 9,  22 => 3,);
+        return array (  998 => 911,  983 => 897,  980 => 896,  933 => 850,  925 => 844,  917 => 837,  909 => 831,  887 => 809,  873 => 795,  859 => 781,  805 => 727,  767 => 689,  761 => 684,  755 => 681,  660 => 588,  624 => 552,  597 => 525,  588 => 516,  585 => 514,  579 => 509,  546 => 477,  542 => 476,  538 => 475,  519 => 458,  483 => 422,  460 => 399,  434 => 373,  417 => 356,  411 => 351,  405 => 348,  382 => 327,  362 => 308,  359 => 307,  305 => 254,  293 => 244,  288 => 240,  284 => 239,  280 => 238,  253 => 214,  232 => 196,  217 => 183,  203 => 170,  194 => 164,  169 => 142,  160 => 135,  123 => 99,  120 => 98,  114 => 93,  41 => 23,  36 => 20,  32 => 16,  29 => 12,  27 => 11,  24 => 9,  22 => 3,);
     }
 }
 /* {# Mixins*/
@@ -1678,6 +1683,11 @@ table.logs .sf-call-stack abbr {
 /*     top: 8px;*/
 /*     width: 50px;*/
 /*     text-align: center;*/
+/* }*/
+/* #menu-profiler .label .icon img,*/
+/* #menu-profiler .label .icon svg {*/
+/*     height: 24px;*/
+/*     max-width: 24px;*/
 /* }*/
 /* #menu-profiler li a .label .icon svg path {*/
 /*     fill: #DDD;*/

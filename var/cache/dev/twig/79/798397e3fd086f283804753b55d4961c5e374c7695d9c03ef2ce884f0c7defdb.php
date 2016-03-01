@@ -15,8 +15,8 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_66b33f3a27864f30fe72345797b2457eb7d4adccfca22e91c3bc99c67d46a759 = $this->env->getExtension("native_profiler");
-        $__internal_66b33f3a27864f30fe72345797b2457eb7d4adccfca22e91c3bc99c67d46a759->enter($__internal_66b33f3a27864f30fe72345797b2457eb7d4adccfca22e91c3bc99c67d46a759_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/base_js.html.twig"));
+        $__internal_5efa69abe4e4df786d9cb5374ee241cc954c636a9e069e9977a5109cd89b0b66 = $this->env->getExtension("native_profiler");
+        $__internal_5efa69abe4e4df786d9cb5374ee241cc954c636a9e069e9977a5109cd89b0b66->enter($__internal_5efa69abe4e4df786d9cb5374ee241cc954c636a9e069e9977a5109cd89b0b66_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/base_js.html.twig"));
 
         // line 1
         echo "<script>/*<![CDATA[*/
@@ -121,7 +121,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
                             var request = requestStack[i];
 
                             var row = document.createElement('tr');
-                            rows.appendChild(row);
+                            rows.insertBefore(row, rows.firstChild);
 
                             var methodCell = document.createElement('td');
                             if (request.error) {
@@ -208,6 +208,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
                     Sfjs.removeClass(ajaxToolbarPanel, 'sf-toolbar-status-red');
                 } else if (state == 'error') {
                     Sfjs.addClass(ajaxToolbarPanel, 'sf-toolbar-status-red');
+                    Sfjs.removeClass(ajaxToolbarPanel, 'sf-ajax-request-loading');
                 } else {
                     Sfjs.addClass(ajaxToolbarPanel, 'sf-ajax-request-loading');
                 }
@@ -227,9 +228,9 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
         }
 
         ";
-        // line 209
+        // line 210
         if (array_key_exists("excluded_ajax_paths", $context)) {
-            // line 210
+            // line 211
             echo "            if (window.XMLHttpRequest && XMLHttpRequest.prototype.addEventListener) {
                 var proxied = XMLHttpRequest.prototype.open;
 
@@ -240,27 +241,27 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
                     var path = url;
                     if (url.substr(0, 1) === '/') {
                         if (0 === url.indexOf('";
-            // line 219
+            // line 220
             echo twig_escape_filter($this->env, twig_escape_filter($this->env, $this->getAttribute((isset($context["request"]) ? $context["request"] : $this->getContext($context, "request")), "basePath", array()), "js"), "html", null, true);
             echo "')) {
                             path = url.substr(";
-            // line 220
+            // line 221
             echo twig_escape_filter($this->env, twig_length_filter($this->env, $this->getAttribute((isset($context["request"]) ? $context["request"] : $this->getContext($context, "request")), "basePath", array())), "html", null, true);
             echo ");
                         }
                     }
                     else if (0 === url.indexOf('";
-            // line 223
+            // line 224
             echo twig_escape_filter($this->env, twig_escape_filter($this->env, ($this->getAttribute((isset($context["request"]) ? $context["request"] : $this->getContext($context, "request")), "schemeAndHttpHost", array()) . $this->getAttribute((isset($context["request"]) ? $context["request"] : $this->getContext($context, "request")), "basePath", array())), "js"), "html", null, true);
             echo "')) {
                         path = url.substr(";
-            // line 224
+            // line 225
             echo twig_escape_filter($this->env, twig_length_filter($this->env, ($this->getAttribute((isset($context["request"]) ? $context["request"] : $this->getContext($context, "request")), "schemeAndHttpHost", array()) . $this->getAttribute((isset($context["request"]) ? $context["request"] : $this->getContext($context, "request")), "basePath", array()))), "html", null, true);
             echo ");
                     }
 
-                    if (path.substr(0, 1) === '/' && !path.match(new RegExp(";
-            // line 227
+                    if (!path.match(new RegExp(";
+            // line 228
             echo twig_jsonencode_filter((isset($context["excluded_ajax_paths"]) ? $context["excluded_ajax_paths"] : $this->getContext($context, "excluded_ajax_paths")));
             echo "))) {
                         var stackElement = {
@@ -293,7 +294,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
             }
         ";
         }
-        // line 257
+        // line 258
         echo "
         return {
             hasClass: hasClass,
@@ -473,7 +474,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
 /*]]>*/</script>
 ";
         
-        $__internal_66b33f3a27864f30fe72345797b2457eb7d4adccfca22e91c3bc99c67d46a759->leave($__internal_66b33f3a27864f30fe72345797b2457eb7d4adccfca22e91c3bc99c67d46a759_prof);
+        $__internal_5efa69abe4e4df786d9cb5374ee241cc954c636a9e069e9977a5109cd89b0b66->leave($__internal_5efa69abe4e4df786d9cb5374ee241cc954c636a9e069e9977a5109cd89b0b66_prof);
 
     }
 
@@ -489,7 +490,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
 
     public function getDebugInfo()
     {
-        return array (  297 => 257,  264 => 227,  258 => 224,  254 => 223,  248 => 220,  244 => 219,  233 => 210,  231 => 209,  25 => 5,  22 => 1,);
+        return array (  298 => 258,  265 => 228,  259 => 225,  255 => 224,  249 => 221,  245 => 220,  234 => 211,  232 => 210,  25 => 5,  22 => 1,);
     }
 }
 /* <script>/*<![CDATA[*//* */
@@ -595,7 +596,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
 /*                             var request = requestStack[i];*/
 /* */
 /*                             var row = document.createElement('tr');*/
-/*                             rows.appendChild(row);*/
+/*                             rows.insertBefore(row, rows.firstChild);*/
 /* */
 /*                             var methodCell = document.createElement('td');*/
 /*                             if (request.error) {*/
@@ -682,6 +683,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
 /*                     Sfjs.removeClass(ajaxToolbarPanel, 'sf-toolbar-status-red');*/
 /*                 } else if (state == 'error') {*/
 /*                     Sfjs.addClass(ajaxToolbarPanel, 'sf-toolbar-status-red');*/
+/*                     Sfjs.removeClass(ajaxToolbarPanel, 'sf-ajax-request-loading');*/
 /*                 } else {*/
 /*                     Sfjs.addClass(ajaxToolbarPanel, 'sf-ajax-request-loading');*/
 /*                 }*/
@@ -718,7 +720,7 @@ class __TwigTemplate_c0cc760ccf71c2862b4dc8c3ae09a548f622892d0bb06648318135bc176
 /*                         path = url.substr({{ (request.schemeAndHttpHost ~ request.basePath)|length }});*/
 /*                     }*/
 /* */
-/*                     if (path.substr(0, 1) === '/' && !path.match(new RegExp({{ excluded_ajax_paths|json_encode|raw }}))) {*/
+/*                     if (!path.match(new RegExp({{ excluded_ajax_paths|json_encode|raw }}))) {*/
 /*                         var stackElement = {*/
 /*                             loading: true,*/
 /*                             error: false,*/

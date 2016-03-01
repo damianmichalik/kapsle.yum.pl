@@ -15,8 +15,8 @@ class __TwigTemplate_7f14699b79d56f11c50751b595ddbdab87f76c69354204747c9c4d8f4e0
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_3bca31dcee6d0b8ab5cfe7c1605d361ad7b9cee09daa785f1f3d6ee279e7daf9 = $this->env->getExtension("native_profiler");
-        $__internal_3bca31dcee6d0b8ab5cfe7c1605d361ad7b9cee09daa785f1f3d6ee279e7daf9->enter($__internal_3bca31dcee6d0b8ab5cfe7c1605d361ad7b9cee09daa785f1f3d6ee279e7daf9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Twig/Exception/exception.html.twig"));
+        $__internal_0c38c7775fd45d9a71ab2d5010c0dc95fe40a03d796d2d5b96b005dbf4a21a33 = $this->env->getExtension("native_profiler");
+        $__internal_0c38c7775fd45d9a71ab2d5010c0dc95fe40a03d796d2d5b96b005dbf4a21a33->enter($__internal_0c38c7775fd45d9a71ab2d5010c0dc95fe40a03d796d2d5b96b005dbf4a21a33_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Twig/Exception/exception.html.twig"));
 
         // line 1
         echo "<div class=\"block-exception\">
@@ -210,7 +210,7 @@ class __TwigTemplate_7f14699b79d56f11c50751b595ddbdab87f76c69354204747c9c4d8f4e0
 
         if (clazz) {
             var tags = document.getElementsByTagName('*');
-            for (i = tags.length - 1; i >= 0 ; i--) {
+            for (i = tags.length - 1; i >= 0; i--) {
                 if (tags[i].className === clazz) {
                     tags[i].style.display = 'none';
                 }
@@ -235,7 +235,7 @@ class __TwigTemplate_7f14699b79d56f11c50751b595ddbdab87f76c69354204747c9c4d8f4e0
 //]]></script>
 ";
         
-        $__internal_3bca31dcee6d0b8ab5cfe7c1605d361ad7b9cee09daa785f1f3d6ee279e7daf9->leave($__internal_3bca31dcee6d0b8ab5cfe7c1605d361ad7b9cee09daa785f1f3d6ee279e7daf9_prof);
+        $__internal_0c38c7775fd45d9a71ab2d5010c0dc95fe40a03d796d2d5b96b005dbf4a21a33->leave($__internal_0c38c7775fd45d9a71ab2d5010c0dc95fe40a03d796d2d5b96b005dbf4a21a33_prof);
 
     }
 
@@ -354,7 +354,7 @@ class __TwigTemplate_7f14699b79d56f11c50751b595ddbdab87f76c69354204747c9c4d8f4e0
 /* */
 /*         if (clazz) {*/
 /*             var tags = document.getElementsByTagName('*');*/
-/*             for (i = tags.length - 1; i >= 0 ; i--) {*/
+/*             for (i = tags.length - 1; i >= 0; i--) {*/
 /*                 if (tags[i].className === clazz) {*/
 /*                     tags[i].style.display = 'none';*/
 /*                 }*/

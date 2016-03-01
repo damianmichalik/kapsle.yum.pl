@@ -294,8 +294,10 @@ class Brewery {
     public function getAddressToGeocode()
     {
         $addressToGeocode = $this->getAddress() . ', ' . 
-                $this->getPostcode() .' ' . $this->getCity() . 
-                ', ' . $this->getCountry()->getName();    
+                $this->getPostcode() .' ' . $this->getCity();    
+        if($this->getCountry() != null) {
+            $addressToGeocode .= ', ' . $this->getCountry()->getName();
+        }
         return $addressToGeocode;
     }
     

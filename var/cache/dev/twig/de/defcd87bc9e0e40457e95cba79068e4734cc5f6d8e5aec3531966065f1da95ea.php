@@ -15,8 +15,8 @@ class __TwigTemplate_3dd8ba8e206142bc32ccdec386bff592bb2358db881754f62838a714a94
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f2db042f12b558b150c5958f066e97f25f56cc01cb0acfc84c479da639d80467 = $this->env->getExtension("native_profiler");
-        $__internal_f2db042f12b558b150c5958f066e97f25f56cc01cb0acfc84c479da639d80467->enter($__internal_f2db042f12b558b150c5958f066e97f25f56cc01cb0acfc84c479da639d80467_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar_item.html.twig"));
+        $__internal_50a3ba3b74bf37f613553e9ed1bcb899860f4ee7a6e32937adce7fd8d4119bea = $this->env->getExtension("native_profiler");
+        $__internal_50a3ba3b74bf37f613553e9ed1bcb899860f4ee7a6e32937adce7fd8d4119bea->enter($__internal_50a3ba3b74bf37f613553e9ed1bcb899860f4ee7a6e32937adce7fd8d4119bea_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar_item.html.twig"));
 
         // line 1
         echo "<div class=\"sf-toolbar-block sf-toolbar-block-";
@@ -28,7 +28,7 @@ class __TwigTemplate_3dd8ba8e206142bc32ccdec386bff592bb2358db881754f62838a714a94
         echo "\">
     ";
         // line 2
-        if ((isset($context["link"]) ? $context["link"] : $this->getContext($context, "link"))) {
+        if (((array_key_exists("link", $context)) ? (_twig_default_filter((isset($context["link"]) ? $context["link"] : $this->getContext($context, "link")), true)) : (true))) {
             echo "<a href=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_profiler", array("token" => (isset($context["token"]) ? $context["token"] : $this->getContext($context, "token")), "panel" => (isset($context["name"]) ? $context["name"] : $this->getContext($context, "name")))), "html", null, true);
             echo "\">";
@@ -39,7 +39,7 @@ class __TwigTemplate_3dd8ba8e206142bc32ccdec386bff592bb2358db881754f62838a714a94
         echo "</div>
     ";
         // line 4
-        if ((isset($context["link"]) ? $context["link"] : $this->getContext($context, "link"))) {
+        if (((array_key_exists("link", $context)) ? (_twig_default_filter((isset($context["link"]) ? $context["link"] : $this->getContext($context, "link")), true)) : (true))) {
             echo "</a>";
         }
         // line 5
@@ -49,7 +49,7 @@ class __TwigTemplate_3dd8ba8e206142bc32ccdec386bff592bb2358db881754f62838a714a94
 </div>
 ";
         
-        $__internal_f2db042f12b558b150c5958f066e97f25f56cc01cb0acfc84c479da639d80467->leave($__internal_f2db042f12b558b150c5958f066e97f25f56cc01cb0acfc84c479da639d80467_prof);
+        $__internal_50a3ba3b74bf37f613553e9ed1bcb899860f4ee7a6e32937adce7fd8d4119bea->leave($__internal_50a3ba3b74bf37f613553e9ed1bcb899860f4ee7a6e32937adce7fd8d4119bea_prof);
 
     }
 
@@ -69,9 +69,9 @@ class __TwigTemplate_3dd8ba8e206142bc32ccdec386bff592bb2358db881754f62838a714a94
     }
 }
 /* <div class="sf-toolbar-block sf-toolbar-block-{{ name }} sf-toolbar-status-{{ status|default('normal') }} {{ additional_classes|default('') }}">*/
-/*     {% if link %}<a href="{{ path('_profiler', { token: token, panel: name }) }}">{% endif %}*/
+/*     {% if link|default(true) %}<a href="{{ path('_profiler', { token: token, panel: name }) }}">{% endif %}*/
 /*         <div class="sf-toolbar-icon">{{ icon|default('') }}</div>*/
-/*     {% if link %}</a>{% endif %}*/
+/*     {% if link|default(true) %}</a>{% endif %}*/
 /*         <div class="sf-toolbar-info">{{ text|default('') }}</div>*/
 /* </div>*/
 /* */

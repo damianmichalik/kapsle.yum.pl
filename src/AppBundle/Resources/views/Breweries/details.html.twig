@@ -20,10 +20,40 @@
             </p>
             <hr>  
         </div>  
-        <div class="col-md-6">  
-            {{ mapHtml|raw }}
-            {{ mapJS|raw }}
+            
+        {% if lat is not null and lng is not null %}   
+        <div class="col-md-6" id="map-wrapper">              
+            <div id="map"></div>
+            <script>
+            function initMap() {
+                var myLatLng = {lat: {{ lat }}, lng: {{ lng }} };
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: myLatLng
+                });
+                
+                var contentString = '{{ brewery.name }}';
+                
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: '{{ brewery.name }}'
+                });
+                
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
+                
+            }
+            </script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBSPNX08cXOYUZabQC6FjeZu0rQXJWzms&callback=initMap"></script>               
         </div> 
+        {% endif %}
         <div class="col-md-6">  
             {% if brewery.country is not null %}
                 <p>{{ brewery.country.name }}</p>
