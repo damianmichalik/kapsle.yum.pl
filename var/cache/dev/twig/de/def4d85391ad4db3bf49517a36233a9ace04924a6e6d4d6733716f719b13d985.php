@@ -21,20 +21,20 @@ class __TwigTemplate_8f9ec44604ca9ee58c98b66e9cfd6b5aae5f798e48338da01646856b2c2
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f1513906c3fd209b09bbce304f1c13481219b90b4659a677d2c8939ce6cffc37 = $this->env->getExtension("native_profiler");
-        $__internal_f1513906c3fd209b09bbce304f1c13481219b90b4659a677d2c8939ce6cffc37->enter($__internal_f1513906c3fd209b09bbce304f1c13481219b90b4659a677d2c8939ce6cffc37_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AdminBundle:Caps:index.html.twig"));
+        $__internal_0256b55b7339c4ff125cde4f5fb6dc8b26e2c2eee6a147b90a6e15ea5dfb5e90 = $this->env->getExtension("native_profiler");
+        $__internal_0256b55b7339c4ff125cde4f5fb6dc8b26e2c2eee6a147b90a6e15ea5dfb5e90->enter($__internal_0256b55b7339c4ff125cde4f5fb6dc8b26e2c2eee6a147b90a6e15ea5dfb5e90_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AdminBundle:Caps:index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_f1513906c3fd209b09bbce304f1c13481219b90b4659a677d2c8939ce6cffc37->leave($__internal_f1513906c3fd209b09bbce304f1c13481219b90b4659a677d2c8939ce6cffc37_prof);
+        $__internal_0256b55b7339c4ff125cde4f5fb6dc8b26e2c2eee6a147b90a6e15ea5dfb5e90->leave($__internal_0256b55b7339c4ff125cde4f5fb6dc8b26e2c2eee6a147b90a6e15ea5dfb5e90_prof);
 
     }
 
     // line 3
     public function block_pageContent($context, array $blocks = array())
     {
-        $__internal_1b3f0dcdedc1acedd5989b1b3da841f833292741174fa1a80a05b414064c11b0 = $this->env->getExtension("native_profiler");
-        $__internal_1b3f0dcdedc1acedd5989b1b3da841f833292741174fa1a80a05b414064c11b0->enter($__internal_1b3f0dcdedc1acedd5989b1b3da841f833292741174fa1a80a05b414064c11b0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "pageContent"));
+        $__internal_781dbddb795c3daabdaee93fcf6b55aa2276d1e7f4f1e9bbd6415349530f107a = $this->env->getExtension("native_profiler");
+        $__internal_781dbddb795c3daabdaee93fcf6b55aa2276d1e7f4f1e9bbd6415349530f107a->enter($__internal_781dbddb795c3daabdaee93fcf6b55aa2276d1e7f4f1e9bbd6415349530f107a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "pageContent"));
 
         // line 4
         echo "    
@@ -130,46 +130,66 @@ class __TwigTemplate_8f9ec44604ca9ee58c98b66e9cfd6b5aae5f798e48338da01646856b2c2
         // line 61
         echo $this->env->getExtension('knp_pagination')->sortable($this->env, (isset($context["pagination"]) ? $context["pagination"] : $this->getContext($context, "pagination")), "Nazwa", "c.name");
         echo "</th>
+                        <th>";
+        // line 62
+        echo $this->env->getExtension('knp_pagination')->sortable($this->env, (isset($context["pagination"]) ? $context["pagination"] : $this->getContext($context, "pagination")), "Browar", "b.name");
+        echo "</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     ";
-        // line 66
+        // line 67
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pagination"]) ? $context["pagination"] : $this->getContext($context, "pagination")));
         foreach ($context['_seq'] as $context["_key"] => $context["cap"]) {
-            // line 67
+            // line 68
             echo "                    <tr>
                         <td>";
-            // line 68
+            // line 69
             echo twig_escape_filter($this->env, $this->getAttribute($context["cap"], "id", array()), "html", null, true);
             echo "</td>
                         <td>";
-            // line 69
+            // line 70
             echo twig_escape_filter($this->env, $this->getAttribute($context["cap"], "name", array()), "html", null, true);
             echo "</td>
                         <td>
+                            ";
+            // line 72
+            if ( !(null === $this->getAttribute($context["cap"], "brewery", array()))) {
+                // line 73
+                echo "                                ";
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["cap"], "brewery", array()), "name", array()), "html", null, true);
+                echo "
+                            ";
+            } else {
+                // line 75
+                echo "                                <span class=\"warning-text\">Brak</span>
+                            ";
+            }
+            // line 77
+            echo "                        </td>
+                        <td>
                             <div class=\"btn-group\">
                                 <a title=\"Pokaż\" href=\"";
-            // line 72
+            // line 80
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("admin_show_cap", array("id" => $this->getAttribute($context["cap"], "id", array()))), "html", null, true);
             echo "\" class=\"btn btn-info btn-sm\">
                                     <span class=\"glyphicon glyphicon-eye-open\"></span>
                                 </a>
                                 <a title=\"Edytuj\" href=\"";
-            // line 75
+            // line 83
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("admin_cap_form_action", twig_array_merge($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request", array()), "query", array()), "all", array()), array("id" => $this->getAttribute($context["cap"], "id", array()), "page" => (isset($context["page"]) ? $context["page"] : $this->getContext($context, "page"))))), "html", null, true);
             echo "\" class=\"btn btn-primary btn-sm\">
                                     <span class=\"glyphicon glyphicon-edit\"></span>
                                 </a>
                                 ";
-            // line 78
+            // line 86
             $context["tokenName"] = $this->getAttribute((isset($context["csrfProvider"]) ? $context["csrfProvider"] : $this->getContext($context, "csrfProvider")), "getToken", array(0 => sprintf((isset($context["deleteTokenName"]) ? $context["deleteTokenName"] : $this->getContext($context, "deleteTokenName")), $this->getAttribute($context["cap"], "id", array()))), "method");
-            // line 79
+            // line 87
             echo "                                ";
             $context["deleteUrl"] = $this->env->getExtension('routing')->getPath("admin_delete_cap", twig_array_merge($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request", array()), "query", array()), "all", array()), array("id" => $this->getAttribute($context["cap"], "id", array()), "token" => (isset($context["tokenName"]) ? $context["tokenName"] : $this->getContext($context, "tokenName")), "page" => (isset($context["page"]) ? $context["page"] : $this->getContext($context, "page")))));
-            // line 80
+            // line 88
             echo "                                <a title=\"Usuń\" href=\"";
             echo twig_escape_filter($this->env, (isset($context["deleteUrl"]) ? $context["deleteUrl"] : $this->getContext($context, "deleteUrl")), "html", null, true);
             echo "\" class=\"btn btn-danger btn-sm\" data-confirmAction=\"Czy na pewno chcesz usunąć wybrany rekord?\">
@@ -183,13 +203,13 @@ class __TwigTemplate_8f9ec44604ca9ee58c98b66e9cfd6b5aae5f798e48338da01646856b2c2
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['cap'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 86
+        // line 94
         echo "                    
                 </tbody>
             </table>
 
             ";
-        // line 90
+        // line 98
         echo $this->env->getExtension('knp_pagination')->render($this->env, (isset($context["pagination"]) ? $context["pagination"] : $this->getContext($context, "pagination")), "AdminBundle:Pagination:admin_pagination.html.twig");
         echo "
 
@@ -201,7 +221,7 @@ class __TwigTemplate_8f9ec44604ca9ee58c98b66e9cfd6b5aae5f798e48338da01646856b2c2
 
 ";
         
-        $__internal_1b3f0dcdedc1acedd5989b1b3da841f833292741174fa1a80a05b414064c11b0->leave($__internal_1b3f0dcdedc1acedd5989b1b3da841f833292741174fa1a80a05b414064c11b0_prof);
+        $__internal_781dbddb795c3daabdaee93fcf6b55aa2276d1e7f4f1e9bbd6415349530f107a->leave($__internal_781dbddb795c3daabdaee93fcf6b55aa2276d1e7f4f1e9bbd6415349530f107a_prof);
 
     }
 
@@ -217,7 +237,7 @@ class __TwigTemplate_8f9ec44604ca9ee58c98b66e9cfd6b5aae5f798e48338da01646856b2c2
 
     public function getDebugInfo()
     {
-        return array (  193 => 90,  187 => 86,  173 => 80,  170 => 79,  168 => 78,  162 => 75,  156 => 72,  150 => 69,  146 => 68,  143 => 67,  139 => 66,  131 => 61,  127 => 60,  113 => 49,  103 => 41,  94 => 38,  87 => 37,  83 => 36,  76 => 32,  69 => 28,  51 => 13,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  213 => 98,  207 => 94,  193 => 88,  190 => 87,  188 => 86,  182 => 83,  176 => 80,  171 => 77,  167 => 75,  161 => 73,  159 => 72,  154 => 70,  150 => 69,  147 => 68,  143 => 67,  135 => 62,  131 => 61,  127 => 60,  113 => 49,  103 => 41,  94 => 38,  87 => 37,  83 => 36,  76 => 32,  69 => 28,  51 => 13,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'AdminBundle::base.html.twig' %}*/
@@ -281,6 +301,7 @@ class __TwigTemplate_8f9ec44604ca9ee58c98b66e9cfd6b5aae5f798e48338da01646856b2c2
 /*                     <tr>*/
 /*                         <th>{{ knp_pagination_sortable(pagination, 'ID', 'c.id') }}</th>*/
 /*                         <th>{{ knp_pagination_sortable(pagination, 'Nazwa', 'c.name') }}</th>*/
+/*                         <th>{{ knp_pagination_sortable(pagination, 'Browar', 'b.name') }}</th>*/
 /*                         <th>&nbsp;</th>*/
 /*                     </tr>*/
 /*                 </thead>*/
@@ -289,6 +310,13 @@ class __TwigTemplate_8f9ec44604ca9ee58c98b66e9cfd6b5aae5f798e48338da01646856b2c2
 /*                     <tr>*/
 /*                         <td>{{ cap.id }}</td>*/
 /*                         <td>{{ cap.name }}</td>*/
+/*                         <td>*/
+/*                             {% if cap.brewery is not null %}*/
+/*                                 {{ cap.brewery.name }}*/
+/*                             {% else %}*/
+/*                                 <span class="warning-text">Brak</span>*/
+/*                             {% endif %}*/
+/*                         </td>*/
 /*                         <td>*/
 /*                             <div class="btn-group">*/
 /*                                 <a title="Pokaż" href="{{ path('admin_show_cap', {'id' : cap.id} ) }}" class="btn btn-info btn-sm">*/

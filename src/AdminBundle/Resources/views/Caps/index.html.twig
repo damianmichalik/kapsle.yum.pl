@@ -59,6 +59,7 @@
                     <tr>
                         <th>{{ knp_pagination_sortable(pagination, 'ID', 'c.id') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Nazwa', 'c.name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Browar', 'b.name') }}</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -67,6 +68,13 @@
                     <tr>
                         <td>{{ cap.id }}</td>
                         <td>{{ cap.name }}</td>
+                        <td>
+                            {% if cap.brewery is not null %}
+                                {{ cap.brewery.name }}
+                            {% else %}
+                                <span class="warning-text">Brak</span>
+                            {% endif %}
+                        </td>
                         <td>
                             <div class="btn-group">
                                 <a title="Pokaż" href="{{ path('admin_show_cap', {'id' : cap.id} ) }}" class="btn btn-info btn-sm">

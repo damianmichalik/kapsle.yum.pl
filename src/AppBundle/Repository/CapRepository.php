@@ -39,7 +39,9 @@ class CapRepository extends EntityRepository {
 
     public function getQueryBuilder($params = array())
     {
-        $qb = $this->createQueryBuilder('c')->select('c');
+        $qb = $this->createQueryBuilder('c')
+                ->select('c, b')
+                ->leftJoin('c.brewery', 'b');
         
         if(!empty($params['orderBy'])) {
             $orderDir = !empty($params['orderDir']) ? $params['orderDir'] : null;

@@ -35,4 +35,17 @@ class BreweryRepository extends EntityRepository {
         return $qb;
     }
     
+    public function getTopBreweries ($limit)
+    {
+        $searchResults = $this->createQueryBuilder('b')
+            ->select('count(c.id), b.name, b.slug')
+            ->leftJoin('b.caps', 'c')
+            ->groupBy('b.id')        
+            ->getQuery()
+            ->setMaxResults($limit)
+            ->getArrayResult();
+        
+        return $searchResults;        
+    }
+    
 }

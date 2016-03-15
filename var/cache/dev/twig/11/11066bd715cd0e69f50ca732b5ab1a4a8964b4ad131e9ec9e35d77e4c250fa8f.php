@@ -15,8 +15,8 @@ class __TwigTemplate_07162f6d857cb30770ea5679f1f126f53d0bf2c7f453c08a7c26dabca69
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_4876f88a108c5612dd4336e6dd3f6924c5d1c63a70260b48ebbfd7ff0fcdb42f = $this->env->getExtension("native_profiler");
-        $__internal_4876f88a108c5612dd4336e6dd3f6924c5d1c63a70260b48ebbfd7ff0fcdb42f->enter($__internal_4876f88a108c5612dd4336e6dd3f6924c5d1c63a70260b48ebbfd7ff0fcdb42f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AdminBundle:Partials:adminMenu.html.twig"));
+        $__internal_271c8e256947e4b7e384ced73a370cca3104aab933ac035d7e3b0117a23961e5 = $this->env->getExtension("native_profiler");
+        $__internal_271c8e256947e4b7e384ced73a370cca3104aab933ac035d7e3b0117a23961e5->enter($__internal_271c8e256947e4b7e384ced73a370cca3104aab933ac035d7e3b0117a23961e5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AdminBundle:Partials:adminMenu.html.twig"));
 
         // line 1
         echo "<ul class=\"nav navbar-nav side-nav\">
@@ -42,7 +42,7 @@ class __TwigTemplate_07162f6d857cb30770ea5679f1f126f53d0bf2c7f453c08a7c26dabca69
         echo "\"><i class=\"fa fa-rocket\"></i> Zarządzanie cache'm</a></li>
 </ul>";
         
-        $__internal_4876f88a108c5612dd4336e6dd3f6924c5d1c63a70260b48ebbfd7ff0fcdb42f->leave($__internal_4876f88a108c5612dd4336e6dd3f6924c5d1c63a70260b48ebbfd7ff0fcdb42f_prof);
+        $__internal_271c8e256947e4b7e384ced73a370cca3104aab933ac035d7e3b0117a23961e5->leave($__internal_271c8e256947e4b7e384ced73a370cca3104aab933ac035d7e3b0117a23961e5_prof);
 
     }
 

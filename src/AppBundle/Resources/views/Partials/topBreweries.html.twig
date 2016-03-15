@@ -1,0 +1,11 @@
+<h4>Najpopularniejsze browary</h4>
+
+<ul>
+{% for brewery in breweries %}
+    <li class="list-unstyled">
+        <a href="{{ path('breweries_details', {'slug' : brewery.slug}) }}">
+            {{ brewery.name }} ({{ brewery.1 }})
+        </a>
+    </li>
+{% endfor %}
+</ul>

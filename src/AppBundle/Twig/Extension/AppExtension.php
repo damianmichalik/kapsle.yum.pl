@@ -56,6 +56,13 @@ class AppExtension extends \Twig_Extension {
                         'needs_environment' => true
                     )
             ),            
+            new \Twig_SimpleFunction('top_breweries', 
+                    array($this, 'topBreweries'), 
+                    array(
+                        'is_safe' => array('html'),
+                        'needs_environment' => true
+                    )
+            ),               
         );
     }
     
@@ -78,6 +85,15 @@ class AppExtension extends \Twig_Extension {
         $newestCapses = $capsRepo->getNewestCaps(5);
         return $env->render('AppBundle:Partials:newestCapses.html.twig', array(
             'capses' => $newestCapses
+        ));
+    }
+    
+    public function topBreweries (\Twig_Environment $env)
+    {
+        $breweriesRepo = $this->doctrine->getRepository('AppBundle:Brewery');
+        $topBreweries = $breweriesRepo->getTopBreweries(5);
+        return $env->render('AppBundle:Partials:topBreweries.html.twig', array(
+            'breweries' => $topBreweries
         ));
     }
     

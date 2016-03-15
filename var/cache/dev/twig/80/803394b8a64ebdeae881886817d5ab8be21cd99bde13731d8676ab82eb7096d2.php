@@ -16,8 +16,8 @@ class __TwigTemplate_91276792bcd83b87e87e80d61d9d048e93d8b73470b18f4f56714f4a33d
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_34d412c17254094b2ce4eb2a09a86fcc62e00f038c59160687a86401be2a3827 = $this->env->getExtension("native_profiler");
-        $__internal_34d412c17254094b2ce4eb2a09a86fcc62e00f038c59160687a86401be2a3827->enter($__internal_34d412c17254094b2ce4eb2a09a86fcc62e00f038c59160687a86401be2a3827_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AdminBundle::base.html.twig"));
+        $__internal_0f281f45ee5ae1d590d42b39cf857748356a8eb5a2945629545f42cf015d5da9 = $this->env->getExtension("native_profiler");
+        $__internal_0f281f45ee5ae1d590d42b39cf857748356a8eb5a2945629545f42cf015d5da9->enter($__internal_0f281f45ee5ae1d590d42b39cf857748356a8eb5a2945629545f42cf015d5da9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AdminBundle::base.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -144,46 +144,42 @@ class __TwigTemplate_91276792bcd83b87e87e80d61d9d048e93d8b73470b18f4f56714f4a33d
 
 
             <footer>
-                <div class=\"container\">
-
-                    <div class=\"copy text-center\">
-                        Copyright 2015 <a href='#'>Damian</a>
-                    </div>
-
+                <div class=\"copy text-center\">
+                    Copyright 2015 <a href='#'>Damian</a>
                 </div>
             </footer>
         </div>            
         
         <script src=\"";
-        // line 86
+        // line 82
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/admin/js/jquery.js"), "html", null, true);
         echo "\"></script>
         <script src=\"";
-        // line 87
+        // line 83
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/admin/bootstrap/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
         <script src=\"";
-        // line 88
+        // line 84
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bundles/admin/js/custom.js"), "html", null, true);
         echo "\"></script>
         
     </body>
 </html>";
         
-        $__internal_34d412c17254094b2ce4eb2a09a86fcc62e00f038c59160687a86401be2a3827->leave($__internal_34d412c17254094b2ce4eb2a09a86fcc62e00f038c59160687a86401be2a3827_prof);
+        $__internal_0f281f45ee5ae1d590d42b39cf857748356a8eb5a2945629545f42cf015d5da9->leave($__internal_0f281f45ee5ae1d590d42b39cf857748356a8eb5a2945629545f42cf015d5da9_prof);
 
     }
 
     // line 69
     public function block_pageContent($context, array $blocks = array())
     {
-        $__internal_017235d888557c1b1b5d7a69170cad7ff01abda1c8d78efdf644cf5270d8b169 = $this->env->getExtension("native_profiler");
-        $__internal_017235d888557c1b1b5d7a69170cad7ff01abda1c8d78efdf644cf5270d8b169->enter($__internal_017235d888557c1b1b5d7a69170cad7ff01abda1c8d78efdf644cf5270d8b169_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "pageContent"));
+        $__internal_6d83ba1edcaabb2bbecd880c3c3da1e0fed6e83f8547de97ad6a51bae8372fa9 = $this->env->getExtension("native_profiler");
+        $__internal_6d83ba1edcaabb2bbecd880c3c3da1e0fed6e83f8547de97ad6a51bae8372fa9->enter($__internal_6d83ba1edcaabb2bbecd880c3c3da1e0fed6e83f8547de97ad6a51bae8372fa9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "pageContent"));
 
         // line 70
         echo "                    ";
         
-        $__internal_017235d888557c1b1b5d7a69170cad7ff01abda1c8d78efdf644cf5270d8b169->leave($__internal_017235d888557c1b1b5d7a69170cad7ff01abda1c8d78efdf644cf5270d8b169_prof);
+        $__internal_6d83ba1edcaabb2bbecd880c3c3da1e0fed6e83f8547de97ad6a51bae8372fa9->leave($__internal_6d83ba1edcaabb2bbecd880c3c3da1e0fed6e83f8547de97ad6a51bae8372fa9_prof);
 
     }
 
@@ -199,7 +195,7 @@ class __TwigTemplate_91276792bcd83b87e87e80d61d9d048e93d8b73470b18f4f56714f4a33d
 
     public function getDebugInfo()
     {
-        return array (  184 => 70,  178 => 69,  167 => 88,  163 => 87,  159 => 86,  142 => 71,  140 => 69,  137 => 68,  128 => 65,  124 => 63,  120 => 62,  117 => 61,  108 => 58,  104 => 56,  100 => 55,  91 => 48,  89 => 47,  79 => 40,  68 => 32,  44 => 11,  40 => 10,  36 => 9,  31 => 7,  23 => 1,);
+        return array (  180 => 70,  174 => 69,  163 => 84,  159 => 83,  155 => 82,  142 => 71,  140 => 69,  137 => 68,  128 => 65,  124 => 63,  120 => 62,  117 => 61,  108 => 58,  104 => 56,  100 => 55,  91 => 48,  89 => 47,  79 => 40,  68 => 32,  44 => 11,  40 => 10,  36 => 9,  31 => 7,  23 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -277,12 +273,8 @@ class __TwigTemplate_91276792bcd83b87e87e80d61d9d048e93d8b73470b18f4f56714f4a33d
 /* */
 /* */
 /*             <footer>*/
-/*                 <div class="container">*/
-/* */
-/*                     <div class="copy text-center">*/
-/*                         Copyright 2015 <a href='#'>Damian</a>*/
-/*                     </div>*/
-/* */
+/*                 <div class="copy text-center">*/
+/*                     Copyright 2015 <a href='#'>Damian</a>*/
 /*                 </div>*/
 /*             </footer>*/
 /*         </div>            */

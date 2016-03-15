@@ -15,8 +15,8 @@ class __TwigTemplate_930ea6958fab38458f3a909cf91d290e91de605f1b39e1455d16c42796b
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ea3b1ef92ca3ed312357712c125d105b0714ff870deed99a4bded79a30bea669 = $this->env->getExtension("native_profiler");
-        $__internal_ea3b1ef92ca3ed312357712c125d105b0714ff870deed99a4bded79a30bea669->enter($__internal_ea3b1ef92ca3ed312357712c125d105b0714ff870deed99a4bded79a30bea669_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AppBundle:Partials:newestCapses.html.twig"));
+        $__internal_1f9721b6f2f193a9bdf9e6955002d8bc9dd180e066ea0ba3c64a7b235f22f8ab = $this->env->getExtension("native_profiler");
+        $__internal_1f9721b6f2f193a9bdf9e6955002d8bc9dd180e066ea0ba3c64a7b235f22f8ab->enter($__internal_1f9721b6f2f193a9bdf9e6955002d8bc9dd180e066ea0ba3c64a7b235f22f8ab_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "AppBundle:Partials:newestCapses.html.twig"));
 
         // line 1
         echo "<h4>Najnowsze kapsle</h4>
@@ -47,7 +47,7 @@ class __TwigTemplate_930ea6958fab38458f3a909cf91d290e91de605f1b39e1455d16c42796b
         // line 11
         echo "</ul>";
         
-        $__internal_ea3b1ef92ca3ed312357712c125d105b0714ff870deed99a4bded79a30bea669->leave($__internal_ea3b1ef92ca3ed312357712c125d105b0714ff870deed99a4bded79a30bea669_prof);
+        $__internal_1f9721b6f2f193a9bdf9e6955002d8bc9dd180e066ea0ba3c64a7b235f22f8ab->leave($__internal_1f9721b6f2f193a9bdf9e6955002d8bc9dd180e066ea0ba3c64a7b235f22f8ab_prof);
 
     }
 
