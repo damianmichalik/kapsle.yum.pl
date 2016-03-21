@@ -3,12 +3,17 @@
     <head>
         <title>Mój katalog kapsli</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap -->
-        <link href="{{ asset('bundles/admin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-        <!-- styles -->
-        <link href="{{ asset('bundles/admin/css/sb-admin.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/admin/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/admin/css/admin-panel.css') }}" rel="stylesheet">
+        
+        {% stylesheets filter="scssphp" output="css/combined.css"
+            "bundles/admin/bootstrap/css/bootstrap.min.css"
+            "bundles/admin/css/sb-admin.css"
+            "bundles/admin/css/font-awesome/css/font-awesome.min.css"
+            "bundles/admin/css/admin-panel.css"
+            "bundles/admin/css/select2.min.css"
+            "bundles/admin/css/select2-bootstrap.min.css"
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -78,10 +83,15 @@
                 </div>
             </footer>
         </div>            
-        
-        <script src="{{ asset('bundles/admin/js/jquery.js') }}"></script>
-        <script src="{{ asset('bundles/admin/bootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('bundles/admin/js/custom.js') }}"></script>
+
+        {% javascripts
+            '@AdminBundle/Resources/public/js/jquery.js'
+            '@AdminBundle/Resources/public/bootstrap/js/bootstrap.min.js'
+            '@AdminBundle/Resources/public/js/select2.full.min.js'
+            '@AdminBundle/Resources/public/js/custom.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         
     </body>
 </html>

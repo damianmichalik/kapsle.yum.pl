@@ -3,7 +3,6 @@ $(document).ready(function() {
     $('[data-confirmAction]').click(function(){
         var $this = $(this);
         var message = $this.attr('data-confirmAction') || 'Czy na pewno chcesz wykonac ta akcje?';
-
         return confirm(message);
     });
 
@@ -38,5 +37,9 @@ $(document).ready(function() {
     $('form [name="limit"]').change(function(){
         $(this).closest('form').submit();
     });
+    
+    $( ".select2" ).select2( {
+        theme: "bootstrap"        
+    } );
 
 });

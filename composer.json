@@ -23,7 +23,9 @@
         "doctrine/doctrine-fixtures-bundle": "2.3.*",
         "gedmo/doctrine-extensions": "dev-master",
         "knplabs/knp-paginator-bundle": "~2.5",
-        "willdurand/geocoder-bundle": "dev-master"
+        "willdurand/geocoder-bundle": "dev-master",
+        "leafo/scssphp": "^0.6.3",
+        "patchwork/jsqueeze": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "3.0.*"

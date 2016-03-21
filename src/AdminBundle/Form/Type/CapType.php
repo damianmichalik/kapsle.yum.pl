@@ -26,6 +26,9 @@ class CapType extends AbstractType {
                 'class' => 'AppBundle\Entity\Brewery',
                 'choice_label' => 'name',
                 'placeholder' => 'Wybierz browar',
+                'attr' => array(
+                    'class' => 'select2'
+                ),
                 'query_builder' => function (BreweryRepository $br) {
                     return $br->createQueryBuilder('b')
                         ->orderBy('b.name', 'ASC');

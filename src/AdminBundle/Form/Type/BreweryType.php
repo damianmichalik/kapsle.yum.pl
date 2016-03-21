@@ -36,6 +36,9 @@ class BreweryType extends AbstractType {
                 'class' => 'AppBundle\Entity\Country',
                 'choice_label' => 'name',
                 'placeholder' => 'Wybierz kraj',
+                'attr' => array(
+                    'class' => 'select2'
+                ),
                 'query_builder' => function (CountryRepository $cr) {
                     return $cr->createQueryBuilder('c')
                         ->orderBy('c.name', 'ASC');
