@@ -7,6 +7,13 @@
         <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/app/css/style.css') }}" rel="stylesheet">
         
+        {% stylesheets filter="scssphp" output="css/app_combined.css"
+            "bundles/app/css/bootstrap.min.css"
+            "bundles/app/css/style.css"
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        
         <link rel="shortcut icon" href="{{ asset('bundles/app/images/favicons/favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ asset('bundles/app/images/favicons/favicon.ico') }}" type="image/x-icon">
         <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('bundles/app/images/favicons/apple-icon-57x57.png') }}">
@@ -94,11 +101,15 @@
                 </div>
             </div>
         </footer>
-                
-        <script src="{{ asset('bundles/app/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('bundles/app/js/jquery.autocomplete.js') }}"></script>        
-        <script src="{{ asset('bundles/app/js/custom.js') }}"></script>        
+
+        {% javascripts filter="?jsqueeze" output="js/app_combined.js"
+            '@AppBundle/Resources/public/js/jquery.js'
+            '@AppBundle/Resources/public/js/bootstrap.min.js'
+            '@AppBundle/Resources/public/js/jquery.autocomplete.js'
+            '@AppBundle/Resources/public/js/custom.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         
     </body>
 </html>

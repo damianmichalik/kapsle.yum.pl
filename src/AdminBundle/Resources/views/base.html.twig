@@ -4,7 +4,7 @@
         <title>Mój katalog kapsli</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        {% stylesheets filter="scssphp" output="css/combined.css"
+        {% stylesheets filter="scssphp" output="css/admin_combined.css"
             "bundles/admin/bootstrap/css/bootstrap.min.css"
             "bundles/admin/css/sb-admin.css"
             "bundles/admin/css/font-awesome/css/font-awesome.min.css"
@@ -84,7 +84,7 @@
             </footer>
         </div>            
 
-        {% javascripts
+        {% javascripts filter="?jsqueeze" output="js/admin_combined.js"
             '@AdminBundle/Resources/public/js/jquery.js'
             '@AdminBundle/Resources/public/bootstrap/js/bootstrap.min.js'
             '@AdminBundle/Resources/public/js/select2.full.min.js'
