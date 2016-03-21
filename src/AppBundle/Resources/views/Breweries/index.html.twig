@@ -29,9 +29,10 @@
                         <strong class="item-name">{{ brewery.name }}</strong>
                     </a>
                     {% if brewery.country is not null %}
-                        <p>{{ brewery.country.name }}</p>
+                        <p>{{ brewery.country }}</p>
                     {% endif %}    
-                    <p>{{ brewery.city }}</p>
+                    <p>{{ brewery.city }}</p>  
+                    <p>Kapsle: {{ brewery.num_caps }}</p>
                 </div>        
             </li>
 

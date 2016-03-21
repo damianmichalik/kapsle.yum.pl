@@ -9,7 +9,7 @@ class BreweriesController extends Controller {
     public function indexAction($page)
     {
         $BreweriesRepo = $this->getDoctrine()->getRepository('AppBundle:Brewery');
-        $breweries = $BreweriesRepo->findAll();
+        $breweries = $BreweriesRepo->getBreweriesQueryBuilder();
         
         $limit = $this->container->getParameter('pagination_limit');
         
@@ -31,16 +31,21 @@ class BreweriesController extends Controller {
         } 
         
         $address = $BreweryItem->getAddressToGeocode();        
-        
-        $geocoderResult = $this->container
-            ->get('bazinga_geocoder.geocoder')
-            ->using('cache')->geocode($address);
-        
         $lat = null;
         $lng = null;
-        if ($geocoderResult->count() > 0) {
-            $lat = $geocoderResult->first()->getLatitude();
-            $lng = $geocoderResult->first()->getLongitude();
+        try {
+            $geocoderResult = $this->container
+                ->get('bazinga_geocoder.geocoder')
+                ->using('cache')->geocode($address);
+            
+            if ($geocoderResult->count() > 0) {
+                $lat = $geocoderResult->first()->getLatitude();
+                $lng = $geocoderResult->first()->getLongitude();
+            }
+            
+        } catch (\Exception $ex) {
+            $lat = null;
+            $lng = null;    
         }
         
         return $this->render('AppBundle:Breweries:details.html.twig', array(

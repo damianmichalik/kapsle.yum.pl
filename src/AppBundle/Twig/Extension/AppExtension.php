@@ -30,17 +30,20 @@ class AppExtension extends \Twig_Extension {
     * 
     * @param ContainerInterface $container
     */
-    public function __construct(Registry $doctrine, $container, Router $router) {
+    public function __construct(Registry $doctrine, $container, Router $router)
+    {
         $this->container = $container;
         $this->doctrine = $doctrine;
         $this->router = $router;
     }
     
-    public function getName() {
+    public function getName() 
+    {
         return 'app_extension';
     }
     
-    public function getFunctions () {
+    public function getFunctions () 
+    {
         return array(
             new \Twig_SimpleFunction('print_subscribe_form', 
                     array($this, 'printSubscribeForm'), 
@@ -66,7 +69,8 @@ class AppExtension extends \Twig_Extension {
         );
     }
     
-    public function printSubscribeForm (\Twig_Environment $env) {
+    public function printSubscribeForm (\Twig_Environment $env) 
+    {
         
         $subscribeForm = $this->container->get('form.factory')
                 ->createBuilder(new SubscriberType())
