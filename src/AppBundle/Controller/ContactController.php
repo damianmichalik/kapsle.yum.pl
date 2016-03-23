@@ -11,7 +11,6 @@ class ContactController extends Controller
     
     public function indexAction(Request $request) 
     {
-        
         $contactForm = $this->createForm(ContactType::class);
         
         $contactForm->handleRequest($request);

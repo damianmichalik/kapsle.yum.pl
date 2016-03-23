@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityRepository;
 
 class CapRepository extends EntityRepository {
     
-    public function searchCaps ($searchName) {
+    public function searchCaps ($searchName) 
+    {
         
         $searchResults = $this->createQueryBuilder('c')
             ->where('c.name LIKE :name')
@@ -61,6 +62,23 @@ class CapRepository extends EntityRepository {
         $searchResults = $this->findBy(array(), array('createDate' => 'DESC'), $limit);
         
         return $searchResults;        
+    }
+    
+    public function getCapsInBrewery ($breweryId, $excludeId = 0) 
+    {
+        $searchResults = $this->createQueryBuilder('c')->select('c');
+        
+        if ($excludeId != 0) {
+            $searchResults->where('c.brewery = :brewery AND c.id <> :id')
+                ->setParameter('id', $excludeId)
+                ->setParameter('brewery', $breweryId);
+        } else {
+            $searchResults->where('c.brewery = :brewery')
+                    ->setParameter('brewery', $breweryId);
+        }
+        
+        return $searchResults->getQuery()
+            ->getResult();        
     }
     
 }

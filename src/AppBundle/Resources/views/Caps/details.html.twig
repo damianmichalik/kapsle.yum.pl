@@ -25,6 +25,75 @@
             Browar: <a href="{{ path('breweries_details', {'slug' : cap.brewery.slug}) }}"><strong>{{ cap.brewery.name }}</strong></a>            
         </p>
         {% endif %}
+        
+        {% if breweryCapses|length > 0 %}
+        <div id="brewery-capses">
+            <div class="col-half-width">
+                <h4>Inne kapsle z tego browaru</h4>
+            </div>
+            <div class="col-half-width" id="navigation">
+                <i id="owl-custom-prev" class="glyphicon glyphicon-chevron-left icon-prev-next"></i>
+                <i id="owl-custom-next" class="glyphicon glyphicon-chevron-right icon-prev-next"></i>
+            </div>
+            <br class="clear">
+            <div class="owl-carousel">
+                {% for breweryCap in breweryCapses %}
+                    <div class="item">
+                        <a href="{{ path('caps_details', {'slug' : breweryCap.slug}) }}">                
+                            <img class="img-thumb img-responsive" src="{{ asset(breweryCap.thumb) }}" alt="{{ breweryCap.name }}">                
+                            <span class="item-name">{{ breweryCap.name }}</span>
+                        </a>
+                    </div>        
+                {% endfor %}   
+            </div>              
+        </div>
+        {% endif %}
+        
     </section>
+
+{% endblock %}
+
+{% block inlineJavascripts %}
+    
+    <script type="text/javascript">
+    
+        jQuery(document).ready(function() {
+           
+            var owl = jQuery('.owl-carousel').owlCarousel({
+                loop:true,
+                responsiveClass:true,
+                margin: 20,
+                navText: '',
+                prevText: '',
+                responsive:{
+                    0:{
+                        center: true,
+                        items:1,
+                        nav:false,
+                        dots: false
+                    },
+                    600:{
+                        items:3,
+                        nav:false,
+                        dots: false
+                    },
+                    1000:{
+                        items:5,
+                        nav:false,
+                        dots: false
+                    }
+                }
+            });
+            
+            jQuery('#owl-custom-prev').click(function() {
+                owl.trigger('prev.owl.carousel');
+            });
+            jQuery('#owl-custom-next').click(function() {
+                owl.trigger('next.owl.carousel');
+            });
+        
+        });
+    
+    </script>
 
 {% endblock %}

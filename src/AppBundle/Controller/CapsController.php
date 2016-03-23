@@ -18,8 +18,16 @@ class CapsController extends Controller {
             throw $this->createNotFoundException('Nie znaleziono podanego rekordu');
         }
         
+        $breweryCapses = null;
+        
+        if ($CapItem->getBrewery() !== null) {
+            $breweryId = $CapItem->getBrewery()->getId();            
+            $breweryCapses = $CapsRepo->getCapsInBrewery($breweryId, $CapItem->getId());            
+        }
+        
         return $this->render('AppBundle:Caps:details.html.twig', array(
-            'cap' => $CapItem
+            'cap' => $CapItem,
+            'breweryCapses' => $breweryCapses
         ));
     }
     

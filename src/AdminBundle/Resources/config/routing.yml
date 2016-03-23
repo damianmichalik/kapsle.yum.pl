@@ -91,6 +91,11 @@ admin_brewery_form_action:
     defaults:
         _controller: AdminBundle:Breweries:form 
         id: null            
+
+admin_cache_clear:
+    path: /cache-clear
+    defaults: 
+        _controller: AdminBundle:Cache:clear
         
 admin_cache:
     path: /cache

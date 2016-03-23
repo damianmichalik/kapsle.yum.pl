@@ -11,14 +11,19 @@ class CacheController extends Controller
 {
     public function indexAction()
     {
-        $kernel = $this->container->get('kernel');
-        $command = new CacheClearCommand('cache:clear');
-        $command->setContainer($this->container);
-        $input = new ArrayInput(array());
-        $output = new NullOutput();
-        $resultCode = $command->run($input, $output);
+        return $this->render('AdminBundle:Cache:index.html.twig');
+    }
+    
+    public function clearAction()
+    {
+        $filesystem   = $this->container->get('filesystem');
+        $realCacheDir = $this->container->getParameter('kernel.cache_dir');
+        $this->container->get('cache_clearer')->clear($realCacheDir);
+        $filesystem->remove($realCacheDir);
         
-        return $this->render('AdminBundle:Default:index.html.twig');
+        $this->get('session')->getFlashBag()->add('success', 'Pamięć podręczna została wyczyszczona');
+        
+        return $this->redirect($this->generateUrl('admin_cache'));
     }
     
 }

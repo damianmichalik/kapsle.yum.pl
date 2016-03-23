@@ -110,3 +110,33 @@ footer ul {
     display: block; 
     border-bottom: 1px solid #000; 
 }
+.owl-carousel {
+    margin-top: 10px;
+}
+.owl-carousel .item {
+    width: 166px;
+}
+#brewery-capses .icon-prev-next {
+    padding: 6px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    display: inline-block;
+    background-color: #333;
+    margin-left: 5px;
+    cursor: pointer;
+    color: #9D9D9D;
+}
+#brewery-capses #navigation {
+    padding-top: 10px;
+    text-align: right;
+}
+.col-half-width {
+    float: left;
+    width: 50%;
+}
+@media (max-width: 599px) {
+    #brewery-capses #navigation {
+        display: none;
+    }
+}
