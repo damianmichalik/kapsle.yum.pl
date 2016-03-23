@@ -115,6 +115,10 @@ footer ul {
 }
 .owl-carousel .item {
     width: 166px;
+    margin: 0 auto;
+}
+.owl-carousel .item a:hover {
+    text-decoration: none;
 }
 #brewery-capses .icon-prev-next {
     padding: 6px;
@@ -138,5 +142,9 @@ footer ul {
 @media (max-width: 599px) {
     #brewery-capses #navigation {
         display: none;
+        width: 1%;
+    }
+    #brewery-capses-heading {
+        width: 99%;
     }
 }
