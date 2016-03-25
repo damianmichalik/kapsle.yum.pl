@@ -139,6 +139,9 @@ footer ul {
     float: left;
     width: 50%;
 }
+#brewery-capses {
+    margin-top: 10px;
+}
 @media (max-width: 599px) {
     #brewery-capses #navigation {
         display: none;

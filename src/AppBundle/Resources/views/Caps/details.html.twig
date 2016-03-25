@@ -55,11 +55,40 @@
 
 {% block inlineJavascripts %}
     
+    {% if breweryCapses|length > 0 %}
     <script type="text/javascript">
     
         jQuery(document).ready(function() {
+            
+            function hideOwlNavigation (items) {
+                if(jQuery(window).width() > 0 && jQuery(window).width() < 600) {
+                    jQuery("#navigation").hide();
+                } else if(jQuery(window).width() > 600 && jQuery(window).width() < 1000) {
+                    if (items < 3) {
+                        jQuery("#navigation").hide();
+                    } else {
+                        jQuery("#navigation").show();
+                    }                    
+                } else {
+                    if (items < 5) {
+                        jQuery("#navigation").hide();
+                    } else {
+                        jQuery("#navigation").show();
+                    }     
+                }
+            }
+            
+            var owl = jQuery('.owl-carousel');
+            
+            owl.on('initialized.owl.carousel', function(event) {                
+                hideOwlNavigation(event.item.count);    
+            });
+            
+            owl.on('resized.owl.carousel', function(event) {                
+                hideOwlNavigation(event.item.count);    
+            });
            
-            var owl = jQuery('.owl-carousel').owlCarousel({
+            var owl = owl.owlCarousel({
                 loop:true,
                 responsiveClass:true,
                 margin: 20,
@@ -95,5 +124,6 @@
         });
     
     </script>
+    {% endif %}
 
 {% endblock %}

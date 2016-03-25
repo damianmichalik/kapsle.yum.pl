@@ -22,8 +22,9 @@ class BreweriesController extends Controller {
         ));
     }
     
-    public function detailsAction ($slug) 
+    public function detailsAction ($slug, $page) 
     {
+        $CapsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');    
         $BreweriesRepo = $this->getDoctrine()->getRepository('AppBundle:Brewery');           
         $BreweryItem = $BreweriesRepo->findOneBySlug($slug);        
         if ($BreweryItem === null) {
@@ -48,10 +49,18 @@ class BreweriesController extends Controller {
             $lng = null;    
         }
         
+        $breweryCapses = $CapsRepo->getCapsInBrewery($BreweryItem->getId()); 
+        
+        $limit = $this->container->getParameter('pagination_limit');
+        
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($breweryCapses, $page, $limit);
+        
         return $this->render('AppBundle:Breweries:details.html.twig', array(
             'brewery' => $BreweryItem,
             'lat' => $lat,
-            'lng' => $lng
+            'lng' => $lng,
+            'pagination' => $pagination
         ));
     }
     

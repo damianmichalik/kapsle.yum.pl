@@ -43,9 +43,12 @@ breweries_index:
         page: 1 
 
 breweries_details:
-    path: /browar/{slug}
+    path: /browar/{slug}/{page}
+    requirements:
+        page: \d+
     defaults:
         _controller: AppBundle:Breweries:details
+        page: 1         
         
 contact:
     path: /kontakt
