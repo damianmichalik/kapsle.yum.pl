@@ -58,7 +58,12 @@
             {% if brewery.country is not null %}
                 <p>{{ brewery.country.name }}</p>
             {% endif %}    
-            <p>{{ brewery.postcode }}, {{ brewery.city }}</p>        
+            <p>
+                {% if brewery.postcode is not null %}
+                    {{ brewery.postcode }}, 
+                {% endif %}                     
+                {{ brewery.city }}
+            </p>        
             <p>{{ brewery.address }}</p>
             <p>Kapsle: {{ brewery.caps|length }}</p>
         </div> 

@@ -49,8 +49,7 @@ class Brewery {
     private $address;
     
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
      *      max = 255
      * )
@@ -293,8 +292,11 @@ class Brewery {
     
     public function getAddressToGeocode()
     {
-        $addressToGeocode = $this->getAddress() . ', ' . 
-                $this->getPostcode() .' ' . $this->getCity();    
+        $addressToGeocode = $this->getAddress();
+        if ($this->getPostcode() !== null) {
+            $addressToGeocode .= ', ' . $this->getPostcode();
+        }        
+        $addressToGeocode .= ' ' . $this->getCity();    
         if($this->getCountry() != null) {
             $addressToGeocode .= ', ' . $this->getCountry()->getName();
         }
