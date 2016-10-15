@@ -1,0 +1,44 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block headTitle %}
+    {{ country.name ~ ' | ' ~ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <li>{{ country.name }}</li>
+{% endblock %}
+
+{% block pageContainer %}
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>{{ country.name }}</h2>
+        <hr>
+        <p>
+            <span class="glyphicon glyphicon-time"></span> Dodany {{ country.createDate|date('Y-m-d H:i') }}
+        </p>
+        <hr>
+
+        <ul class="listing row breweries-index">
+
+            {% for brewery in breweries %}
+                <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="item">
+                        <a href="{{ path('breweries_details', {'slug' : brewery.slug}) }}">
+                            <strong class="item-name">{{ brewery.name }}</strong>
+                        </a>
+                        <p>{{ brewery.city }}</p>
+                        <p>Kapsle: {{ brewery.num_caps }}</p>
+                    </div>
+                </li>
+
+                {% if loop.index0 % 3 == 2 %}
+                    <li class="line col-xs-12 col-sm-12 col-md-12 col-lg-12"></li>
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+{% endblock %}

@@ -34,3 +34,6 @@
 
 # Netbeans
 /nbproject/
+
+# PHPStorm
+/.idea/

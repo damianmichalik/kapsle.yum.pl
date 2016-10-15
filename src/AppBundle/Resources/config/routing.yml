@@ -48,7 +48,17 @@ breweries_details:
         page: \d+
     defaults:
         _controller: AppBundle:Breweries:details
-        page: 1         
+        page: 1
+
+countries_index:
+    path: /kraje
+    defaults:
+        _controller: AppBundle:Countries:index
+
+countries_details:
+    path: /kraj/{slug}
+    defaults:
+        _controller: AppBundle:Countries:details
         
 contact:
     path: /kontakt

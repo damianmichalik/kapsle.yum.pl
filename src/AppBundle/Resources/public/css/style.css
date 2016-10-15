@@ -62,7 +62,7 @@ div.navbar-form form {
     border: none;
 }
 #caps-card h1 {
-    font: 1.286em;
+    font-size: 1.286em;
     margin: 8px 0px 6px;
 }
 #footer-newsletter-container {
@@ -83,7 +83,7 @@ footer ul {
 .clear {
     clear: both;    
 }
-.breweries-index p {
+.breweries-index p, .countries-index p {
     margin: 0px 3px 0px 6px;
 }
 .autocomplete-suggestions { 

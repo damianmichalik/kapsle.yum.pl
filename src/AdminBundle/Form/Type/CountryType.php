@@ -8,25 +8,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CountryType extends AbstractType {
-    
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-        
+class CountryType extends AbstractType
+{
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', TextType::class, array(
                 'label' => 'Nazwa',
                 'required'  => false,
-            )) 
+            ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Zapisz'
-            ));   
+                'label' => 'Zapisz',
+            ));
     }
-    
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Country'
+            'data_class' => 'AppBundle\Entity\Country',
         ));
     }
-
 }

@@ -202,7 +202,7 @@ class Cap {
             $zimageSmall->source_path = $this->getUploadRootDir().'/'.$this->image;
             $zimageSmall->target_path = $this->getUploadRootDir().'/m_'.$this->image;
             $zimageSmall->jpeg_quality = 100;
-            $zimageSmall->resize(166, 166, ZEBRA_IMAGE_BOXED);
+            $res = $zimageSmall->resize(166, 166, ZEBRA_IMAGE_BOXED);
             unset($zimageSmall);
             
             $zimage = new ZebraImage();
@@ -215,7 +215,9 @@ class Cap {
             unset($this->imageFile);
             
             if(isset($this->imageTemp)){
-                unlink($this->getUploadRootDir().'/'.$this->imageTemp);
+                if (file_exists($this->getUploadRootDir().'/'.$this->imageTemp)) {
+                    unlink($this->getUploadRootDir().'/'.$this->imageTemp);
+                }
                 unset($this->imageTemp);
             }
         }

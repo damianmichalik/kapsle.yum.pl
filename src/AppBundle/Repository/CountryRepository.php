@@ -34,5 +34,17 @@ class CountryRepository extends EntityRepository {
         
         return $qb;
     }
+
+    public function getAllCountries ()
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('count(b.id) AS num_breweries, count(k.id) AS num_caps, c.name, c.slug')
+            ->leftJoin('c.breweries', 'b')
+            ->leftJoin('b.caps', 'k')
+            ->groupBy('c.id')
+            ->orderBy('c.name', 'ASC');
+
+        return $qb->getQuery()->getArrayResult();
+    }
     
 }

@@ -10,50 +10,50 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \AppBundle\Repository\CountryRepository;
 
-class BreweryType extends AbstractType {
-    
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-        
+class BreweryType extends AbstractType
+{
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', TextType::class, array(
                 'label' => 'Nazwa',
                 'required'  => false,
-            )) 
+            ))
             ->add('city', TextType::class, array(
                 'label' => 'Miasto',
                 'required'  => false,
-            )) 
+            ))
             ->add('address', TextType::class, array(
                 'label' => 'Adres',
                 'required'  => false,
-            )) 
+            ))
             ->add('postcode', TextType::class, array(
                 'label' => 'Kod pocztowy',
                 'required'  => false,
-            )) 
+            ))
             ->add('country', EntityType::class, array(
                 'label' => 'Kraj',
                 'class' => 'AppBundle\Entity\Country',
                 'choice_label' => 'name',
                 'placeholder' => 'Wybierz kraj',
                 'attr' => array(
-                    'class' => 'select2'
+                    'class' => 'select2',
                 ),
                 'query_builder' => function (CountryRepository $cr) {
                     return $cr->createQueryBuilder('c')
                         ->orderBy('c.name', 'ASC');
-                }
+                },
             ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Zapisz'
-            ));   
+                'label' => 'Zapisz',
+            ));
     }
-    
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Brewery'
+            'data_class' => 'AppBundle\Entity\Brewery',
         ));
     }
-
 }

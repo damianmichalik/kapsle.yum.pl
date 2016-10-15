@@ -1,0 +1,37 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block headTitle %}
+    {% if pageTitle is defined %}
+        {{ pageTitle ~ ' | ' ~ parent() }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumb %}
+    <li>Browary</li>
+{% endblock %}
+
+{% block pageContainer %}
+
+    {% if pageTitle is defined %}
+        <h3>{{ pageTitle }}</h3>
+    {% endif %}
+
+    <p>Ilość krajów: <strong>{{ countries|length }}</strong></p>
+
+    <ul class="listing row countries-index">
+        {% for country in countries %}
+            <li class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="item">
+                    <a href="{{ path('countries_details', {'slug' : country.slug}) }}">
+                        <strong class="item-name">{{ country.name }}</strong>
+                    </a>
+                    <p>Browary: {{ country.num_breweries }}</p>
+                    <p>Kapsle: {{ country.num_caps }}</p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

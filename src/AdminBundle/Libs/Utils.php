@@ -2,9 +2,11 @@
 
 namespace AdminBundle\Libs;
 
-class Utils {
-    
-    static public function sluggify($text) {
+class Utils
+{
+
+    public static function sluggify($text)
+    {
         // replace non letter or digits by -
         $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 
@@ -21,10 +23,9 @@ class Utils {
         $text = preg_replace('~[^-\w]+~', '', $text);
 
         if (empty($text)) {
-            return NULL;
+            return null;
         }
 
         return $text;
     }
-    
 }

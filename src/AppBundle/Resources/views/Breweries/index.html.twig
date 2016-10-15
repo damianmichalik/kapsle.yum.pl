@@ -44,6 +44,22 @@
 
     </ul>
     
-{{ knp_pagination_render(pagination, 'AppBundle:Pagination:pagination.html.twig') }}    
+    {{ knp_pagination_render(pagination, 'AppBundle:Pagination:pagination.html.twig') }}
+
+    <br class="clear">
+
+    <h3>Kraje</h3>
+
+    <ul class="listing row countries-index">
+        {% for country in countries %}
+            <li class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                <div class="item">
+                    <a href="{{ path('countries_details', {'slug' : country.slug}) }}">
+                        <span class="item-name">{{ country.name }}</span>
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}
