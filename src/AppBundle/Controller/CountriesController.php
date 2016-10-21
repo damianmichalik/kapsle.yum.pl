@@ -7,17 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class CountriesController extends Controller
 {
 
-    public function indexAction ()
+    public function indexAction()
     {
         $countries = $this->getDoctrine()->getRepository('AppBundle:Country')->getAllCountries();
 
         return $this->render('AppBundle:Countries:index.html.twig', array(
             'countries' => $countries,
-            'pageTitle' => 'Kraje'
+            'pageTitle' => 'Kraje',
         ));
     }
-    
-    public function detailsAction ($slug)
+
+    public function detailsAction($slug)
     {
         $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneBySlug($slug);
 
@@ -29,8 +29,7 @@ class CountriesController extends Controller
 
         return $this->render('AppBundle:Countries:details.html.twig', array(
             'country' => $country,
-            'breweries' => $breweries
+            'breweries' => $breweries,
         ));
     }
-    
 }

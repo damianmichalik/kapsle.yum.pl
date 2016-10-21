@@ -49,8 +49,7 @@ class Brewery {
     private $address;
     
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
      *      max = 255
      * )
@@ -75,9 +74,26 @@ class Brewery {
     
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="breweries")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $country;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Cap", mappedBy="brewery")
+     */
+    protected $caps;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     */
+    private $lng;
     
 
     /**
@@ -204,4 +220,134 @@ class Brewery {
     {
         return $this->country;
     }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Brewery
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Brewery
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set postcode
+     *
+     * @param string $postcode
+     * @return Brewery
+     */
+    public function setPostcode($postcode)
+    {
+        $this->postcode = $postcode;
+
+        return $this;
+    }
+
+    /**
+     * Get postcode
+     *
+     * @return string 
+     */
+    public function getPostcode()
+    {
+        return $this->postcode;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preSave(){
+        
+        if(null == $this->createDate){
+            $this->createDate = new \DateTime();
+        }
+        $this->updateDate = new \DateTime();
+    }
+    
+    public function getAddressToGeocode()
+    {
+        $addressToGeocode = $this->getAddress();
+        if ($this->getPostcode() !== null) {
+            $addressToGeocode .= ', ' . $this->getPostcode();
+        }        
+        $addressToGeocode .= ' ' . $this->getCity();    
+        if($this->getCountry() != null) {
+            $addressToGeocode .= ', ' . $this->getCountry()->getName();
+        }
+        return $addressToGeocode;
+    }
+    
+    /**
+     * Add breweries
+     *
+     * @param \AppBundle\Entity\Cap Cap
+     * @return Brewery
+     */
+    public function addCap(\AppBundle\Entity\Cap $caps)
+    {
+        $this->caps[] = $caps;
+
+        return $this;
+    }
+
+    /**
+     * Remove caps
+     *
+     * @param \AppBundle\Entity\Cap $caps
+     */
+    public function removeCap(\AppBundle\Entity\Cap $caps)
+    {
+        $this->caps->removeElement($caps);
+    }
+
+    /**
+     * Get caps
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCaps()
+    {
+        return $this->caps;
+    }
+
+    
+
 }

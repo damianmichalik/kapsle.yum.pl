@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CountryRepository")
@@ -108,4 +109,37 @@ class Country {
         $this->updateDate = new \DateTime();
     }
     
+
+    /**
+     * Add breweries
+     *
+     * @param \AppBundle\Entity\Brewery $breweries
+     * @return Country
+     */
+    public function addBrewery(\AppBundle\Entity\Brewery $breweries)
+    {
+        $this->breweries[] = $breweries;
+
+        return $this;
+    }
+
+    /**
+     * Remove breweries
+     *
+     * @param \AppBundle\Entity\Brewery $breweries
+     */
+    public function removeBrewery(\AppBundle\Entity\Brewery $breweries)
+    {
+        $this->breweries->removeElement($breweries);
+    }
+
+    /**
+     * Get breweries
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBreweries()
+    {
+        return $this->breweries;
+    }
 }

@@ -113,7 +113,7 @@ class ZebraImage
      *
      *  @var integer
      */
-    public $jpeg_quality;
+    public $jpegQuality;
 
     /**
      *  Indicates the compression level of the output image (lower compression means bigger file size).
@@ -176,7 +176,7 @@ class ZebraImage
      *
      *  @var    string
      */
-    public $source_path;
+    public $sourcePath;
 
     /**
      *  Path (including file name) to where to save the transformed image.
@@ -186,7 +186,7 @@ class ZebraImage
      *
      *  @var    string
      */
-    public $target_path;
+    public $targetPath;
 
     /**
      *  Constructor of the class.
@@ -203,7 +203,7 @@ class ZebraImage
 
         $this->error = 0;
 
-        $this->jpeg_quality = 85;
+        $this->jpegQuality = 85;
 
         $this->png_compression = 9;
 
@@ -211,7 +211,7 @@ class ZebraImage
 
         $this->sharpen_images = false;
 
-        $this->source_path = $this->target_path = '';
+        $this->sourcePath = $this->targetPath = '';
 
     }
 
@@ -1208,7 +1208,7 @@ class ZebraImage
             return false;
 
         // if source file does not exist
-        } elseif (!is_file($this->source_path)) {
+        } elseif (!is_file($this->sourcePath)) {
 
             // save the error level and stop the execution of the script
             $this->error = 1;
@@ -1216,7 +1216,7 @@ class ZebraImage
             return false;
 
         // if source file is not readable
-        } elseif (!is_readable($this->source_path)) {
+        } elseif (!is_readable($this->sourcePath)) {
 
             // save the error level and stop the execution of the script
             $this->error = 2;
@@ -1224,7 +1224,7 @@ class ZebraImage
             return false;
 
         // if target file is same as source file and source file is not writable
-        } elseif ($this->target_path == $this->source_path && !is_writable($this->source_path)) {
+        } elseif ($this->targetPath == $this->sourcePath && !is_writable($this->sourcePath)) {
 
             // save the error level and stop the execution of the script
             $this->error = 3;
@@ -1233,7 +1233,7 @@ class ZebraImage
 
         // try to get source file width, height and type
         // and if it founds an unsupported file type
-        } elseif (!list($this->source_width, $this->source_height, $this->source_type) = @getimagesize($this->source_path)) {
+        } elseif (!list($this->source_width, $this->source_height, $this->source_type) = @getimagesize($this->sourcePath)) {
 
             // save the error level and stop the execution of the script
             $this->error = 4;
@@ -1244,7 +1244,7 @@ class ZebraImage
         } else {
 
             // get target file's type based on the file extension
-            $this->target_type = strtolower(substr($this->target_path, strrpos($this->target_path, '.') + 1));
+            $this->target_type = strtolower(substr($this->targetPath, strrpos($this->targetPath, '.') + 1));
 
             // create an image from file using extension dependant function
             // checks for file extension
@@ -1254,7 +1254,7 @@ class ZebraImage
                 case IMAGETYPE_GIF:
 
                     // create an image from file
-                    $identifier = imagecreatefromgif($this->source_path);
+                    $identifier = imagecreatefromgif($this->sourcePath);
 
                     // get the index of the transparent color (if any)
                     if (($this->source_transparent_color_index = imagecolortransparent($identifier)) >= 0)
@@ -1271,7 +1271,7 @@ class ZebraImage
                 case IMAGETYPE_JPEG:
 
                     // create an image from file
-                    $identifier = imagecreatefromjpeg($this->source_path);
+                    $identifier = imagecreatefromjpeg($this->sourcePath);
 
                     break;
 
@@ -1279,7 +1279,7 @@ class ZebraImage
                 case IMAGETYPE_PNG:
 
                     // create an image from file
-                    $identifier = imagecreatefrompng($this->source_path);
+                    $identifier = imagecreatefrompng($this->sourcePath);
 
                     // disable blending
                     imagealphablending($identifier, false);
@@ -1301,7 +1301,7 @@ class ZebraImage
 
         // if target file has to have the same timestamp as the source image
         // save it as a global property of the class
-        if ($this->preserve_time) $this->source_image_time = filemtime($this->source_path);
+        if ($this->preserve_time) $this->source_image_time = filemtime($this->sourcePath);
 
         // make available the source image's identifier
         $this->source_identifier = $identifier;
@@ -1610,7 +1610,7 @@ class ZebraImage
                     return false;
 
                 // if, for some reason, file could not be created
-                } elseif (@!imagegif($identifier, $this->target_path)) {
+                } elseif (@!imagegif($identifier, $this->targetPath)) {
 
                     // save the error level and stop the execution of the script
                     $this->error = 3;
@@ -1634,7 +1634,7 @@ class ZebraImage
                     return false;
 
                 // if, for some reason, file could not be created
-                } elseif (@!imagejpeg($identifier, $this->target_path, $this->jpeg_quality)) {
+                } elseif (@!imagejpeg($identifier, $this->targetPath, $this->jpegQuality)) {
 
                     // save the error level and stop the execution of the script
                     $this->error = 3;
@@ -1660,7 +1660,7 @@ class ZebraImage
                     return false;
 
                 // if, for some reason, file could not be created
-                } elseif (@!imagepng($identifier, $this->target_path, $this->png_compression)) {
+                } elseif (@!imagepng($identifier, $this->targetPath, $this->png_compression)) {
 
                     // save the error level and stop the execution of the script
                     $this->error = 3;
@@ -1688,7 +1688,7 @@ class ZebraImage
         if ($disabled_functions == '' || strpos('chmod', $disabled_functions) === false) {
 
             // chmod the file
-            chmod($this->target_path, intval($this->chmod_value, 8));
+            chmod($this->targetPath, intval($this->chmod_value, 8));
 
         // save the error level
         } else $this->error = 8;
@@ -1697,7 +1697,7 @@ class ZebraImage
         if ($this->preserve_time && isset($this->source_image_time)) {
 
             // touch the newly created file
-            @touch($this->target_path, $this->source_image_time);
+            @touch($this->targetPath, $this->source_image_time);
 
         }
 

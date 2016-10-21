@@ -9,11 +9,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CountryRepository")
- * @ORM\Table(name="countries", options={"collate"="utf8_polish_ci", "charset"="utf8"}) 
+ * @ORM\Table(name="countries", options={"collate"="utf8_polish_ci", "charset"="utf8"})
  * @ORM\HasLifecycleCallbacks
  */
-class Country {
-    
+class Country
+{
     /**
      *
      * @ORM\Column(type="integer")
@@ -21,7 +21,7 @@ class Country {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank
@@ -30,23 +30,23 @@ class Country {
      * )
      */
     private $name;
-    
+
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=120, unique=true)
      */
     private $slug;
-    
+
     /**
      * @ORM\Column(name="create_date", type="datetime")
      */
     private $createDate;
-    
+
     /**
      * @ORM\Column(name="update_date", type="datetime")
      */
     private $updateDate;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Brewery", mappedBy="country")
      */
@@ -56,44 +56,57 @@ class Country {
     {
         $this->breweries = new ArrayCollection();
     }
-    
-    public function getId() {
+
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getSlug() {
+    public function getSlug()
+    {
         return $this->slug;
     }
 
-    public function getCreateDate() {
+    public function getCreateDate()
+    {
         return $this->createDate;
     }
 
-    public function getUpdateDate() {
+    public function getUpdateDate()
+    {
         return $this->updateDate;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
+
         return $this;
     }
 
-    public function setSlug($slug) {
+    public function setSlug($slug)
+    {
         $this->slug = $slug;
+
         return $this;
     }
 
-    public function setCreateDate($createDate) {
+    public function setCreateDate($createDate)
+    {
         $this->createDate = $createDate;
+
         return $this;
     }
 
-    public function setUpdateDate($updateDate) {
+    public function setUpdateDate($updateDate)
+    {
         $this->updateDate = $updateDate;
+
         return $this;
     }
 
@@ -101,14 +114,13 @@ class Country {
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function preSave(){
-        
-        if(null == $this->createDate){
+    public function preSave()
+    {
+        if (null == $this->createDate) {
             $this->createDate = new \DateTime();
         }
         $this->updateDate = new \DateTime();
     }
-    
 
     /**
      * Add breweries
@@ -136,7 +148,7 @@ class Country {
     /**
      * Get breweries
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBreweries()
     {

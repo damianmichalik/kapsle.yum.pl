@@ -8,33 +8,26 @@ use \Symfony\Component\HttpFoundation\Request;
 
 class ContactController extends Controller
 {
-    
-    public function indexAction(Request $request) 
+
+    public function indexAction(Request $request)
     {
         $contactForm = $this->createForm(ContactType::class);
-        
         $contactForm->handleRequest($request);
-        
         if ($contactForm->isValid()) {
-            
             $subject = 'Zapytanie z formularza kontaktowego';
-            
             $htmlBody = $this->renderView(
-                    'AppBundle:Email:contact.html.twig',
-                    array('formData' => $contactForm->getData())
+                'AppBundle:Email:contact.html.twig',
+                array('formData' => $contactForm->getData())
             );
-            
             $mailer = $this->container->get('contact_mailer');
             $mailer->send($subject, $htmlBody);
-
             $this->get('session')->getFlashBag()->add('success', 'Zgłoszenie zostało wysłane');
+
             return $this->redirect($this->generateUrl('contact'));
         }
-        
+
         return $this->render('AppBundle:Contact:index.html.twig', array(
-            'contactForm' => $contactForm->createView()
+            'contactForm' => $contactForm->createView(),
         ));
-        
     }
-    
 }

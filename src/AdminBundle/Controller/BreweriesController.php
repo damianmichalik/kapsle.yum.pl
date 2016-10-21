@@ -111,6 +111,7 @@ class BreweriesController extends Controller
         return $this->render('AdminBundle:Breweries:form.html.twig', array(
             'form' => $form->createView(),
             'slideId' => $id,
+            'brewery' => $brewery,
         ));
     }
 }

@@ -8,11 +8,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BreweryRepository")
- * @ORM\Table(name="breweries", options={"collate"="utf8_polish_ci", "charset"="utf8"}) 
+ * @ORM\Table(name="breweries", options={"collate"="utf8_polish_ci", "charset"="utf8"})
  * @ORM\HasLifecycleCallbacks
  */
-class Brewery {
-    
+class Brewery
+{
+
     /**
      *
      * @ORM\Column(type="integer")
@@ -20,7 +21,7 @@ class Brewery {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank
@@ -29,7 +30,7 @@ class Brewery {
      * )
      */
     private $name;
-    
+
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank
@@ -38,7 +39,7 @@ class Brewery {
      * )
      */
     private $city;
-    
+
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank
@@ -47,7 +48,7 @@ class Brewery {
      * )
      */
     private $address;
-    
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
@@ -55,39 +56,50 @@ class Brewery {
      * )
      */
     private $postcode;
-    
+
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=120, unique=true)
      */
     private $slug;
-    
+
     /**
      * @ORM\Column(name="create_date", type="datetime")
      */
     private $createDate;
-    
+
     /**
      * @ORM\Column(name="update_date", type="datetime")
      */
     private $updateDate;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="breweries")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $country;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Cap", mappedBy="brewery")
      */
     protected $caps;
-    
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     */
+    private $lng;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -110,7 +122,7 @@ class Brewery {
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -133,7 +145,7 @@ class Brewery {
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -156,7 +168,7 @@ class Brewery {
     /**
      * Get createDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateDate()
     {
@@ -179,7 +191,7 @@ class Brewery {
     /**
      * Get updateDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdateDate()
     {
@@ -202,7 +214,7 @@ class Brewery {
     /**
      * Get country
      *
-     * @return \AppBundle\Entity\Country 
+     * @return \AppBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -225,7 +237,7 @@ class Brewery {
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -248,7 +260,7 @@ class Brewery {
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -271,42 +283,43 @@ class Brewery {
     /**
      * Get postcode
      *
-     * @return string 
+     * @return string
      */
     public function getPostcode()
     {
         return $this->postcode;
     }
-    
+
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function preSave(){
-        
-        if(null == $this->createDate){
+    public function preSave()
+    {
+        if (null == $this->createDate) {
             $this->createDate = new \DateTime();
         }
         $this->updateDate = new \DateTime();
     }
-    
+
     public function getAddressToGeocode()
     {
         $addressToGeocode = $this->getAddress();
         if ($this->getPostcode() !== null) {
-            $addressToGeocode .= ', ' . $this->getPostcode();
-        }        
-        $addressToGeocode .= ' ' . $this->getCity();    
-        if($this->getCountry() != null) {
-            $addressToGeocode .= ', ' . $this->getCountry()->getName();
+            $addressToGeocode .= ', '.$this->getPostcode();
         }
+        $addressToGeocode .= ' '.$this->getCity();
+        if ($this->getCountry() != null) {
+            $addressToGeocode .= ', '.$this->getCountry()->getName();
+        }
+
         return $addressToGeocode;
     }
-    
+
     /**
      * Add breweries
      *
-     * @param \AppBundle\Entity\Cap Cap
+     * @param \AppBundle\Entity\Cap Cap $caps
      * @return Brewery
      */
     public function addCap(\AppBundle\Entity\Cap $caps)
@@ -329,10 +342,66 @@ class Brewery {
     /**
      * Get caps
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCaps()
     {
         return $this->caps;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->caps = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set lat
+     *
+     * @param float $lat
+     *
+     * @return Brewery
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return float
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param float $lng
+     *
+     * @return Brewery
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return float
+     */
+    public function getLng()
+    {
+        return $this->lng;
     }
 }

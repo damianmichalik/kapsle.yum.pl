@@ -7,16 +7,16 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
- * 
+ *
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
-class User implements AdvancedUserInterface, \Serializable {
+class User implements AdvancedUserInterface, \Serializable
+{
 
     /**
      * @ORM\Column(type="integer")
@@ -24,14 +24,14 @@ class User implements AdvancedUserInterface, \Serializable {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="string", length = 20, unique = true)
-     * 
+     *
      * @Assert\NotBlank(
      *      groups = {"Registration", "ChangeDetails"}
      * )
-     * 
+     *
      * @Assert\Length(
      *      min=5,
      *      max=20,
@@ -39,111 +39,120 @@ class User implements AdvancedUserInterface, \Serializable {
      * )
      */
     private $username;
-    
+
     /**
      * @ORM\Column(type="string", length = 120, unique = true)
-     * 
+     *
      * @Assert\NotBlank(
      *      groups = {"Registration"}
      * )
-     * 
+     *
      * @Assert\Email(
      *      groups = {"Registration"}
      * )
-     * 
+     *
      * @Assert\Length(
      *      max = 120,
      *      groups = {"Registration"}
      * )
      */
     private $email;
-    
+
     /**
      * @ORM\Column(type="string", length = 64)
      */
     private $password;
-    
+
     /**
      * @Assert\NotBlank(
      *      groups = {"Registration", "ChangePassword"}
      * )
-     * 
+     *
      * @Assert\Length(
      *      min = 8,
      *      groups = {"Registration", "ChangePassword"}
      * )
      */
     private $plainPassword;
-    
+
     /**
      * @ORM\Column(name="account_non_expired", type="boolean")
      */
     private $accountNonExpired = true;
-    
+
     /**
      * @ORM\Column(name="account_non_locked", type="boolean")
      */
     private $accountNonLocked = true;
-    
+
     /**
      * @ORM\Column(name="credentials_non_expired", type="boolean")
      */
     private $credentialsNonExpired = true;
-    
+
     /**
      * @ORM\Column(type="boolean")
      */
     private $enabled = false;
-    
+
     /**
      * @ORM\Column(type="array")
      */
     private $roles;
-    
-    public function eraseCredentials() {
+
+    public function eraseCredentials()
+    {
         $this->plainPassword = null;
     }
 
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function getRoles() {
-        if(empty($this->roles)){
+    public function getRoles()
+    {
+        if (empty($this->roles)) {
             return array('ROLE_USER');
         }
-        
+
         return $this->roles;
     }
 
-    public function getSalt() {
+    public function getSalt()
+    {
         return null;
     }
 
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->username;
     }
 
-    public function isAccountNonExpired() {
+    public function isAccountNonExpired()
+    {
         return $this->accountNonExpired;
     }
 
-    public function isAccountNonLocked() {
+    public function isAccountNonLocked()
+    {
         return $this->accountNonLocked;
     }
 
-    public function isCredentialsNonExpired() {
+    public function isCredentialsNonExpired()
+    {
         return $this->credentialsNonExpired;
     }
 
-    public function isEnabled() {
+    public function isEnabled()
+    {
         return $this->enabled;
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -179,7 +188,7 @@ class User implements AdvancedUserInterface, \Serializable {
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -215,7 +224,7 @@ class User implements AdvancedUserInterface, \Serializable {
     /**
      * Get accountNonExpired
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getAccountNonExpired()
     {
@@ -238,7 +247,7 @@ class User implements AdvancedUserInterface, \Serializable {
     /**
      * Get accountNonLocked
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getAccountNonLocked()
     {
@@ -261,7 +270,7 @@ class User implements AdvancedUserInterface, \Serializable {
     /**
      * Get credentialsNonExpired
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCredentialsNonExpired()
     {
@@ -284,7 +293,7 @@ class User implements AdvancedUserInterface, \Serializable {
     /**
      * Get enabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEnabled()
     {
@@ -304,15 +313,17 @@ class User implements AdvancedUserInterface, \Serializable {
         return $this;
     }
 
-    public function serialize() {
+    public function serialize()
+    {
         return serialize(array(
             $this->id,
             $this->username,
-            $this->password
+            $this->password,
         ));
     }
 
-    public function unserialize($serialized) {
+    public function unserialize($serialized)
+    {
         list(
             $this->id,
             $this->username,
@@ -320,15 +331,16 @@ class User implements AdvancedUserInterface, \Serializable {
         ) = unserialize($serialized);
     }
 
-    
-    public function getPlainPassword() {
+    public function getPlainPassword()
+    {
         return $this->plainPassword;
     }
 
-    public function setPlainPassword($plainPassword) {
+    public function setPlainPassword($plainPassword)
+    {
         $this->plainPassword = $plainPassword;
     }
-    
+
     public function setAccountExpired($accountNonExpired)
     {
         $this->accountNonExpired = !$accountNonExpired;

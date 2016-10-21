@@ -6,30 +6,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SubscriberType extends AbstractType {
+class SubscriberType extends AbstractType
+{
 
-    public function getName() {
+    public function getName()
+    {
         return 'subscriber';
     }
-    
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-        
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add('name', 'text', array(
             'label' => 'Imię',
-            'required' => false
+            'required' => false,
         ))
         ->add('email', 'text', array(
             'label' => 'Email',
-            'required' => false
+            'required' => false,
         ));
-        
     }
-    
+
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Subscriber'
+            'data_class' => 'AppBundle\Entity\Subscriber',
         ));
     }
-    
 }

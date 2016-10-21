@@ -45,8 +45,13 @@ class BreweryType extends AbstractType
                         ->orderBy('c.name', 'ASC');
                 },
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Zapisz',
+            ->add('lat', TextType::class, array(
+                'label' => 'Szerokość geograficzna',
+                'required'  => false,
+            ))
+            ->add('lng', TextType::class, array(
+                'label' => 'Długość geograficzna',
+                'required'  => false,
             ));
     }
 
