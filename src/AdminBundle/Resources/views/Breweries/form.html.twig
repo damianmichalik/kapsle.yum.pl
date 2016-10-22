@@ -44,8 +44,6 @@
             {{ form_row(form.address) }}
             {{ form_row(form.postcode) }}
             {{ form_row(form.country) }}
-            {{ form_row(form.lat) }}
-            {{ form_row(form.lng) }}
 
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="partner_googleHeight">Wybierz pozycję na mapie</label>
@@ -54,9 +52,12 @@
                         <div id="map_canvas" style="border:1px solid #ccc;width:100%; height:400px"></div>
                     </div>
                     <br>
-                    <button class="btn btn-primary btn-add-location" onclick="return setMarkerOnMap()">Kliknij, by dodać lokalizację</button>
+                    <button class="btn btn-primary btn-add-location" onclick="return setMarkerOnMap()">Kliknij, aby wyszukać lokalizację</button>
                 </div>
             </div>
+
+            {{ form_row(form.lat) }}
+            {{ form_row(form.lng) }}
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
@@ -116,7 +117,6 @@
 
         function setMarkerOnMap(){
             if (
-                jQuery("#brewery_postcode").val() == '' ||
                 jQuery("#brewery_city").val() == '' ||
                 jQuery("#brewery_address").val() == '' ||
                 jQuery("#brewery_country").val() == ''
@@ -124,7 +124,6 @@
                 alert("Wpisz adres");
             } else {
                 var address = jQuery("#brewery_country").val() + ', ' + jQuery("#brewery_country :selected").text() + ', ' + jQuery("#brewery_address").val() + ', ' + jQuery("#brewery_postcode").val() + ' ' + jQuery("#brewery_city").val();
-                alert(address);
                 geocoder.geocode({'address': address}, function (results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         map.setCenter(results[0].geometry.location);

@@ -35,23 +35,6 @@ class BreweriesController extends Controller
             throw $this->createNotFoundException('Nie znaleziono podanego rekordu');
         }
 
-        $address = $breweryItem->getAddressToGeocode();
-        $lat = null;
-        $lng = null;
-        try {
-            $geocoderResult = $this->container
-                ->get('bazinga_geocoder.geocoder')
-                ->using('cache')->geocode($address);
-
-            if ($geocoderResult->count() > 0) {
-                $lat = $geocoderResult->first()->getLatitude();
-                $lng = $geocoderResult->first()->getLongitude();
-            }
-        } catch (\Exception $ex) {
-            $lat = null;
-            $lng = null;
-        }
-
         $breweryCapses = $capsRepo->getCapsInBrewery($breweryItem->getId());
 
         $limit = $this->container->getParameter('pagination_limit');
@@ -61,8 +44,6 @@ class BreweriesController extends Controller
 
         return $this->render('AppBundle:Breweries:details.html.twig', array(
             'brewery' => $breweryItem,
-            'lat' => $lat,
-            'lng' => $lng,
             'pagination' => $pagination,
         ));
     }
