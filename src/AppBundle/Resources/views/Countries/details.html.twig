@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
+    <li><a href="{{ path('countries_index') }}">Kraje</a></li>
     <li>{{ country.name }}</li>
 {% endblock %}
 
@@ -17,6 +18,76 @@
             <span class="glyphicon glyphicon-time"></span> Dodany {{ country.createDate|date('Y-m-d H:i') }}
         </p>
         <hr>
+
+        <div id="map-wrapper">
+            <div id="map"></div>
+        </div>
+
+        <hr>
+
+        <script>
+
+            var map = null;
+            var infoWindow = null;
+            var objects = 0;
+            var bounds = null;
+            var markers = [];
+
+            function initMap() {
+                var myLatLng = {lat: 52, lng: 19 };
+
+                bounds = new google.maps.LatLngBounds();
+
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 16,
+                    center: myLatLng
+                });
+
+                infoWindow = new google.maps.InfoWindow();
+
+                var infoWindowHtml = '';
+
+                {% for brewery in breweries %}
+                infoWindowHtml = '<a href="{{ path('breweries_details', {'slug' : brewery.slug}) }}">{{ brewery.name }}</a><br>{{ brewery.city }}<br>Kapsle: {{ brewery.num_caps }}';
+                addMultiMarker('{{ brewery.lat }}', '{{ brewery.lng }}', infoWindowHtml);
+                {% endfor %}
+
+            }
+
+            function addMultiMarker(coordinatesX,coordinatesY, info_html){
+
+                if(coordinatesX.length>0 && coordinatesY.length>0) {
+                    ++objects;
+
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: new google.maps.LatLng(coordinatesX,coordinatesY)
+                    });
+
+                    markers.push(marker);
+
+                    var contentString = info_html;
+
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infoWindow.setContent(contentString);
+                        infoWindow.open(map,marker);
+                    });
+
+                    bounds.extend(new google.maps.LatLng(coordinatesX,coordinatesY));
+                    map.setCenter(bounds.getCenter());
+
+                    if(objects>1) {
+                        console.log(objects);
+                        map.fitBounds(bounds);
+                    }
+                    else if(objects==1) map.setZoom(11);
+                }
+            }
+
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBSPNX08cXOYUZabQC6FjeZu0rQXJWzms&callback=initMap"></script>
+
+        <br>
 
         <ul class="listing row breweries-index">
 

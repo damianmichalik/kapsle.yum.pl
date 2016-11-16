@@ -65,7 +65,7 @@ class BreweryRepository extends EntityRepository
     public function getBreweriesInCountry($countryId)
     {
         $qb = $this->createQueryBuilder('b')
-            ->select('count(c.id) AS num_caps, b.name, b.slug, b.city, l.name AS country')
+            ->select('count(c.id) AS num_caps, b.name, b.slug, b.city, b.lat, b.lng, l.name AS country')
             ->leftJoin('b.caps', 'c')
             ->leftJoin('b.country', 'l')
             ->groupBy('b.id')

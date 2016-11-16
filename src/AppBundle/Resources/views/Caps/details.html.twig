@@ -87,9 +87,15 @@
             owl.on('resized.owl.carousel', function(event) {                
                 hideOwlNavigation(event.item.count);    
             });
+
+            var slideNumbers = jQuery(".item").length;
+            var carouselLopp = true;
+            if(slideNumbers < 2) {
+                carouselLopp = false
+            }
            
             var owl = owl.owlCarousel({
-                loop:true,
+                loop:carouselLopp,
                 responsiveClass:true,
                 margin: 20,
                 navText: '',

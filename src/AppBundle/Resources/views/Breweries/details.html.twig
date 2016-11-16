@@ -6,6 +6,9 @@
 
 {% block breadcrumb %}
     <li><a href="{{ path('breweries_index') }}">Browary</a></li>
+    {% if brewery.country is not null %}
+        <li><a href="{{ path('countries_details', {'slug' : brewery.country.slug}) }}">{{ brewery.country.name }}</a></li>
+    {% endif %}
     <li>{{ brewery.name }}</li>
 {% endblock %}
 
@@ -56,7 +59,7 @@
         {% endif %}
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  
             {% if brewery.country is not null %}
-                <p>{{ brewery.country.name }}</p>
+                <p><a href="{{ path('countries_details', {'slug' : brewery.country.slug}) }}">{{ brewery.country.name }}</a></p>
             {% endif %}    
             <p>
                 {% if brewery.postcode is not null %}
