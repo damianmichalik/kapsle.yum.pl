@@ -59,6 +59,7 @@
                     <tr>
                         <th>{{ knp_pagination_sortable(pagination, 'ID', 'c.id') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Nazwa', 'c.name') }}</th>
+                        <th>Zdjęcie</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Browar', 'b.name') }}</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -68,6 +69,7 @@
                     <tr>
                         <td>{{ cap.id }}</td>
                         <td>{{ cap.name }}</td>
+                        <td><img class="admin-cap-image" src="{{ asset(cap.thumb) }}"></td>
                         <td>
                             {% if cap.brewery is not null %}
                                 {{ cap.brewery.name }}

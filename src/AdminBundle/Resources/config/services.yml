@@ -1,4 +1,10 @@
 services:
-#    admin.example:
-#        class: AdminBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    admin.image_type_extension:
+        class: AdminBundle\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+    admin_bundle.twig.extension:
+        class: AdminBundle\Twig\Extension\AdminExtension
+        arguments: ["@doctrine", "@service_container", "@router"]
+        tags:
+            - { name : twig.extension }

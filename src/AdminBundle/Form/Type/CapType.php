@@ -38,6 +38,7 @@ class CapType extends AbstractType
             ->add('imageFile', FileType::class, array(
                 'label' => 'Zdjęcie',
                 'required'  => false,
+                'image_path' => 'image',
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Zapisz',

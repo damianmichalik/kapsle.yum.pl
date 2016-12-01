@@ -70,7 +70,45 @@ class AppExtension extends \Twig_Extension
                     'needs_environment' => true,
                 )
             ),
+            new \Twig_SimpleFunction(
+                'get_html_tree',
+                array($this, 'getHtmlTree'),
+                array(
+                    'is_safe' => array('html'),
+                    'needs_environment' => true,
+                )
+            ),
         );
+    }
+
+    public function getHtmlTree(\Twig_Environment $env)
+    {
+        $repo = $this->doctrine->getRepository('AppBundle:Page');
+
+        $htmlTree = $repo->childrenHierarchy(null, false, array(
+            'decorate' => true,
+            'rootOpen' => function ($tree) {
+                if (count($tree) && ($tree[0]['lvl'] == 0)) {
+                    return '';
+                } else {
+                    return '<ul>';
+                }
+            },
+            'rootClose' => function ($child) {
+                if (count($child) && ($child[0]['lvl'] == 0)) {
+                    return '';
+                } else {
+                    return '</ul>';
+                }
+            },
+            'childOpen' => '<li>',
+            'childClose' => '</li>',
+            'nodeDecorator' => function ($node) {
+                return '<a href="/page/'.$node['slug'].'">'.$node['name'].'</a>';
+            },
+        ));
+
+        return $htmlTree;
     }
 
     public function printSubscribeForm(\Twig_Environment $env)

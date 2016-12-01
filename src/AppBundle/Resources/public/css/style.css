@@ -151,3 +151,26 @@ footer ul {
         width: 99%;
     }
 }
+#main-menu {
+    margin-left: 30px;
+}
+.slimmenu li {
+    background-color: #f8f8f8 !important;
+    border-left: 0 !important;
+}
+.slimmenu li a {
+    color: #777 !important;
+    padding-right: 32px !important;
+}
+ul.slimmenu li .sub-toggle {
+    width: 20px !important;
+    background-color: #f8f8f8 !important;
+}
+.has-submenu ul {
+    padding: 0px !important;
+}
+@media screen and (min-width: 800px) {
+    ul.slimmenu li ul li {
+        width: 125px !important;
+    }
+}

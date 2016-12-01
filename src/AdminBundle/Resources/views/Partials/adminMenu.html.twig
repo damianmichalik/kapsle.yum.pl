@@ -5,5 +5,6 @@
     <li {{ "cap" in currentRoute ? ' class="active" ' : ' ' }}><a href="{{ path('admin_caps_list') }}"><i class="glyphicon glyphicon-list"></i> Zarządzanie kapslami</a></li>
     <li {{ "countr" in currentRoute ? ' class="active" ' : ' ' }}><a href="{{ path('admin_countries_list') }}"><i class="glyphicon glyphicon-globe"></i> Zarządzanie krajami</a></li>
     <li {{ "brewer" in currentRoute ? ' class="active" ' : ' ' }}><a href="{{ path('admin_breweries_list') }}"><i class="fa fa-beer"></i> Zarządzanie browarami</a></li>
+    <li {{ "_page" in currentRoute ? ' class="active" ' : ' ' }}><a href="{{ path('admin_pages_list') }}"><i class="fa fa-file-o"></i> Zarządzanie stronami</a></li>
     <li {{ "cache" in currentRoute ? ' class="active" ' : ' ' }}><a href="{{ path('admin_cache') }}"><i class="fa fa-rocket"></i> Zarządzanie cache'm</a></li>
 </ul>

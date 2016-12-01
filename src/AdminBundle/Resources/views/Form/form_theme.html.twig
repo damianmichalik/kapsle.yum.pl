@@ -131,3 +131,28 @@
     {{ block('button_widget') }}
 {% endspaceless %}
 {% endblock submit_widget %}
+
+{% block file_widget %}
+    {% spaceless %}
+
+        {{ block('form_widget') }}
+        {% if image_url is defined %}
+            {% if image_url is not null %}
+                {% if
+                image_url|lower ends with 'jpeg' or
+                image_url|lower ends with 'jpg' or
+                image_url|lower ends with 'png' or
+                image_url|lower ends with 'gif'
+                %}
+                    <br>
+                    <img style="max-width:100%;height: auto;" src="{{ asset(image_url) }}" data-module="{{ id }}" />
+                    <br>
+                {% else %}
+                    <br>
+                    <span>Obecny plik: {{ image_url }}</span>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+    {% endspaceless %}
+{% endblock %}

@@ -21,3 +21,7 @@ footer {
 .warning-text {
     color: darkred;
 }
+.admin-cap-image {
+    max-width: 100px;
+    height: auto;
+}

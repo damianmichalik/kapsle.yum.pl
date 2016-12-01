@@ -90,7 +90,37 @@ admin_brewery_form_action:
         id: \d+
     defaults:
         _controller: AdminBundle:Breweries:form 
-        id: null            
+        id: null
+
+admin_pages_list:
+    path: /strony/{page}
+    defaults:
+        page: 1
+        _controller: AdminBundle:Pages:index
+    requirements:
+        page: \d+
+
+admin_show_page:
+    path: /strona/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Pages:show
+
+admin_delete_page:
+    path: /strona/usun/{id}/{token}
+    defaults:
+        _controller: AdminBundle:Pages:delete
+    requirements:
+        id: \d+
+
+admin_page_form_action:
+    path: /strona/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AdminBundle:Pages:form
+        id: null
 
 admin_cache_clear:
     path: /cache-clear

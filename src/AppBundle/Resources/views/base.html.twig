@@ -5,12 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% stylesheets filter="scssphp" output="css/app_combined.css"
-            "bundles/app/css/bootstrap.min.css"
-            "bundles/app/css/style.css"
-        %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        {#{% stylesheets filter="scssphp" output="css/app_combined.css"#}
+            {#"bundles/app/css/bootstrap.min.css"#}
+            {#"bundles/app/css/superfish.css"#}
+            {#"bundles/app/css/style.css"#}
+        {#%}#}
+            {#<link rel="stylesheet" href="{{ asset_url }}" />#}
+        {#{% endstylesheets %}#}
+
+        <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/app/css/slimmenu.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/app/css/style.css') }}" rel="stylesheet">
         
         <link href="{{ asset('bundles/app/css/owl.carousel.css') }}" rel="stylesheet">
 
@@ -112,8 +117,21 @@
         {% endjavascripts %}
         
         <script src="{{ asset('bundles/app/js/owl.carousel.min.js') }}"></script>
-        
+        <script src="{{ asset('bundles/app/js/jquery.slimmenu.min.js') }}"></script>
+
+        <script>
+            jQuery('.slimmenu').slimmenu({
+                resizeWidth: '800',
+                collapserTitle: '',
+                animSpeed:'slow',
+                indentChildren: true,
+                childrenIndenter: '&raquo;'
+            });
+        </script>
+
         {% block inlineJavascripts %}{% endblock %}
-        
+
+
+
     </body>
 </html>
