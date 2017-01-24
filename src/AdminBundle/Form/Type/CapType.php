@@ -23,6 +23,7 @@ class CapType extends AbstractType
                 'required'  => false,
             ))
             ->add('brewery', EntityType::class, array(
+                'required' => false,
                 'label' => 'Browar',
                 'class' => 'AppBundle\Entity\Brewery',
                 'choice_label' => 'name',

@@ -162,6 +162,9 @@ footer ul {
     color: #777 !important;
     padding-right: 32px !important;
 }
+.slimmenu li a:hover {
+    background-color: #dfdfdf !important;
+}
 ul.slimmenu li .sub-toggle {
     width: 20px !important;
     background-color: #f8f8f8 !important;
