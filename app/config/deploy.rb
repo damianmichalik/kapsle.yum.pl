@@ -27,5 +27,6 @@ set :keep_releases, 2
 set :dump_assetic_assets, true
 set :use_sudo, false
 set :ssh_options, { :forward_agent => true }
+set :shared_children, [web_path + "/uploads", web_path + "/images", web_path + "/media"]
 # Be more verbose by uncommenting the following line
 logger.level = Logger::MAX_LEVEL

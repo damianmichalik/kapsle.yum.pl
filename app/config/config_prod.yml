@@ -23,3 +23,9 @@ monolog:
             level: debug
         console:
             type:  console
+
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root: /home/michol12/public_html/kapsle.yum.pl/shared/web
