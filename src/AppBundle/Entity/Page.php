@@ -20,6 +20,9 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class Page
 {
+    /**
+     * trait
+     */
     use TimestampableTrait;
 
     /**
