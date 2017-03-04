@@ -18,7 +18,7 @@
         </p>
         <hr>
         <p>            
-            <img class="img-responsive" src="{{ asset(cap.image) }}" alt="{{ cap.name }}">
+            <img class="img-responsive" src="{{ asset(cap.image)|imagine_filter('cap_detail_thumb') }}" alt="{{ cap.name }}">
         </p>       
         {% if cap.brewery is not null %}
         <p>
@@ -40,7 +40,7 @@
                 {% for breweryCap in breweryCapses %}
                     <div class="item">
                         <a href="{{ path('caps_details', {'slug' : breweryCap.slug}) }}">                
-                            <img class="img-thumb img-responsive" src="{{ asset(breweryCap.thumb) }}" alt="{{ breweryCap.name }}">                
+                            <img class="img-thumb img-responsive" src="{{ asset(breweryCap.image)|imagine_filter('cap_listing_thumb') }}" alt="{{ breweryCap.name }}">
                             <span class="item-name">{{ breweryCap.name }}</span>
                         </a>
                     </div>        

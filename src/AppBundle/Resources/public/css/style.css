@@ -172,6 +172,9 @@ ul.slimmenu li .sub-toggle {
 .has-submenu ul {
     padding: 0px !important;
 }
+.menu-collapser {
+    background-color: #f8f8f8 !important;
+}
 @media screen and (min-width: 800px) {
     ul.slimmenu li ul li {
         width: 125px !important;

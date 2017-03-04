@@ -67,6 +67,10 @@ class PageRepository extends NestedTreeRepository
 
     public function completePagination($pagination, $allPages)
     {
+        if (count($allPages) == 0) {
+            return array();
+        }
+
         $topElements = array();
         $firstElementLevel = (int)$pagination[0]['lvl'];
         if ($firstElementLevel > 0) {

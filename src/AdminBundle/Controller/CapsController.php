@@ -52,9 +52,12 @@ class CapsController extends Controller
         if (!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
             $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
         } else {
-            $slide = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
+            $cap = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
+
+            $this->get('admin.cap_image_handler')->removeCapImage($cap);
+
             $em = $this->getDoctrine()->getManager();
-            $em->remove($slide);
+            $em->remove($cap);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
@@ -82,6 +85,8 @@ class CapsController extends Controller
             $em->persist($cap);
             $em->flush();
 
+            $this->get('admin.cap_image_handler')->setCapImage($cap);
+
             $message = (isset($newCapForm)) ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
             $this->get('session')->getFlashBag()->add('success', $message);
 
@@ -90,7 +95,7 @@ class CapsController extends Controller
 
         return $this->render('AdminBundle:Caps:form.html.twig', array(
             'form' => $form->createView(),
-            'slideId' => $id,
+            'capId' => $id,
         ));
     }
 

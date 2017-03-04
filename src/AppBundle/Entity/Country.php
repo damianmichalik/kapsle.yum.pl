@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CountryRepository")
@@ -14,6 +15,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Country
 {
+    use TimestampableTrait;
+
     /**
      *
      * @ORM\Column(type="integer")
@@ -36,16 +39,6 @@ class Country
      * @ORM\Column(type="string", length=120, unique=true)
      */
     private $slug;
-
-    /**
-     * @ORM\Column(name="create_date", type="datetime")
-     */
-    private $createDate;
-
-    /**
-     * @ORM\Column(name="update_date", type="datetime")
-     */
-    private $updateDate;
 
     /**
      * @ORM\OneToMany(targetEntity="Brewery", mappedBy="country")
@@ -72,16 +65,6 @@ class Country
         return $this->slug;
     }
 
-    public function getCreateDate()
-    {
-        return $this->createDate;
-    }
-
-    public function getUpdateDate()
-    {
-        return $this->updateDate;
-    }
-
     public function setName($name)
     {
         $this->name = $name;
@@ -96,30 +79,12 @@ class Country
         return $this;
     }
 
-    public function setCreateDate($createDate)
-    {
-        $this->createDate = $createDate;
-
-        return $this;
-    }
-
-    public function setUpdateDate($updateDate)
-    {
-        $this->updateDate = $updateDate;
-
-        return $this;
-    }
-
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
     public function preSave()
     {
-        if (null == $this->createDate) {
-            $this->createDate = new \DateTime();
-        }
-        $this->updateDate = new \DateTime();
     }
 
     /**

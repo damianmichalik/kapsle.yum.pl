@@ -52,9 +52,9 @@ class CountriesController extends Controller
         if (!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
             $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
         } else {
-            $slide = $this->getDoctrine()->getRepository('AppBundle:Country')->find($id);
+            $country = $this->getDoctrine()->getRepository('AppBundle:Country')->find($id);
             $em = $this->getDoctrine()->getManager();
-            $em->remove($slide);
+            $em->remove($country);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
@@ -108,7 +108,7 @@ class CountriesController extends Controller
 
         return $this->render('AdminBundle:Countries:form.html.twig', array(
             'form' => $form->createView(),
-            'slideId' => $id,
+            'countryId' => $id,
         ));
     }
 }

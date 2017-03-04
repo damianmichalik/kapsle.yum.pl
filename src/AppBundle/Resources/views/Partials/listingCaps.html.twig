@@ -6,7 +6,7 @@
         <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">     
             <div class="item">
                 <a href="{{ path('caps_details', {'slug' : cap.slug}) }}">                
-                    <img class="img-thumb img-responsive" src="{{ asset(cap.thumb) }}" alt="{{ cap.name }}">                
+                    <img class="img-thumb img-responsive" src="{{ asset(cap.image)|imagine_filter('cap_listing_thumb') }}" alt="{{ cap.name }}">
                     <span class="item-name">{{ cap.name }}</span>
                 </a>
             </div>        

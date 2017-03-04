@@ -5,8 +5,8 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            {% if slideId is not null %}
-                Edycja browaru #{{ slideId }}
+            {% if breweryId is not null %}
+                Edycja browaru #{{ breweryId }}
             {% else %}
                 Nowy browar
             {% endif %}
@@ -22,8 +22,8 @@
             </li>
             <li class="active">
                 <i class="fa fa-file"></i> 
-                {% if slideId is not null %}
-                    Edycja browaru #{{ slideId }}
+                {% if breweryId is not null %}
+                    Edycja browaru #{{ breweryId }}
                 {% else %}
                     Nowy browar
                 {% endif %}
@@ -88,7 +88,7 @@
         var currentReverseGeocodeResponse;
 
         function initGoogleMaps() {
-            {% if slideId is not null %}
+            {% if breweryId is not null %}
             var latlng = new google.maps.LatLng({{ brewery.lat }}, {{ brewery.lng }});
             {% else %}
             var latlng = new google.maps.LatLng(52.0, 19.3);

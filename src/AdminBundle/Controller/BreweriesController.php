@@ -52,9 +52,9 @@ class BreweriesController extends Controller
         if (!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
             $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
         } else {
-            $slide = $this->getDoctrine()->getRepository('AppBundle:Brewery')->find($id);
+            $brewery = $this->getDoctrine()->getRepository('AppBundle:Brewery')->find($id);
             $em = $this->getDoctrine()->getManager();
-            $em->remove($slide);
+            $em->remove($brewery);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
@@ -110,7 +110,7 @@ class BreweriesController extends Controller
 
         return $this->render('AdminBundle:Breweries:form.html.twig', array(
             'form' => $form->createView(),
-            'slideId' => $id,
+            'breweryId' => $id,
             'brewery' => $brewery,
         ));
     }

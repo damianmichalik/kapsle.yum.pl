@@ -5,8 +5,8 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            {% if slideId is not null %}
-                Edycja kraju #{{ slideId }}
+            {% if countryId is not null %}
+                Edycja kraju #{{ countryId }}
             {% else %}
                 Nowy kraj
             {% endif %}
@@ -22,8 +22,8 @@
             </li>
             <li class="active">
                 <i class="fa fa-file"></i> 
-                {% if slideId is not null %}
-                    Edycja kraju #{{ slideId }}
+                {% if countryId is not null %}
+                    Edycja kraju #{{ countryId }}
                 {% else %}
                     Nowy kraj
                 {% endif %}

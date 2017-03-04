@@ -8,3 +8,11 @@ services:
         arguments: ["@doctrine", "@service_container", "@router"]
         tags:
             - { name : twig.extension }
+    admin.image_path_validator:
+        class: AdminBundle\Validator\Constraints\ImageFileValidator
+        arguments: ["%kernel.root_dir%"]
+        tags:
+            - { name: validator.constraint_validator }
+    admin.cap_image_handler:
+        class: AdminBundle\Libs\CapImageHandler
+        arguments: ["%kernel.root_dir%", "@doctrine"]

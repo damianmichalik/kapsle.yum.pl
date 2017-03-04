@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \AppBundle\Repository\BreweryRepository;
+use FM\ElfinderBundle\Form\Type\ElFinderType;
 
 class CapType extends AbstractType
 {
@@ -36,10 +37,12 @@ class CapType extends AbstractType
                         ->orderBy('b.name', 'ASC');
                 },
             ))
-            ->add('imageFile', FileType::class, array(
+            ->add('image', ElFinderType::class, array(
                 'label' => 'Zdjęcie',
-                'required'  => false,
-                'image_path' => 'image',
+                'required' => true,
+                'instance'=>'default',
+                'enable' => true,
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Zapisz',

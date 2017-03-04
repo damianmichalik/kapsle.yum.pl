@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BreweryRepository")
@@ -13,6 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Brewery
 {
+    use TimestampableTrait;
 
     /**
      *
@@ -62,16 +64,6 @@ class Brewery
      * @ORM\Column(type="string", length=120, unique=true)
      */
     private $slug;
-
-    /**
-     * @ORM\Column(name="create_date", type="datetime")
-     */
-    private $createDate;
-
-    /**
-     * @ORM\Column(name="update_date", type="datetime")
-     */
-    private $updateDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="breweries")
@@ -150,52 +142,6 @@ class Brewery
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set createDate
-     *
-     * @param \DateTime $createDate
-     * @return Brewery
-     */
-    public function setCreateDate($createDate)
-    {
-        $this->createDate = $createDate;
-
-        return $this;
-    }
-
-    /**
-     * Get createDate
-     *
-     * @return \DateTime
-     */
-    public function getCreateDate()
-    {
-        return $this->createDate;
-    }
-
-    /**
-     * Set updateDate
-     *
-     * @param \DateTime $updateDate
-     * @return Brewery
-     */
-    public function setUpdateDate($updateDate)
-    {
-        $this->updateDate = $updateDate;
-
-        return $this;
-    }
-
-    /**
-     * Get updateDate
-     *
-     * @return \DateTime
-     */
-    public function getUpdateDate()
-    {
-        return $this->updateDate;
     }
 
     /**
@@ -296,10 +242,6 @@ class Brewery
      */
     public function preSave()
     {
-        if (null == $this->createDate) {
-            $this->createDate = new \DateTime();
-        }
-        $this->updateDate = new \DateTime();
     }
 
     public function getAddressToGeocode()

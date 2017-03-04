@@ -101,4 +101,38 @@ bazinga_geocoder:
             locale: pl
             region: null
             use_ssl: true
-            api_key: AIzaSyDLySLAKcHZkxKQl_3tZCk-yrbXNWvPTkI   
+            api_key: AIzaSyDLySLAKcHZkxKQl_3tZCk-yrbXNWvPTkI
+
+fm_elfinder:
+    instances:
+        default:
+            locale: %locale%
+            editor: form
+            include_assets: true
+            visible_mime_types: ['image/png', 'image/jpg', 'image/jpeg']
+            connector:
+                roots:
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+
+    filter_sets:
+        cache: ~
+        cap_detail_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [334, 334], mode: inset }
+                background: { size: [334, 334], position: center, color: '#fff' }
+        cap_listing_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [166, 166], mode: inset }
+                background: { size: [166, 166], position: center, color: '#fff' }

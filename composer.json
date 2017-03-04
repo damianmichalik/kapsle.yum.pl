@@ -25,7 +25,10 @@
         "knplabs/knp-paginator-bundle": "~2.5",
         "willdurand/geocoder-bundle": "dev-master",
         "leafo/scssphp": "^0.6.3",
-        "patchwork/jsqueeze": "~1.0"
+        "patchwork/jsqueeze": "~1.0",
+        "knplabs/knp-menu-bundle": "^2.1",
+        "helios-ag/fm-elfinder-bundle": "^6.2",
+        "liip/imagine-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "3.0.*"
@@ -52,7 +55,8 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "component-dir": "web/assets"
     },
     "extra": {
         "symfony-app-dir": "app",

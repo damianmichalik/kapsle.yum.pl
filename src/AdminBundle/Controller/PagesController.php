@@ -116,7 +116,7 @@ class PagesController extends Controller
 
         return $this->render('AdminBundle:Pages:form.html.twig', array(
             'form' => $form->createView(),
-            'slideId' => $id,
+            'pageId' => $id,
             'page' => $page,
         ));
     }
