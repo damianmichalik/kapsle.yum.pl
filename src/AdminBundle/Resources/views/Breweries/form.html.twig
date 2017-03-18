@@ -39,6 +39,7 @@
         {% form_theme form with 'AdminBundle:Form:form_theme.html.twig' %}
 
         {{ form_start(form) }}
+            {{ form_row(form._token) }}
             {{ form_row(form.name) }}
             {{ form_row(form.city) }}
             {{ form_row(form.address) }}
@@ -60,11 +61,23 @@
             {{ form_row(form.lng) }}
 
             <div class="form-group">
+                <strong class="col-sm-3 control-label">Fakty o browarze</strong>
+            </div>
+
+            <ul class="facts" data-prototype="{{ form_widget(form.facts.vars.prototype)|e('html_attr') }}">
+                {% for fact in form.facts %}
+                    <li>
+                        {{ form_row(fact.text) }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     <button type="submit" id="brewery_save" class="btn-success btn">Zapisz</button>
                 </div>
             </div>
-        {{ form_end(form) }}
+        {{ form_end(form, {'render_rest': false}) }}
 
         <a href="{{ path('admin_breweries_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
 
@@ -161,6 +174,47 @@
             }
 
         };
+
+        var $collectionHolder;
+
+        var $addFactLink = $('<div class="form-group"><span class="col-sm-3 control-label"><a href="#" class="add_range_link">Dodaj nowy fakt</a></span></div>');
+        var $newLinkLi = $('<li></li>').append($addFactLink);
+
+        jQuery(document).ready(function() {
+            $collectionHolder = $('ul.facts');
+
+            $collectionHolder.find('li').each(function() {
+                addFactFormDeleteLink($(this));
+            });
+
+            $collectionHolder.append($newLinkLi);
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addFactLink.on('click', function(e) {
+                e.preventDefault();
+                addFactForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addFactForm($collectionHolder, $newLinkLi) {
+            var prototype = $collectionHolder.data('prototype');
+            var index = $collectionHolder.data('index');
+            var newForm = prototype.replace(/__name__/g, index);
+            $collectionHolder.data('index', index + 1);
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+            addFactFormDeleteLink($newFormLi);
+        }
+
+        function addFactFormDeleteLink($factFormLi) {
+            var $removeFormA = $('<div class="form-group"><span class="col-sm-3 control-label"><a href="#">Usuń powyższy fakt</a></span></div>');
+            $factFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                e.preventDefault();
+                $factFormLi.remove();
+            });
+        }
 
 
     </script>

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BreweryRepository")
@@ -87,6 +88,23 @@ class Brewery
      * @Assert\NotBlank
      */
     private $lng;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Fact", inversedBy="breweries", cascade={"persist"})
+     * @ORM\JoinTable(name="breweries_facts")
+     */
+    protected $facts;
+
+    public function __construct()
+    {
+        $this->facts = new ArrayCollection();
+        $this->caps = new ArrayCollection();
+    }
+
+    public function getFacts()
+    {
+        return $this->facts;
+    }
 
     /**
      * Get id
@@ -292,14 +310,6 @@ class Brewery
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->caps = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Set lat
      *
      * @param float $lat
@@ -345,5 +355,29 @@ class Brewery
     public function getLng()
     {
         return $this->lng;
+    }
+
+    /**
+     * Add fact
+     *
+     * @param \AppBundle\Entity\Fact $fact
+     *
+     * @return Brewery
+     */
+    public function addFact(\AppBundle\Entity\Fact $fact)
+    {
+        $this->facts[] = $fact;
+
+        return $this;
+    }
+
+    /**
+     * Remove fact
+     *
+     * @param \AppBundle\Entity\Fact $fact
+     */
+    public function removeFact(\AppBundle\Entity\Fact $fact)
+    {
+        $this->facts->removeElement($fact);
     }
 }

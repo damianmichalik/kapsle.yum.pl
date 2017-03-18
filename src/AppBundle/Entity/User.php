@@ -100,6 +100,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $roles;
 
+    /**
+     * @ORM\Column(type="datetime", name="last_login")
+     */
+    private $lastLogin;
+
     public function eraseCredentials()
     {
         $this->plainPassword = null;
@@ -375,5 +380,29 @@ class User implements AdvancedUserInterface, \Serializable
     public function getCredentialsExpired()
     {
         return !$this->credentialsNonExpired;
+    }
+
+    /**
+     * Set lastLogin
+     *
+     * @param \DateTime $lastLogin
+     *
+     * @return User
+     */
+    public function setLastLogin($lastLogin)
+    {
+        $this->lastLogin = $lastLogin;
+
+        return $this;
+    }
+
+    /**
+     * Get lastLogin
+     *
+     * @return \DateTime
+     */
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
     }
 }

@@ -24,17 +24,24 @@ class CapsController extends Controller
             $breweryCapses = $capsRepo->getCapsInBrewery($breweryId, $capItem->getId());
         }
 
+        $maxViews = $this->getDoctrine()->getRepository('AppBundle:Cap')->getMaxViewsByCap($capItem->getId());
+
         return $this->render('AppBundle:Caps:details.html.twig', array(
             'cap' => $capItem,
             'breweryCapses' => $breweryCapses,
+            'maxViews' => $maxViews,
         ));
     }
 
     public function autocompleteAction(Request $request)
     {
         $searchParam = $request->query->get('query');
-        $searchResults = $this->getUniqueSearchResults($searchParam)
-                ->getQuery()->getResult();
+
+        $capsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
+        $searchResults = $capsRepo->getUniqueQueryBuilder(array(
+            'searchKeyword' => $searchParam,
+        ))->getQuery()->getResult();
+
         $suggestions = $this->getJSONSuggestions($searchResults);
 
         return new JsonResponse(array('suggestions' => $suggestions));
@@ -43,10 +50,14 @@ class CapsController extends Controller
     public function searchAction(Request $request, $page)
     {
         $searchParam = $request->query->get('search');
-        $searchResults = $this->getSearchResults($searchParam);
         $limit = $this->container->getParameter('pagination_limit');
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($searchResults, $page, $limit);
+        $params = array(
+            'orderBy' => 'c.createDate',
+            'orderDir' => 'DESC',
+            'searchKeyword' => $searchParam,
+        );
+
+        $pagination = $this->get('app.caps_paginator')->getPaginatedCaps($params, $page, $limit);
 
         return $this->render('AppBundle:Default:index.html.twig', array(
             'pagination' => $pagination,
@@ -55,31 +66,35 @@ class CapsController extends Controller
         ));
     }
 
-    private function getSearchResults($searchParam, $unique = false)
+    public function tagAction($slug, $page)
     {
-        $queryParams = $this->prepareQueryParams($searchParam);
-        $capsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
-        $searchResults = $capsRepo->getQueryBuilder($queryParams);
+        $tagsRepo = $this->getDoctrine()->getRepository('AppBundle:Tag');
+        $tag = $tagsRepo->findOneBySlug($slug);
 
-        return $searchResults;
-    }
+        if ($tag === null) {
+            throw $this->createNotFoundException('Nie ma takiego tagu');
+        }
 
-    private function getUniqueSearchResults($searchParam, $unique = false)
-    {
-        $queryParams = $this->prepareQueryParams($searchParam);
-        $capsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
-        $searchResults = $capsRepo->getUniqueQueryBuilder($queryParams);
+        $em = $this->getDoctrine()->getManager();
+        $tag->setViews($tag->getViews()+1);
+        $em->persist($tag);
+        $em->flush();
 
-        return $searchResults;
-    }
+        $limit = $this->container->getParameter('pagination_limit');
 
-    private function prepareQueryParams($searchParam)
-    {
-        $queryParams = array(
-            'searchKeyword' => $searchParam,
+        $params = array(
+            'orderBy' => 'c.createDate',
+            'orderDir' => 'DESC',
+            'tagSlug' => $tag->getSlug(),
         );
 
-        return $queryParams;
+        $pagination = $this->get('app.caps_paginator')->getPaginatedCaps($params, $page, $limit);
+
+        return $this->render('AppBundle:Default:index.html.twig', array(
+            'pagination' => $pagination,
+            'tagSlug' => $tag->getSlug(),
+            'pageTitle' => 'Wyniki wyszukiwania dla tagu: "'.$tag->getName().'"',
+        ));
     }
 
     private function getJSONSuggestions($searchResults)

@@ -3,12 +3,14 @@
 namespace AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \AppBundle\Repository\CountryRepository;
+use AdminBundle\Form\Type\FactType;
+use AppBundle\Entity\Brewery;
 
 class BreweryType extends AbstractType
 {
@@ -52,13 +54,19 @@ class BreweryType extends AbstractType
             ->add('lng', TextType::class, array(
                 'label' => 'Długość geograficzna',
                 'required'  => false,
-            ));
+            ))
+            ->add('facts', CollectionType::class, array(
+                'entry_type' => FactType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Brewery',
+            'data_class' => Brewery::class,
         ));
     }
 }

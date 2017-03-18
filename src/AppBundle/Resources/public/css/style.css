@@ -180,3 +180,21 @@ ul.slimmenu li .sub-toggle {
         width: 125px !important;
     }
 }
+#tag-cloud ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#tag-cloud ul li {
+    display: inline-block;
+    padding: 0;
+}
+#tag-cloud .small {
+    font-size: 1em;
+}
+#tag-cloud .medium {
+    font-size:1.2em;
+}
+#tag-cloud .large {
+    font-size:1.4em;
+}

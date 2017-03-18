@@ -41,8 +41,9 @@ class CapRepository extends EntityRepository
     public function getQueryBuilder($params = array())
     {
         $qb = $this->createQueryBuilder('c')
-                ->select('c, b')
-                ->leftJoin('c.brewery', 'b');
+                ->select('c, b, t')
+                ->leftJoin('c.brewery', 'b')
+                ->leftJoin('c.tags', 't');
 
         if (!empty($params['orderBy'])) {
             $orderDir = !empty($params['orderDir']) ? $params['orderDir'] : null;
@@ -52,6 +53,11 @@ class CapRepository extends EntityRepository
         if (!empty($params['searchKeyword'])) {
             $qb->andWhere('c.name LIKE :searchParam')
                     ->setParameter('searchParam', '%'.$params['searchKeyword'].'%');
+        }
+
+        if(!empty($params['tagSlug'])){
+            $qb->andWhere('t.slug = :tagSlug')
+                ->setParameter('tagSlug', $params['tagSlug']);
         }
 
         return $qb;
@@ -78,5 +84,16 @@ class CapRepository extends EntityRepository
         }
 
         return $searchResults->getQuery()->getResult();
+    }
+
+    public function getMaxViewsByCap($capId)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('MAX(t.views)')
+            ->leftJoin('c.tags', 't')
+            ->where('c.id = :cid')
+            ->setParameter('cid', $capId);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

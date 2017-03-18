@@ -22,7 +22,15 @@ caps_search:
         page: \d+
     defaults:
         _controller: AppBundle:Caps:search
-        page: 1     
+        page: 1
+
+caps_tags:
+    path: /tag/{slug}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Caps:tag
+        page: 1
         
 caps_ajax_autocomplete:
     path: /autocomplete

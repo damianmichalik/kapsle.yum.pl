@@ -9,5 +9,13 @@ services:
         arguments: ["@service_container"]
     contact_mailer:
         class: AppBundle\Utils\Services\Mailer\ContactMailer
-        arguments: ["@mailer", "%from_email%", "%from_name%", "%admin_email%"]    
+        arguments: ["@mailer", "%from_email%", "%from_name%", "%admin_email%"]
+    app.login_listener:
+        class: AppBundle\EventListener\LoginListener
+        arguments: ['@doctrine']
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
+    app.caps_paginator:
+        class: AppBundle\Utils\Services\CapsPaginator
+        arguments: ['@doctrine','@knp_paginator']
             

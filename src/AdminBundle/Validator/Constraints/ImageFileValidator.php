@@ -24,7 +24,6 @@ class ImageFileValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         $filePath = $this->rootDir.'/../web'.$value;
-        $fileObject = new FileObject($filePath);
 
         if (!is_file($filePath)) {
             $this->context->buildViolation($constraint->messageNotFile)
@@ -32,6 +31,8 @@ class ImageFileValidator extends ConstraintValidator
                 ->addViolation();
             return;
         }
+
+        $fileObject = new FileObject($filePath);
 
         $size = @getimagesize($filePath);
 

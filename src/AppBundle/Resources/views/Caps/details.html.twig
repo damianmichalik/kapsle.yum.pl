@@ -48,6 +48,28 @@
             </div>              
         </div>
         {% endif %}
+
+        {% if cap.tags|length > 0 %}
+            <hr>
+            <div id="tag-cloud">
+                <div id="tag-cloud-heading">
+                    <h4>Tagi</h4>
+                </div>
+                <ul>
+                    {% for tag in cap.tags %}
+                        {% set percent = ((tag.views / maxViews) * 100) %}
+                        {% if percent < 30 %}
+                            {% set class = 'small' %}
+                        {% elseif percent >= 30 and percent < 70 %}
+                            {% set class = 'medium' %}
+                        {% else %}
+                            {% set class = 'large' %}
+                        {% endif %}
+                        <li class="{{ class }}"><a href="{{ path('caps_tags', {'slug' : tag.slug}) }}">{{ tag }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         
     </section>
 

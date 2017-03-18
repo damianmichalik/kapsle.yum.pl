@@ -11,13 +11,13 @@ class DefaultController extends Controller
 {
     public function indexAction($page)
     {
-        $capsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
-        $allCaps = $capsRepo->findBy(array(), array('createDate' => 'DESC'));
-
         $limit = $this->container->getParameter('pagination_limit');
+        $params = array(
+            'orderBy' => 'c.createDate',
+            'orderDir' => 'DESC',
+        );
 
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($allCaps, $page, $limit);
+        $pagination = $this->get('app.caps_paginator')->getPaginatedCaps($params, $page, $limit);
 
         return $this->render('AppBundle:Default:index.html.twig', array(
             'pagination' => $pagination,

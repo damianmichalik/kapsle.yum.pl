@@ -8,10 +8,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \AppBundle\Repository\BreweryRepository;
 use FM\ElfinderBundle\Form\Type\ElFinderType;
+use AdminBundle\Form\Type\TagsInputType;
 
 class CapType extends AbstractType
 {
@@ -43,6 +43,10 @@ class CapType extends AbstractType
                 'instance'=>'default',
                 'enable' => true,
                 'attr' => array('class' => 'form-control'),
+            ))
+            ->add('tags', TagsInputType::class, array(
+                'label' => 'Tagi',
+                'required' => false,
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Zapisz',

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Brewery;
 use AdminBundle\Form\Type\BreweryType;
 use Symfony\Component\Security\Csrf\CsrfToken;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class BreweriesController extends Controller
 {
@@ -15,7 +16,6 @@ class BreweriesController extends Controller
 
     public function indexAction(Request $request, $page)
     {
-
         $queryParams = array(
             'searchKeyword' => $request->query->get('searchKeyword'),
         );
@@ -86,6 +86,7 @@ class BreweriesController extends Controller
     public function formAction(Request $request, $id = null)
     {
 
+        $newBreweryForm = false;
         if (null == $id) {
             $brewery = new Brewery();
             $newBreweryForm = true;
@@ -96,13 +97,30 @@ class BreweriesController extends Controller
         $form = $this->createForm(BreweryType::class, $brewery);
 
         $form->handleRequest($request);
+
+        if (!$newBreweryForm) {
+            $originalFacts = new ArrayCollection();
+            foreach ($brewery->getFacts() as $fact) {
+                $originalFacts->add($fact);
+            }
+        }
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if (!$newBreweryForm) {
+                foreach ($originalFacts as $fact) {
+                    if (false === $brewery->getFacts()->contains($fact)) {
+                        $fact->getBreweries()->removeElement($brewery);
+                        $em->persist($fact);
+                    }
+                }
+            }
 
             $em->persist($brewery);
             $em->flush();
 
-            $message = (isset($newBreweryForm)) ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
+            $message = $newBreweryForm ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
             $this->get('session')->getFlashBag()->add('success', $message);
 
             return $this->redirect($this->generateUrl('admin_breweries_list', $request->query->all()));
