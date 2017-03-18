@@ -397,7 +397,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get lastLogin
+     * Get lastLogin date
      *
      * @return \DateTime
      */
