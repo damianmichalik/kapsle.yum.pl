@@ -57,13 +57,17 @@
                 </div>
                 <ul>
                     {% for tag in cap.tags %}
-                        {% set percent = ((tag.views / maxViews) * 100) %}
-                        {% if percent < 30 %}
-                            {% set class = 'small' %}
-                        {% elseif percent >= 30 and percent < 70 %}
-                            {% set class = 'medium' %}
+                        {% if maxViews > 0 %}
+                            {% set percent = ((tag.views / maxViews) * 100) %}
+                            {% if percent < 30 %}
+                                {% set class = 'small' %}
+                            {% elseif percent >= 30 and percent < 70 %}
+                                {% set class = 'medium' %}
+                            {% else %}
+                                {% set class = 'large' %}
+                            {% endif %}
                         {% else %}
-                            {% set class = 'large' %}
+                            {% set class = 'small' %}
                         {% endif %}
                         <li class="{{ class }}"><a href="{{ path('caps_tags', {'slug' : tag.slug}) }}">{{ tag }}</a></li>
                     {% endfor %}
