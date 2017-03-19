@@ -13,14 +13,20 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\Fact;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class FactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text', TextType::class, array(
-            'label' => 'Opis',
-        ));
+        $builder
+            ->add('text', TextType::class, array(
+                'label' => 'Opis',
+            ))
+            ->add('year', IntegerType::class, array(
+                'label' => 'Rok',
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

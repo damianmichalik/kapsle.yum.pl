@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \AppBundle\Repository\CountryRepository;
 use AdminBundle\Form\Type\FactType;
 use AppBundle\Entity\Brewery;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class BreweryType extends AbstractType
 {
@@ -59,6 +60,7 @@ class BreweryType extends AbstractType
                 'entry_type' => FactType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'constraints' => new Valid(),
             ))
         ;
     }

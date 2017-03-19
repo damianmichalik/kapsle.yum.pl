@@ -68,6 +68,7 @@
                 {% for fact in form.facts %}
                     <li>
                         {{ form_row(fact.text) }}
+                        {{ form_row(fact.year) }}
                     </li>
                 {% endfor %}
             </ul>

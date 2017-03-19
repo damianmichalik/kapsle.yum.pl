@@ -92,6 +92,7 @@ class Brewery
     /**
      * @ORM\ManyToMany(targetEntity="Fact", inversedBy="breweries", cascade={"persist"})
      * @ORM\JoinTable(name="breweries_facts")
+     * @ORM\OrderBy({"year" = "ASC"})
      */
     protected $facts;
 

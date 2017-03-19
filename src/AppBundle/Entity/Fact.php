@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FactsRepository")
@@ -25,8 +26,19 @@ class Fact
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
      */
     private $text;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\Regex(
+     *     pattern="/\d{4}/",
+     *     message="Rok musi mieć format RRRR"
+     * )
+     * @Assert\GreaterThanOrEqual(1000)
+     */
+    private $year;
 
     /**
      * @ORM\ManyToMany(targetEntity="Brewery", mappedBy="facts")
@@ -107,5 +119,29 @@ class Fact
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set year
+     *
+     * @param integer $year
+     *
+     * @return Fact
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * Get year
+     *
+     * @return integer
+     */
+    public function getYear()
+    {
+        return $this->year;
     }
 }

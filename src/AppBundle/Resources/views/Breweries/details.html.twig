@@ -69,7 +69,27 @@
             </p>        
             <p>{{ brewery.address }}</p>
             <p>Kapsle: {{ brewery.caps|length }}</p>
-        </div> 
+        </div>
+
+        {% if brewery.facts|length > 0 %}
+            <div id="brewery-capses" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h4>Fakty o browarze</h4>
+                <div class="timelineBox">
+                    <div class="outerTimeline">
+                        <div class="timeline">
+                            {% for fact in brewery.facts %}
+                                <div class="item">
+                                    <div class="eventContainer">
+                                        <h3 class="year"><strong>{{ fact.year }}</strong></h3>
+                                        <p class="desc">{{ fact.text }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         
         <div id="brewery-capses" class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
             <h4>Kapsle z tego browaru</h4>
@@ -77,5 +97,39 @@
         </div>        
         
     </section>
+
+{% endblock %}
+
+{% block inlineJavascripts %}
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function() {
+            jQuery('.timeline').owlCarousel({
+                loop:false,
+                margin:0,
+                stagePadding: 0,
+                nav:true,
+                responsive:{
+                    300:{
+                        items:1
+                    },
+                    400:{
+                        items:2
+                    },
+                    500:{
+                        items:2
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:4
+                    }
+                }
+            });
+        });
+
+    </script>
 
 {% endblock %}
