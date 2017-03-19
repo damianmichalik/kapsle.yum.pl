@@ -50,7 +50,7 @@ class CapType extends AbstractType
             ))
             ->add('publishedAt', DateTimePickerType::class, array(
                 'label' => 'Data publikacji',
-                'empty_data' => null,
+                'empty_data' => '',
                 'format' => 'YYYY-MM-DD HH:mm',
                 'required' => false,
             ))

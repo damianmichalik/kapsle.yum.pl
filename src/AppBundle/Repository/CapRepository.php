@@ -41,12 +41,12 @@ class CapRepository extends EntityRepository
         return $qb;
     }
 
-    public function getQueryBuilder($params = array())
+    public function getBackendQueryBuilder($params = array())
     {
         $qb = $this->createQueryBuilder('c')
-                ->select('c, b, t')
-                ->leftJoin('c.brewery', 'b')
-                ->leftJoin('c.tags', 't');
+            ->select('c, b, t')
+            ->leftJoin('c.brewery', 'b')
+            ->leftJoin('c.tags', 't');
 
         if (!empty($params['orderBy'])) {
             $orderDir = !empty($params['orderDir']) ? $params['orderDir'] : null;
@@ -55,13 +55,20 @@ class CapRepository extends EntityRepository
 
         if (!empty($params['searchKeyword'])) {
             $qb->andWhere('c.name LIKE :searchParam')
-                    ->setParameter('searchParam', '%'.$params['searchKeyword'].'%');
+                ->setParameter('searchParam', '%'.$params['searchKeyword'].'%');
         }
 
         if(!empty($params['tagSlug'])){
             $qb->andWhere('t.slug = :tagSlug')
                 ->setParameter('tagSlug', $params['tagSlug']);
         }
+
+        return $qb;
+    }
+
+    public function getQueryBuilder($params = array())
+    {
+        $qb = $this->getBackendQueryBuilder($params);
 
         $qb->andWhere('c.publishedAt IS NULL OR c.publishedAt >= :now')
             ->setParameter('now', new \DateTime());

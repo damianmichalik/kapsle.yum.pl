@@ -21,7 +21,7 @@ class CapsController extends Controller
         );
 
         $capsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
-        $allCaps = $capsRepo->getQueryBuilder($queryParams);
+        $allCaps = $capsRepo->getBackendQueryBuilder($queryParams);
 
         $limits = $this->container->getParameter('admin.limits');
 
