@@ -61,6 +61,14 @@ class Cap
     private $tags;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
+     * @Assert\DateTime
+     */
+    private $publishedAt = null;
+
+    /**
      * Set brewery
      *
      * @param \AppBundle\Entity\Brewery $brewery
@@ -168,5 +176,29 @@ class Cap
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set publishedAt
+     *
+     * @param \DateTime $publishedAt
+     *
+     * @return Cap
+     */
+    public function setPublishedAt($publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get publishedAt
+     *
+     * @return \DateTime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
     }
 }

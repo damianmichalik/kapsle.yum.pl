@@ -48,6 +48,12 @@ class CapType extends AbstractType
                 'label' => 'Tagi',
                 'required' => false,
             ))
+            ->add('publishedAt', DateTimePickerType::class, array(
+                'label' => 'Data publikacji',
+                'empty_data' => null,
+                'format' => 'YYYY-MM-DD HH:mm',
+                'required' => false,
+            ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Zapisz',
             ));

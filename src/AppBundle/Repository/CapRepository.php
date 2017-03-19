@@ -33,6 +33,9 @@ class CapRepository extends EntityRepository
                     ->setParameter('searchParam', '%'.$params['searchKeyword'].'%');
         }
 
+        $qb->andWhere('c.publishedAt IS NULL OR c.publishedAt >= :now')
+            ->setParameter('now', new \DateTime());
+
         $qb->distinct();
 
         return $qb;
@@ -60,14 +63,22 @@ class CapRepository extends EntityRepository
                 ->setParameter('tagSlug', $params['tagSlug']);
         }
 
+        $qb->andWhere('c.publishedAt IS NULL OR c.publishedAt >= :now')
+            ->setParameter('now', new \DateTime());
+
         return $qb;
     }
 
     public function getNewestCaps($limit)
     {
-        $searchResults = $this->findBy(array(), array('createDate' => 'DESC'), $limit);
+        $searchResults = $this->getQueryBuilder(array(
+            'orderBy' => 'c.createDate',
+            'orderDir' => 'DESC',
+        ));
 
-        return $searchResults;
+        $searchResults->setMaxResults($limit);
+
+        return $searchResults->getQuery()->getResult();
     }
 
     public function getCapsInBrewery($breweryId, $excludeId = 0)
@@ -82,6 +93,9 @@ class CapRepository extends EntityRepository
             $searchResults->where('c.brewery = :brewery')
                     ->setParameter('brewery', $breweryId);
         }
+
+        $searchResults->andWhere('c.publishedAt IS NULL OR c.publishedAt >= :now')
+            ->setParameter('now', new \DateTime());
 
         return $searchResults->getQuery()->getResult();
     }
