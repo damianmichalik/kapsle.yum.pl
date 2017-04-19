@@ -39,7 +39,7 @@ class PagesController extends Controller
 
         $topElements = $pagesRepo->completePagination($pagination, $allPages);
 
-        return $this->render('Backend/Pages/index.html.twig', array(
+        return $this->render('backend/Pages/index.html.twig', array(
             'pagination' => $pagination,
             'topElements' => $topElements,
             'deleteTokenName' => $this->deleteTokenName,
@@ -63,7 +63,7 @@ class PagesController extends Controller
             return $this->redirect($this->generateUrl('admin_pages_list'));
         }
 
-        return $this->render('Backend/Pages/show.html.twig', array(
+        return $this->render('backend/Pages/show.html.twig', array(
             'page' => $page,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
@@ -114,7 +114,7 @@ class PagesController extends Controller
             return $this->redirect($this->generateUrl('admin_pages_list', $request->query->all()));
         }
 
-        return $this->render('Backend/Pages/form.html.twig', array(
+        return $this->render('backend/Pages/form.html.twig', array(
             'form' => $form->createView(),
             'pageId' => $id,
             'page' => $page,

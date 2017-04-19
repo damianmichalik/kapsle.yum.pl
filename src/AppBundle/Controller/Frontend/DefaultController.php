@@ -19,7 +19,7 @@ class DefaultController extends Controller
 
         $pagination = $this->get('app.caps_paginator')->getPaginatedCaps($params, $page, $limit);
 
-        return $this->render('Frontend/Default/index.html.twig', array(
+        return $this->render('frontend/Default/index.html.twig', array(
             'pagination' => $pagination,
         ));
     }

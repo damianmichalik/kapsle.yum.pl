@@ -32,7 +32,7 @@ class BreweriesController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($allBreweries, $page, $limit);
 
-        return $this->render('Backend/Breweries/index.html.twig', array(
+        return $this->render('backend/Breweries/index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
@@ -76,7 +76,7 @@ class BreweriesController extends Controller
             return $this->redirect($this->generateUrl('admin_breweries_list'));
         }
 
-        return $this->render('Backend/Breweries/show.html.twig', array(
+        return $this->render('backend/Breweries/show.html.twig', array(
             'brewery' => $brewery,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
@@ -126,7 +126,7 @@ class BreweriesController extends Controller
             return $this->redirect($this->generateUrl('admin_breweries_list', $request->query->all()));
         }
 
-        return $this->render('Backend/Breweries/form.html.twig', array(
+        return $this->render('backend/Breweries/form.html.twig', array(
             'form' => $form->createView(),
             'breweryId' => $id,
             'brewery' => $brewery,

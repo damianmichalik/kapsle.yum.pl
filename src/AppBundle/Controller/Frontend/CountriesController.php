@@ -11,7 +11,7 @@ class CountriesController extends Controller
     {
         $countries = $this->getDoctrine()->getRepository('AppBundle:Country')->getAllCountries();
 
-        return $this->render('Frontend/Countries/index.html.twig', array(
+        return $this->render('frontend/Countries/index.html.twig', array(
             'countries' => $countries,
             'pageTitle' => 'Kraje',
         ));
@@ -27,7 +27,7 @@ class CountriesController extends Controller
 
         $breweries = $this->getDoctrine()->getRepository('AppBundle:Brewery')->getBreweriesInCountry($country->getId());
 
-        return $this->render('Frontend/Countries/details.html.twig', array(
+        return $this->render('frontend/Countries/details.html.twig', array(
             'country' => $country,
             'breweries' => $breweries,
         ));

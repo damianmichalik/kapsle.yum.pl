@@ -19,7 +19,7 @@ class BreweriesController extends Controller
 
         $countries = $this->getDoctrine()->getRepository('AppBundle:Country')->getAllCountries();
 
-        return $this->render('Frontend/Breweries/index.html.twig', array(
+        return $this->render('frontend/Breweries/index.html.twig', array(
             'pagination' => $pagination,
             'pageTitle' => 'Browary',
             'countries' => $countries,
@@ -42,7 +42,7 @@ class BreweriesController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($breweryCapses, $page, $limit);
 
-        return $this->render('Frontend/Breweries/details.html.twig', array(
+        return $this->render('frontend/Breweries/details.html.twig', array(
             'brewery' => $breweryItem,
             'pagination' => $pagination,
         ));

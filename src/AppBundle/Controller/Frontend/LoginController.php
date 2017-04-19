@@ -29,7 +29,7 @@ class LoginController extends Controller
             'username' => $session->get(Security::LAST_USERNAME),
         ));
 
-        return $this->render('Frontend/Login/login.html.twig', array(
+        return $this->render('frontend/Login/login.html.twig', array(
             'loginForm' => $loginForm->createView(),
         ));
     }

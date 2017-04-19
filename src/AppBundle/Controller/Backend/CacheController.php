@@ -12,7 +12,7 @@ class CacheController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('Backend/Cache/index.html.twig');
+        return $this->render('backend/Cache/index.html.twig');
     }
 
     public function clearAction()

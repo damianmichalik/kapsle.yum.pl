@@ -32,7 +32,7 @@ class CountriesController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($allCountries, $page, $limit);
 
-        return $this->render('Backend/Countries/index.html.twig', array(
+        return $this->render('backend/Countries/index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
@@ -76,7 +76,7 @@ class CountriesController extends Controller
             return $this->redirect($this->generateUrl('admin_countries_list'));
         }
 
-        return $this->render('Backend/Countries/show.html.twig', array(
+        return $this->render('backend/Countries/show.html.twig', array(
             'country' => $country,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
@@ -106,7 +106,7 @@ class CountriesController extends Controller
             return $this->redirect($this->generateUrl('admin_countries_list', $request->query->all()));
         }
 
-        return $this->render('Backend/Countries/form.html.twig', array(
+        return $this->render('backend/Countries/form.html.twig', array(
             'form' => $form->createView(),
             'countryId' => $id,
         ));

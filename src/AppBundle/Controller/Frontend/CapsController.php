@@ -26,7 +26,7 @@ class CapsController extends Controller
 
         $maxViews = $this->getDoctrine()->getRepository('AppBundle:Cap')->getMaxViewsByCap($capItem->getId());
 
-        return $this->render('Frontend/Caps/details.html.twig', array(
+        return $this->render('frontend/Caps/details.html.twig', array(
             'cap' => $capItem,
             'breweryCapses' => $breweryCapses,
             'maxViews' => $maxViews,
@@ -59,7 +59,7 @@ class CapsController extends Controller
 
         $pagination = $this->get('app.caps_paginator')->getPaginatedCaps($params, $page, $limit);
 
-        return $this->render('Frontend/Default/index.html.twig', array(
+        return $this->render('frontend/Default/index.html.twig', array(
             'pagination' => $pagination,
             'searchParam' => $searchParam,
             'pageTitle' => 'Wyniki wyszukiwania dla frazy: "'.$searchParam.'"',
@@ -90,7 +90,7 @@ class CapsController extends Controller
 
         $pagination = $this->get('app.caps_paginator')->getPaginatedCaps($params, $page, $limit);
 
-        return $this->render('Frontend/Default/index.html.twig', array(
+        return $this->render('frontend/Default/index.html.twig', array(
             'pagination' => $pagination,
             'tagSlug' => $tag->getSlug(),
             'pageTitle' => 'Wyniki wyszukiwania dla tagu: "'.$tag->getName().'"',

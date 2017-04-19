@@ -16,7 +16,7 @@ class ContactController extends Controller
         if ($contactForm->isValid()) {
             $subject = 'Zapytanie z formularza kontaktowego';
             $htmlBody = $this->renderView(
-                'Frontend/Email/contact.html.twig',
+                'frontend/Email/contact.html.twig',
                 array('formData' => $contactForm->getData())
             );
             $mailer = $this->container->get('contact_mailer');
@@ -26,7 +26,7 @@ class ContactController extends Controller
             return $this->redirect($this->generateUrl('contact'));
         }
 
-        return $this->render('Frontend/Contact/index.html.twig', array(
+        return $this->render('frontend/Contact/index.html.twig', array(
             'contactForm' => $contactForm->createView(),
         ));
     }

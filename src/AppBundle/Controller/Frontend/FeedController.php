@@ -12,7 +12,7 @@ class FeedController extends Controller
                 ->getRepository('AppBundle:Cap')
                 ->findBy(array(), array('createDate' => 'DESC'));
 
-        return $this->render('Frontend/Feeds/rss.xml.twig', array(
+        return $this->render('frontend/Feeds/rss.xml.twig', array(
             'caps' => $caps,
         ));
     }

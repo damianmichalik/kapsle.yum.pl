@@ -1,4 +1,4 @@
-{% extends 'Frontend/base.html.twig' %}
+{% extends 'frontend/base.html.twig' %}
 
 {% block headTitle %}
     {{ brewery.name ~ ' | ' ~ parent() }}
@@ -93,7 +93,7 @@
         
         <div id="brewery-capses" class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
             <h4>Kapsle z tego browaru</h4>
-            {% include 'Frontend/Partials/listingCaps.html.twig' %}
+            {% include 'frontend/Partials/listingCaps.html.twig' %}
         </div>        
         
     </section>

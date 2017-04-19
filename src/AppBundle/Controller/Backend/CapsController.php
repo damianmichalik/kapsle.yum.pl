@@ -32,7 +32,7 @@ class CapsController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($allCaps, $page, $limit);
 
-        return $this->render('Backend/Caps/index.html.twig', array(
+        return $this->render('backend/Caps/index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
@@ -93,7 +93,7 @@ class CapsController extends Controller
             return $this->redirect($this->generateUrl('admin_caps_list', $request->query->all()));
         }
 
-        return $this->render('Backend/Caps/form.html.twig', array(
+        return $this->render('backend/Caps/form.html.twig', array(
             'form' => $form->createView(),
             'capId' => $id,
         ));
@@ -112,7 +112,7 @@ class CapsController extends Controller
             return $this->redirect($this->generateUrl('admin_caps_list'));
         }
 
-        return $this->render('Backend/Caps/show.html.twig', array(
+        return $this->render('backend/Caps/show.html.twig', array(
             'cap' => $cap,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
