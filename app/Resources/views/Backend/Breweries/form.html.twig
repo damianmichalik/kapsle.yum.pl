@@ -1,4 +1,4 @@
-{% extends 'backend/base.html.twig' %}
+{% extends 'Backend/base.html.twig' %}
 
 {% block pageContent %}
     
@@ -36,7 +36,7 @@
 
     <div class="col-lg-12">
             
-        {% form_theme form with 'backend/Form/form_theme.html.twig' %}
+        {% form_theme form with 'Backend/Form/form_theme.html.twig' %}
 
         {{ form_start(form) }}
             {{ form_row(form._token) }}

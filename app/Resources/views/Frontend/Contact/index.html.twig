@@ -1,4 +1,4 @@
-{% extends 'frontend/base.html.twig' %}
+{% extends 'Frontend/base.html.twig' %}
 
 {% block headTitle %}
     {{  'Kontakt | ' ~ parent() }}
@@ -13,7 +13,7 @@
     <section id="contact">
         <h2>Kontakt</h2>
         
-        {% include 'frontend/Partials/flashMsg.html.twig' %}
+        {% include 'Frontend/Partials/flashMsg.html.twig' %}
         {% form_theme contactForm 'bootstrap_3_layout.html.twig' %}
         {{ form(contactForm) }}
         
