@@ -1,0 +1,33 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block pageContent %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Zarządzanie cache'em
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="glyphicon glyphicon-dashboard"></i>  
+                <a href="{{ path('admin_homepage') }}">Kokpit</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-rocket"></i> 
+                Zarządzanie cache'em
+            </li>
+        </ol>    
+    </div>
+</div>
+            
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            <a href="{{ path('admin_cache_clear') }}">
+               <button type="button" class="btn btn-danger">Wyczyść cache</button>
+            </a>
+        </p>        
+    </div>
+</div>
+
+{% endblock %}

@@ -5,11 +5,11 @@ _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
 admin:
-    resource: "@AdminBundle/Resources/config/routing.yml"
+    resource: "@AppBundle/Resources/config/routing_backend.yml"
     prefix:   /admin-panel
 
 app:
-    resource: "@AppBundle/Resources/config/routing.yml"
+    resource: "@AppBundle/Resources/config/routing_frontend.yml"
     prefix:   /
 
 

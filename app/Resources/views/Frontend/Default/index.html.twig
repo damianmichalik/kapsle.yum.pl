@@ -1,0 +1,19 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block headTitle %}
+    {% if pageTitle is defined %} 
+        {{ pageTitle ~ ' | ' ~ parent() }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block pageContainer %}
+    
+    {% if pageTitle is defined %} 
+        <h3>{{ pageTitle }}</h3>
+    {% endif %}
+
+    {% include 'frontend/Partials/listingCaps.html.twig' %}
+
+{% endblock %}

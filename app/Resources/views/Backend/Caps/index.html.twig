@@ -1,0 +1,108 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block pageContent %}
+    
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Zarządzanie kapslami
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="glyphicon glyphicon-dashboard"></i>  
+                <a href="{{ path('admin_homepage') }}">Kokpit</a>
+            </li>            
+            <li class="active">
+                <i class="glyphicon glyphicon-list"></i> 
+                Zarządzanie kapslami
+            </li>
+        </ol>    
+    </div>
+</div>     
+
+<div class="row">
+
+    <div class="col-lg-12">
+    
+        <div class="dm-table-action">            
+            <a href="{{ path('admin_cap_form_action', app.request.query.all|merge({'page' : page})) }}" class="btn btn-success btn-sm">Dodaj nowy kapsel</a>        
+        </div>
+            
+        <div class="form-row">
+            <form action="{{ path('admin_caps_list') }}" method="get" class="form-inline">
+                <div class="col-xs-6 no-padding">
+                    <div id="example_length" class="form-group dataTables_length">                        
+                        <select class="form-control" size="1" name="limit" id="limit">
+                            {% for limit in limits %}
+                                <option {{ currLimit == limit ? 'selected="selected"':'' }} value="{{ limit }}">
+                                    {{ limit }}
+                                </option>
+                            {% endfor %}
+                        </select> 
+                        <label>                            
+                            rekordów na stronie
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-6 no-padding">
+                    <div class="form-group pull-right">                  
+                        <label>Szukaj:</label> <input class="form-control"  type="text" value="{{ queryParams['searchKeyword'] }}" name="searchKeyword">
+                    </div>
+                </div>
+            </form>
+        </div>         
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered table-hover dm-custom-table">
+                <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'ID', 'c.id') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Nazwa', 'c.name') }}</th>
+                        <th>Zdjęcie</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Browar', 'b.name') }}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cap in pagination %}
+                    <tr>
+                        <td>{{ cap.id }}</td>
+                        <td>{{ cap.name }}</td>
+                        <td><img class="admin-cap-image" src="{{ asset(cap.thumb) }}"></td>
+                        <td>
+                            {% if cap.brewery is not null %}
+                                {{ cap.brewery.name }}
+                            {% else %}
+                                <span class="warning-text">Brak</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a title="Pokaż" href="{{ path('admin_show_cap', {'id' : cap.id} ) }}" class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                </a>
+                                <a title="Edytuj" href="{{ path('admin_cap_form_action', app.request.query.all|merge({'id': cap.id, 'page' : page})) }}" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                                {% set tokenName = csrfProvider.getToken(deleteTokenName|format(cap.id)) %}
+                                {% set deleteUrl = path('admin_delete_cap', app.request.query.all|merge({'id': cap.id, 'token': tokenName, 'page' : page})) %}
+                                <a title="Usuń" href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmAction="Czy na pewno chcesz usunąć wybrany rekord?">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </div>
+                        </td>                
+                    </tr>
+                    {% endfor %}                    
+                </tbody>
+            </table>
+
+            {{ knp_pagination_render(pagination, 'backend/Pagination/admin_pagination.html.twig') }}
+
+        </div>       
+
+    </div>
+    
+</div>
+
+{% endblock %}

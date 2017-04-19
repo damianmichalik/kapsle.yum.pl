@@ -6,7 +6,7 @@ use AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AdminBundle\Validator\Constraints as CapAssert;
+use AppBundle\Validator\Constraints as CapAssert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CapRepository")

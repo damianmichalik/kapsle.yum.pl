@@ -1,0 +1,23 @@
+<p>Ilość kapsli: <strong>{{ pagination.getTotalItemCount }}</strong></p>  
+
+<ul class="listing row">        
+
+    {% for cap in pagination %}
+        <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">     
+            <div class="item">
+                <a href="{{ path('caps_details', {'slug' : cap.slug}) }}">                
+                    <img class="img-thumb img-responsive" src="{{ asset(cap.image)|imagine_filter('cap_listing_thumb') }}" alt="{{ cap.name }}">
+                    <span class="item-name">{{ cap.name }}</span>
+                </a>
+            </div>        
+        </li>
+
+        {% if loop.index0 % 3 == 2 %}
+            <li class="line col-xs-12 col-sm-12 col-md-12 col-lg-12"></li>
+        {% endif %}
+
+    {% endfor %}
+
+</ul>
+
+{{ knp_pagination_render(pagination, 'frontend/Pagination/pagination.html.twig') }}

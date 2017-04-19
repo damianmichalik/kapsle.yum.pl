@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% stylesheets filter="?scssphp" output="css/app_combined.css"
+            "assets/frontend/css/bootstrap.min.css"
+            "assets/frontend/css/slimmenu.min.css"
+            "assets/frontend/css/owl.carousel.css"
+            "assets/frontend/css/style.css"
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        <link rel="shortcut icon" href="{{ asset('bundles/app/images/favicons/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('bundles/app/images/favicons/favicon.ico') }}" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('bundles/app/images/favicons/apple-icon-57x57.png') }}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('bundles/app/images/favicons/apple-icon-60x60.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicons/apple-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('bundles/app/images/favicons/apple-icon-76x76.png') }}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('bundles/app/images/favicons/apple-icon-114x114.png') }}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('bundles/app/images/favicons/apple-icon-120x120.png') }}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('bundles/app/images/favicons/apple-icon-144x144.png') }}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('bundles/app/images/favicons/apple-icon-152x152.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('bundles/app/images/favicons/apple-icon-180x180.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('bundles/app/images/favicons/android-icon-192x192.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bundles/app/images/favicons/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('bundles/app/images/favicons/favicon-96x96.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('bundles/app/images/favicons/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('bundles/app/images/favicons/manifest.json') }}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{{ asset('bundles/app/images/favicons/ms-icon-144x144.png') }}">
+        <meta name="theme-color" content="#ffffff">
+        
+        <title>{% spaceless %}{% block headTitle %}Mój katalog kapsli{% endblock %}{% endspaceless %}</title>      
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="container">
+                <div class="nav navbar-nav">
+                    <h1>
+                        <a href="{{ path('app_homepage') }}">Mój katalog kapsli</a>
+                    </h1>
+                </div>
+                <div id="search-form-wrapper">        
+                    <form id="caps-search-form" class="navbar-form navbar-right" action="{{ path('caps_search') }}" role="search">
+                        <input disabled="disabled" type="hidden" id="autocomplete-url" name="autocomplete_url" value="{{ path('caps_ajax_autocomplete') }}">
+                        <div class="form-group">
+                            <input id="caps-search-keyword" value="{{ searchParam is defined ? searchParam : '' }}" type="text" class="form-control" name="search" placeholder="Szukaj...">
+                        </div>
+                        <button id="search-button" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </form> 
+                </div>
+            </div>
+        </header>
+        
+        {% include 'frontend/Partials/nav.html.twig' %}
+                        
+        <div class="container">
+            
+            <ol class="breadcrumb">
+                <li><a href="{{ path('app_homepage') }}">Home</a></li>
+                {% block breadcrumb %}
+                {% endblock %}
+            </ol>
+            
+            {% block pageContainer %}{% endblock %}
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        {{ newest_capses() }}
+                    </div>                   
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        {{ top_breweries() }}
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <h4>Subskrypcje</h4> 
+                        <ul class="social">
+                            <li class="list-unstyled">
+                                <a href="{{ path('caps_rss') }}">
+                                    <img src="{{ asset('bundles/app/images/feed-icon-28x28.png') }}" alt="RSS">
+                                    <span>Kanał RSS</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-right">                                                            
+                            Copyright &copy; 2015 Damian
+                        </p>
+                        <p class="text-right">       
+                            Icons made by <a rel="external" href="http://www.freepik.com" title="Freepik">Freepik</a> from <a rel="external" href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a rel="external" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        {% javascripts filter="?jsqueeze" output="js/app_combined.js"
+            'assets/frontend/js/jquery.min.js'
+            'assets/frontend/js/bootstrap.min.js'
+            'assets/frontend/js/jquery.autocomplete.js'
+            'assets/frontend/js/custom.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        
+        <script src="{{ asset('assets/frontend/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets/frontend/js/jquery.slimmenu.min.js') }}"></script>
+
+        <script>
+            jQuery('.slimmenu').slimmenu({
+                resizeWidth: '800',
+                collapserTitle: '',
+                animSpeed:'slow',
+                indentChildren: true,
+                childrenIndenter: '&raquo;'
+            });
+        </script>
+
+        {% block inlineJavascripts %}{% endblock %}
+
+
+
+    </body>
+</html>

@@ -1,0 +1,85 @@
+app_homepage:
+    path:     /{page}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Frontend/Default:index
+        page: 1 
+
+caps_rss:
+    path: /rss
+    defaults:
+        _controller: AppBundle:Frontend/Feed:rss
+        
+caps_details:
+    path: /kapsel/{slug}
+    defaults:
+        _controller: AppBundle:Frontend/Caps:capsDetails
+        
+caps_search:
+    path: /szukaj/{page}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Frontend/Caps:search
+        page: 1
+
+caps_tags:
+    path: /tag/{slug}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Frontend/Caps:tag
+        page: 1
+        
+caps_ajax_autocomplete:
+    path: /autocomplete
+    defaults:
+        _controller: AppBundle:Frontend/Caps:autocomplete
+        
+caps_login:
+    path: /login
+    defaults:
+        _controller: AppBundle:Frontend/Login:login
+
+breweries_index:
+    path: /browary/{page}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Frontend/Breweries:index
+        page: 1 
+
+breweries_details:
+    path: /browar/{slug}/{page}
+    requirements:
+        page: \d+
+    defaults:
+        _controller: AppBundle:Frontend/Breweries:details
+        page: 1
+
+countries_index:
+    path: /kraje
+    defaults:
+        _controller: AppBundle:Frontend/Countries:index
+
+countries_details:
+    path: /kraj/{slug}
+    defaults:
+        _controller: AppBundle:Frontend/Countries:details
+
+contact:
+    path: /kontakt
+    defaults:
+        _controller: AppBundle:Frontend/Contact:index
+    
+_check_path:
+    path: /login-check
+    
+_logout:
+    path: /logout
+    
+subscribe:
+    path: /subscribe
+    defaults:
+        _controller: AppBundle:Frontend/Subscribe:subscribe

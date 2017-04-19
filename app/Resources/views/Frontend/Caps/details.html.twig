@@ -1,0 +1,161 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block headTitle %}
+    {{ cap.name ~ ' | ' ~ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <li>{{ cap.name }}</li>
+{% endblock %}
+
+{% block pageContainer %}
+
+    <section id="caps-card">
+        <h2>{{ cap.name }}</h2>
+        <hr>
+        <p>
+            <span class="glyphicon glyphicon-time"></span> Dodany {{ cap.createDate|date('Y-m-d H:i') }}
+        </p>
+        <hr>
+        <p>            
+            <img class="img-responsive" src="{{ asset(cap.image)|imagine_filter('cap_detail_thumb') }}" alt="{{ cap.name }}">
+        </p>       
+        {% if cap.brewery is not null %}
+        <p>
+            Browar: <a href="{{ path('breweries_details', {'slug' : cap.brewery.slug}) }}"><strong>{{ cap.brewery.name }}</strong></a>            
+        </p>
+        {% endif %}
+        
+        {% if breweryCapses|length > 0 %}
+        <div id="brewery-capses">
+            <div class="col-half-width" id="brewery-capses-heading">
+                <h4>Inne kapsle z tego browaru</h4>
+            </div>
+            <div class="col-half-width" id="navigation">
+                <i id="owl-custom-prev" class="glyphicon glyphicon-chevron-left icon-prev-next"></i>
+                <i id="owl-custom-next" class="glyphicon glyphicon-chevron-right icon-prev-next"></i>
+            </div>
+            <br class="clear">
+            <div class="owl-carousel">
+                {% for breweryCap in breweryCapses %}
+                    <div class="item">
+                        <a href="{{ path('caps_details', {'slug' : breweryCap.slug}) }}">                
+                            <img class="img-thumb img-responsive" src="{{ asset(breweryCap.image)|imagine_filter('cap_listing_thumb') }}" alt="{{ breweryCap.name }}">
+                            <span class="item-name">{{ breweryCap.name }}</span>
+                        </a>
+                    </div>        
+                {% endfor %}   
+            </div>              
+        </div>
+        {% endif %}
+
+        {% if cap.tags|length > 0 %}
+            <hr>
+            <div id="tag-cloud">
+                <div id="tag-cloud-heading">
+                    <h4>Tagi</h4>
+                </div>
+                <ul>
+                    {% for tag in cap.tags %}
+                        {% if maxViews > 0 %}
+                            {% set percent = ((tag.views / maxViews) * 100) %}
+                            {% if percent < 30 %}
+                                {% set class = 'small' %}
+                            {% elseif percent >= 30 and percent < 70 %}
+                                {% set class = 'medium' %}
+                            {% else %}
+                                {% set class = 'large' %}
+                            {% endif %}
+                        {% else %}
+                            {% set class = 'small' %}
+                        {% endif %}
+                        <li class="{{ class }}"><a href="{{ path('caps_tags', {'slug' : tag.slug}) }}">{{ tag }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+    </section>
+
+{% endblock %}
+
+{% block inlineJavascripts %}
+    
+    {% if breweryCapses|length > 0 %}
+    <script type="text/javascript">
+    
+        jQuery(document).ready(function() {
+            
+            function hideOwlNavigation (items) {
+                if(jQuery(window).width() > 0 && jQuery(window).width() < 600) {
+                    jQuery("#navigation").hide();
+                } else if(jQuery(window).width() > 600 && jQuery(window).width() < 1000) {
+                    if (items < 3) {
+                        jQuery("#navigation").hide();
+                    } else {
+                        jQuery("#navigation").show();
+                    }                    
+                } else {
+                    if (items < 5) {
+                        jQuery("#navigation").hide();
+                    } else {
+                        jQuery("#navigation").show();
+                    }     
+                }
+            }
+            
+            var owl = jQuery('.owl-carousel');
+            
+            owl.on('initialized.owl.carousel', function(event) {                
+                hideOwlNavigation(event.item.count);    
+            });
+            
+            owl.on('resized.owl.carousel', function(event) {                
+                hideOwlNavigation(event.item.count);    
+            });
+
+            var slideNumbers = jQuery(".item").length;
+            var carouselLopp = true;
+            if(slideNumbers < 2) {
+                carouselLopp = false
+            }
+           
+            var owl = owl.owlCarousel({
+                loop:carouselLopp,
+                responsiveClass:true,
+                margin: 20,
+                navText: '',
+                prevText: '',
+                responsive:{
+                    0:{
+                        center: true,
+                        items:1,
+                        nav:false,
+                        dots: false
+                    },
+                    600:{
+                        items:3,
+                        nav:false,
+                        dots: false
+                    },
+                    1000:{
+                        items:5,
+                        nav:false,
+                        dots: false
+                    }
+                }
+            });
+            
+            jQuery('#owl-custom-prev').click(function() {
+                owl.trigger('prev.owl.carousel');
+            });
+            jQuery('#owl-custom-next').click(function() {
+                owl.trigger('next.owl.carousel');
+            });
+        
+        });
+    
+    </script>
+    {% endif %}
+
+{% endblock %}

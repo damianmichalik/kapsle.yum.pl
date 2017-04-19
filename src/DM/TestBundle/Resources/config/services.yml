@@ -1,0 +1,5 @@
+services:
+    dm.shortcode:
+        class: DM\TestBundle\Utils\Shortcode\DMShortcode
+        tags:
+            - { name: app.shortcode }

@@ -1,0 +1,133 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Backend/Default:index }
+    
+admin_caps_list:
+    path: /kapsle/{page}
+    defaults:
+        page: 1
+        _controller: AppBundle:Backend/Caps:index
+    requirements:
+        page: \d+
+        
+admin_delete_cap:
+    path: /kapsle/usun/{id}/{token}
+    defaults:
+        _controller: AppBundle:Backend/Caps:delete
+    requirements:
+        id: \d+        
+
+admin_cap_form_action:
+    path: /kapsle/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Caps:form
+        id: null            
+       
+admin_show_cap:
+    path: /kapsle/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Caps:show
+        
+admin_countries_list:
+    path: /kraje/{page}
+    defaults:
+        page: 1
+        _controller: AppBundle:Backend/Countries:index
+    requirements:
+        page: \d+   
+        
+admin_show_country:
+    path: /kraj/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Countries:show
+        
+admin_delete_country:
+    path: /kraj/usun/{id}/{token}
+    defaults:
+        _controller: AppBundle:Backend/Countries:delete
+    requirements:
+        id: \d+        
+
+admin_country_form_action:
+    path: /kraj/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Countries:form
+        id: null      
+        
+admin_breweries_list:
+    path: /browar/{page}
+    defaults:
+        page: 1
+        _controller: AppBundle:Backend/Breweries:index
+    requirements:
+        page: \d+   
+        
+admin_show_brewery:
+    path: /browar/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Breweries:show
+        
+admin_delete_brewery:
+    path: /browar/usun/{id}/{token}
+    defaults:
+        _controller: AppBundle:Backend/Breweries:delete
+    requirements:
+        id: \d+        
+
+admin_brewery_form_action:
+    path: /browar/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Breweries:form
+        id: null
+
+admin_pages_list:
+    path: /strony/{page}
+    defaults:
+        page: 1
+        _controller: AppBundle:Backend/Pages:index
+    requirements:
+        page: \d+
+
+admin_show_page:
+    path: /strona/pokaz/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Pages:show
+
+admin_delete_page:
+    path: /strona/usun/{id}/{token}
+    defaults:
+        _controller: AppBundle:Backend/Pages:delete
+    requirements:
+        id: \d+
+
+admin_page_form_action:
+    path: /strona/form/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Pages:form
+        id: null
+
+admin_cache_clear:
+    path: /cache-clear
+    defaults: 
+        _controller: AppBundle:Backend/Cache:clear
+        
+admin_cache:
+    path: /cache
+    defaults: 
+        _controller: AppBundle:Backend/Cache:index

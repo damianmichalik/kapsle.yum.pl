@@ -25,7 +25,8 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new AdminBundle\AdminBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new DM\TestBundle\DMTestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,7 +1,7 @@
 services:
     app_bundle.twig.extension:
         class: AppBundle\Twig\Extension\AppExtension
-        arguments: ["@doctrine", "@service_container", "@router"]
+        arguments: ["@doctrine", "@service_container", "@router", "@app.shortcode_chain"]
         tags:
             - { name : twig.extension }
     geocoder_cache:
@@ -18,4 +18,24 @@ services:
     app.caps_paginator:
         class: AppBundle\Utils\Services\CapsPaginator
         arguments: ['@doctrine','@knp_paginator']
+    app.shortcode_chain:
+        class: AppBundle\Utils\Shortcode\ShortcodeChain
+    admin.form.type.tagsinput:
+        class: AppBundle\Form\Type\TagsInputType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }
+    admin.image_path_validator:
+        class: AppBundle\Validator\Constraints\ImageFileValidator
+        arguments: ["%kernel.root_dir%"]
+        tags:
+            - { name: validator.constraint_validator }
+    admin.cap_image_handler:
+        class: AppBundle\Utils\CapImageHandler
+        arguments: ["%kernel.root_dir%", "@doctrine"]
+    admin.main_menu_builder:
+        class: AppBundle\Menu\MainMenuBuilder
+        arguments: ["@knp_menu.factory","@event_dispatcher"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: admin.main }
             

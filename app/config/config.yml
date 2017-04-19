@@ -4,7 +4,6 @@ imports:
     - { resource: services.yml }
     - { resource: doctrine_extensions.yml }
     - { resource: "@AppBundle/Resources/config/parameters.yml" }
-    - { resource: "@AdminBundle/Resources/config/parameters.yml" }
 
 framework:
     #esi:             ~

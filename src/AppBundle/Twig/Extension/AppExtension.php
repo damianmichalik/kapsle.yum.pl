@@ -2,10 +2,11 @@
 
 namespace AppBundle\Twig\Extension;
 
-use AppBundle\Form\Type\SubscriberType;
+use AppBundle\Form\SubscriberType;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use AppBundle\Utils\Shortcode\ShortcodeChain;
 
 class AppExtension extends \Twig_Extension
 {
@@ -27,20 +28,34 @@ class AppExtension extends \Twig_Extension
     protected $router;
 
     /**
+     * @var ShortcodeChain
+     */
+    protected $shortcodeChain;
+
+    /**
     * Constructor
     *
     * @param ContainerInterface $container
     */
-    public function __construct(Registry $doctrine, $container, Router $router)
+    public function __construct(Registry $doctrine, $container, Router $router, ShortcodeChain $shortcodeChain)
     {
         $this->container = $container;
         $this->doctrine = $doctrine;
         $this->router = $router;
+        $this->shortcodeChain = $shortcodeChain;
     }
 
     public function getName()
     {
         return 'app_extension';
+    }
+
+    public function getFilters()
+    {
+        return array(
+            new \Twig_SimpleFilter('str_repeat', array($this, 'strRepeat')),
+            new \Twig_SimpleFilter('appp_shortcode', array($this, 'doShortcode')),
+        );
     }
 
     public function getFunctions()
@@ -119,7 +134,7 @@ class AppExtension extends \Twig_Extension
                 ->setAction($this->router->generate('subscribe'))
                 ->getForm();
 
-        return $env->render('AppBundle:Partials:subscribeForm.html.twig', array(
+        return $env->render('frontend/Partials/subscribeForm.html.twig', array(
             'subscribeForm' => $subscribeForm->createView(),
         ));
     }
@@ -129,7 +144,7 @@ class AppExtension extends \Twig_Extension
         $capsRepo = $this->doctrine->getRepository('AppBundle:Cap');
         $newestCapses = $capsRepo->getNewestCaps(5);
 
-        return $env->render('AppBundle:Partials:newestCapses.html.twig', array(
+        return $env->render('frontend/Partials/newestCapses.html.twig', array(
             'capses' => $newestCapses,
         ));
     }
@@ -139,8 +154,23 @@ class AppExtension extends \Twig_Extension
         $breweriesRepo = $this->doctrine->getRepository('AppBundle:Brewery');
         $topBreweries = $breweriesRepo->getTopBreweries(5);
 
-        return $env->render('AppBundle:Partials:topBreweries.html.twig', array(
+        return $env->render('frontend/Partials/topBreweries.html.twig', array(
             'breweries' => $topBreweries,
         ));
+    }
+
+    /**
+     * @param string $content Content to search for shortcodes
+     *
+     * @return string Content with shortcodes filtered out.
+     */
+    public function doShortcode($content)
+    {
+        return $this->shortcodeChain->process($content);
+    }
+
+    public function strRepeat($text, $number)
+    {
+        return str_repeat($text, $number);
     }
 }
