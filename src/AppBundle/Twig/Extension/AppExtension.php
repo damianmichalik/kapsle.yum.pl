@@ -134,7 +134,7 @@ class AppExtension extends \Twig_Extension
                 ->setAction($this->router->generate('subscribe'))
                 ->getForm();
 
-        return $env->render('frontend/Partials/subscribeForm.html.twig', array(
+        return $env->render('Frontend/Partials/subscribeForm.html.twig', array(
             'subscribeForm' => $subscribeForm->createView(),
         ));
     }
@@ -144,7 +144,7 @@ class AppExtension extends \Twig_Extension
         $capsRepo = $this->doctrine->getRepository('AppBundle:Cap');
         $newestCapses = $capsRepo->getNewestCaps(5);
 
-        return $env->render('frontend/Partials/newestCapses.html.twig', array(
+        return $env->render('Frontend/Partials/newestCapses.html.twig', array(
             'capses' => $newestCapses,
         ));
     }
@@ -154,7 +154,7 @@ class AppExtension extends \Twig_Extension
         $breweriesRepo = $this->doctrine->getRepository('AppBundle:Brewery');
         $topBreweries = $breweriesRepo->getTopBreweries(5);
 
-        return $env->render('frontend/Partials/topBreweries.html.twig', array(
+        return $env->render('Frontend/Partials/topBreweries.html.twig', array(
             'breweries' => $topBreweries,
         ));
     }
