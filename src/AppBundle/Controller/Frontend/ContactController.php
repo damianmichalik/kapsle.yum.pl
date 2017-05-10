@@ -26,7 +26,7 @@ class ContactController extends Controller
             return $this->redirect($this->generateUrl('contact'));
         }
 
-        return $this->render('frontend/Contact/index.html.twig', array(
+        return $this->render('frontend/contact/index.html.twig', array(
             'contactForm' => $contactForm->createView(),
         ));
     }

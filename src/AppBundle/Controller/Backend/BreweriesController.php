@@ -32,10 +32,9 @@ class BreweriesController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($allBreweries, $page, $limit);
 
-        return $this->render('backend/Breweries/index.html.twig', array(
+        return $this->render('backend/breweries/index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->deleteTokenName,
-            'csrfProvider' => $this->get('security.csrf.token_manager'),
             'queryParams' => $queryParams,
             'limits' => $limits,
             'currLimit' => $limit,
@@ -43,92 +42,86 @@ class BreweriesController extends Controller
         ));
     }
 
-    public function deleteAction(Request $request, $id, $token)
+    public function deleteAction(Request $request, Brewery $brewery)
     {
+        $tokenName = sprintf($this->deleteTokenName, $brewery->getId());
+        if (!$this->isCsrfTokenValid($tokenName, $request->request->get('_csrf_token'))) {
+            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token');
 
-        $tokenName = sprintf($this->deleteTokenName, $id);
-        $csrfProvider = $this->get('security.csrf.token_manager');
-
-        if (!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
-            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
-        } else {
-            $brewery = $this->getDoctrine()->getRepository('AppBundle:Brewery')->find($id);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($brewery);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
+            return $this->redirect($this->generateUrl('admin_breweries_list', $request->query->all()));
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($brewery);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
 
         return $this->redirect($this->generateUrl('admin_breweries_list', $request->query->all()));
     }
 
-    public function showAction($id)
+    public function showAction(Brewery $brewery)
     {
-
-        $breweriesRepo = $this->getDoctrine()->getRepository('AppBundle:Brewery');
-
-        $brewery = $breweriesRepo->find($id);
-
-        if ($brewery === null) {
-            $this->get('session')->getFlashBag()->add('error', 'Rekord nie został znaleziony');
-
-            return $this->redirect($this->generateUrl('admin_breweries_list'));
-        }
-
-        return $this->render('backend/Breweries/show.html.twig', array(
+        return $this->render('backend/breweries/show.html.twig', array(
             'brewery' => $brewery,
             'deleteTokenName' => $this->deleteTokenName,
-            'csrfProvider' => $this->get('security.csrf.token_manager'),
         ));
     }
 
-    public function formAction(Request $request, $id = null)
+    public function newAction(Request $request)
     {
-
-        $newBreweryForm = false;
-        if (null == $id) {
-            $brewery = new Brewery();
-            $newBreweryForm = true;
-        } else {
-            $brewery = $this->getDoctrine()->getRepository('AppBundle:Brewery')->find($id);
-        }
-
+        $brewery = new Brewery();
         $form = $this->createForm(BreweryType::class, $brewery);
 
         $form->handleRequest($request);
 
-        if (!$newBreweryForm) {
-            $originalFacts = new ArrayCollection();
-            foreach ($brewery->getFacts() as $fact) {
-                $originalFacts->add($fact);
-            }
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($brewery);
+            $em->flush();
+
+            $this->addFlash('success', 'Poprawnie dodano nowy rekord');
+
+            return $this->redirect($this->generateUrl('admin_breweries_list', $request->query->all()));
+        }
+
+        return $this->render('backend/breweries/new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function editAction(Request $request, Brewery $brewery)
+    {
+        $form = $this->createForm(BreweryType::class, $brewery);
+
+        $form->handleRequest($request);
+
+        $originalFacts = new ArrayCollection();
+        foreach ($brewery->getFacts() as $fact) {
+            $originalFacts->add($fact);
         }
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            if (!$newBreweryForm) {
-                foreach ($originalFacts as $fact) {
-                    if (false === $brewery->getFacts()->contains($fact)) {
-                        $fact->getBreweries()->removeElement($brewery);
-                        $em->persist($fact);
-                    }
+            foreach ($originalFacts as $fact) {
+                if (false === $brewery->getFacts()->contains($fact)) {
+                    $fact->getBreweries()->removeElement($brewery);
+                    $em->persist($fact);
                 }
             }
 
             $em->persist($brewery);
             $em->flush();
 
-            $message = $newBreweryForm ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
-            $this->get('session')->getFlashBag()->add('success', $message);
+            $this->addFlash('success', 'Rekord został zaktualizowany');
 
             return $this->redirect($this->generateUrl('admin_breweries_list', $request->query->all()));
         }
 
-        return $this->render('backend/Breweries/form.html.twig', array(
+        return $this->render('backend/breweries/edit.html.twig', array(
             'form' => $form->createView(),
-            'breweryId' => $id,
             'brewery' => $brewery,
         ));
     }

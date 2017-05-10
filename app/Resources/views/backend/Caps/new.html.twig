@@ -6,11 +6,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            {% if capId is not null %}
-                Edycja kapsla #{{ capId }}
-            {% else %}
-                Nowy kapsel
-            {% endif %}
+            Nowy kapsel
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -22,12 +18,8 @@
                 <a href="{{ path('admin_caps_list') }}">Zarządzanie kapslami</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> 
-                {% if capId is not null %}
-                    Edycja kapsla #{{ capId }}
-                {% else %}
-                    Nowy kapsel
-                {% endif %}
+                <i class="fa fa-file"></i>
+                Nowy kapsel
             </li>
         </ol>    
     </div>
@@ -37,7 +29,7 @@
 
     <div class="col-lg-12">
             
-        {% form_theme form with 'backend/Form/form_theme.html.twig' %}
+        {% form_theme form with 'backend/form/form_theme.html.twig' %}
 
         {{ form(form) }}
 

@@ -1,0 +1,44 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block pageContent %}
+    
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Edycja profilu
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="glyphicon glyphicon-dashboard"></i>  
+                <a href="{{ path('admin_homepage') }}">Kokpit</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-user"></i>
+                Edycja profilu
+            </li>
+        </ol>    
+    </div>
+</div>       
+
+<div class="row">
+
+    <div class="col-lg-12">
+            
+        {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+        {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" id="brewery_save" class="btn-success btn">Zapisz</button>
+                </div>
+            </div>
+        {{ form_end(edit_form) }}
+
+        <a href="{{ path('admin_homepage', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -19,9 +19,7 @@ class CountryType extends AbstractType
                 'label' => 'Nazwa',
                 'required'  => false,
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Zapisz',
-            ));
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

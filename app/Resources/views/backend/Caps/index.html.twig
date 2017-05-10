@@ -1,5 +1,7 @@
 {% extends 'backend/base.html.twig' %}
 
+{% import "backend/macro/buttons.html.twig" as buttons %}
+
 {% block pageContent %}
     
 <div class="row">
@@ -25,7 +27,7 @@
     <div class="col-lg-12">
     
         <div class="dm-table-action">            
-            <a href="{{ path('admin_cap_form_action', app.request.query.all|merge({'page' : page})) }}" class="btn btn-success btn-sm">Dodaj nowy kapsel</a>        
+            <a href="{{ path('admin_new_cap', app.request.query.all|merge({'page' : page})) }}" class="btn btn-success btn-sm">Dodaj nowy kapsel</a>
         </div>
             
         <div class="form-row">
@@ -77,19 +79,16 @@
                                 <span class="warning-text">Brak</span>
                             {% endif %}
                         </td>
-                        <td>
+                        <td class="text-right">
                             <div class="btn-group">
                                 <a title="Pokaż" href="{{ path('admin_show_cap', {'id' : cap.id} ) }}" class="btn btn-info btn-sm">
                                     <span class="glyphicon glyphicon-eye-open"></span>
                                 </a>
-                                <a title="Edytuj" href="{{ path('admin_cap_form_action', app.request.query.all|merge({'id': cap.id, 'page' : page})) }}" class="btn btn-primary btn-sm">
+                                <a title="Edytuj" href="{{ path('admin_edit_cap', app.request.query.all|merge({'id': cap.id, 'page' : page})) }}" class="btn btn-primary btn-sm">
                                     <span class="glyphicon glyphicon-edit"></span>
                                 </a>
-                                {% set tokenName = csrfProvider.getToken(deleteTokenName|format(cap.id)) %}
-                                {% set deleteUrl = path('admin_delete_cap', app.request.query.all|merge({'id': cap.id, 'token': tokenName, 'page' : page})) %}
-                                <a title="Usuń" href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmAction="Czy na pewno chcesz usunąć wybrany rekord?">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
+                                {% set deleteUrl = path('admin_delete_cap', app.request.query.all|merge({'id': cap.id, 'page' : page})) %}
+                                {{ buttons.delete(deleteUrl, 'Usuń', deleteTokenName, cap.id) }}
                             </div>
                         </td>                
                     </tr>
@@ -97,7 +96,7 @@
                 </tbody>
             </table>
 
-            {{ knp_pagination_render(pagination, 'backend/Pagination/admin_pagination.html.twig') }}
+            {{ knp_pagination_render(pagination, 'backend/pagination/admin_pagination.html.twig') }}
 
         </div>       
 

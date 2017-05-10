@@ -15,7 +15,6 @@ class CountriesController extends Controller
 
     public function indexAction(Request $request, $page)
     {
-
         $queryParams = array(
             'searchKeyword' => $request->query->get('searchKeyword'),
         );
@@ -32,10 +31,9 @@ class CountriesController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($allCountries, $page, $limit);
 
-        return $this->render('backend/Countries/index.html.twig', array(
+        return $this->render('backend/countries/index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->deleteTokenName,
-            'csrfProvider' => $this->get('security.csrf.token_manager'),
             'queryParams' => $queryParams,
             'limits' => $limits,
             'currLimit' => $limit,
@@ -43,55 +41,35 @@ class CountriesController extends Controller
         ));
     }
 
-    public function deleteAction(Request $request, $id, $token)
+    public function deleteAction(Request $request, Country $country)
     {
+        $tokenName = sprintf($this->deleteTokenName, $country->getId());
+        if (!$this->isCsrfTokenValid($tokenName, $request->request->get('_csrf_token'))) {
+            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token');
 
-        $tokenName = sprintf($this->deleteTokenName, $id);
-        $csrfProvider = $this->get('security.csrf.token_manager');
-
-        if (!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
-            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
-        } else {
-            $country = $this->getDoctrine()->getRepository('AppBundle:Country')->find($id);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($country);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
+            return $this->redirect($this->generateUrl('admin_countries_list', $request->query->all()));
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($country);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
 
         return $this->redirect($this->generateUrl('admin_countries_list', $request->query->all()));
     }
 
-    public function showAction($id)
+    public function showAction(Country $country)
     {
-
-        $countriesRepo = $this->getDoctrine()->getRepository('AppBundle:Country');
-
-        $country = $countriesRepo->find($id);
-
-        if ($country === null) {
-            $this->get('session')->getFlashBag()->add('error', 'Rekord nie został znaleziony');
-
-            return $this->redirect($this->generateUrl('admin_countries_list'));
-        }
-
-        return $this->render('backend/Countries/show.html.twig', array(
+        return $this->render('backend/countries/show.html.twig', array(
             'country' => $country,
             'deleteTokenName' => $this->deleteTokenName,
             'csrfProvider' => $this->get('security.csrf.token_manager'),
         ));
     }
 
-    public function formAction(Request $request, $id = null)
+    public function editAction(Request $request, Country $country)
     {
-        if (null == $id) {
-            $country = new Country();
-            $newCountryForm = true;
-        } else {
-            $country = $this->getDoctrine()->getRepository('AppBundle:Country')->find($id);
-        }
-
         $form = $this->createForm(CountryType::class, $country);
 
         $form->handleRequest($request);
@@ -100,13 +78,34 @@ class CountriesController extends Controller
             $em->persist($country);
             $em->flush();
 
-            $message = (isset($newCountryForm)) ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
-            $this->get('session')->getFlashBag()->add('success', $message);
+            $this->addFlash('success', 'Rekord został zaktualizowany');
 
             return $this->redirect($this->generateUrl('admin_countries_list', $request->query->all()));
         }
 
-        return $this->render('backend/Countries/form.html.twig', array(
+        return $this->render('backend/countries/edit.html.twig', array(
+            'form' => $form->createView(),
+            'country' => $country,
+        ));
+    }
+
+    public function newAction(Request $request, $id = null)
+    {
+        $country = new Country();
+        $form = $this->createForm(CountryType::class, $country);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($country);
+            $em->flush();
+
+            $this->addFlash('success', 'Poprawnie dodano nowy rekord');
+
+            return $this->redirect($this->generateUrl('admin_countries_list', $request->query->all()));
+        }
+
+        return $this->render('backend/countries/new.html.twig', array(
             'form' => $form->createView(),
             'countryId' => $id,
         ));

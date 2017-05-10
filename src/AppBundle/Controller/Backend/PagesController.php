@@ -39,11 +39,10 @@ class PagesController extends Controller
 
         $topElements = $pagesRepo->completePagination($pagination, $allPages);
 
-        return $this->render('backend/Pages/index.html.twig', array(
+        return $this->render('backend/pages/index.html.twig', array(
             'pagination' => $pagination,
             'topElements' => $topElements,
             'deleteTokenName' => $this->deleteTokenName,
-            'csrfProvider' => $this->get('security.csrf.token_manager'),
             'queryParams' => $queryParams,
             'limits' => $limits,
             'currLimit' => $limit,
@@ -51,72 +50,73 @@ class PagesController extends Controller
         ));
     }
 
-    public function showAction($id)
+    public function showAction(Page $page)
     {
-        $pagesRepo = $this->getDoctrine()->getRepository('AppBundle:Page');
-
-        $page = $pagesRepo->find($id);
-
-        if ($page === null) {
-            $this->get('session')->getFlashBag()->add('error', 'Rekord nie został znaleziony');
-
-            return $this->redirect($this->generateUrl('admin_pages_list'));
-        }
-
-        return $this->render('backend/Pages/show.html.twig', array(
+        return $this->render('backend/pages/show.html.twig', array(
             'page' => $page,
             'deleteTokenName' => $this->deleteTokenName,
-            'csrfProvider' => $this->get('security.csrf.token_manager'),
         ));
     }
 
-    public function deleteAction(Request $request, $id, $token)
+    public function deleteAction(Request $request, Page $page)
     {
-        $tokenName = sprintf($this->deleteTokenName, $id);
-        $csrfProvider = $this->get('security.csrf.token_manager');
+        $tokenName = sprintf($this->deleteTokenName, $page->getId());
+        if (!$this->isCsrfTokenValid($tokenName, $request->request->get('_csrf_token'))) {
+            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token');
 
-        if (!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
-            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
-        } else {
-            $page = $this->getDoctrine()->getRepository('AppBundle:Page')->find($id);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($page);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
+            return $this->redirect($this->generateUrl('admin_pages_list', $request->query->all()));
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($page);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
 
         return $this->redirect($this->generateUrl('admin_pages_list', $request->query->all()));
     }
 
-    public function formAction(Request $request, $id = null)
+    public function newAction(Request $request)
     {
-
-        if (null == $id) {
-            $page = new Page();
-            $newPageForm = true;
-        } else {
-            $page = $this->getDoctrine()->getRepository('AppBundle:Page')->find($id);
-        }
-
+        $page = new Page();
         $form = $this->createForm(PageType::class, $page);
-
         $form->handleRequest($request);
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($page);
             $em->flush();
 
-            $message = (isset($newBreweryForm)) ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
-            $this->get('session')->getFlashBag()->add('success', $message);
+            $this->addFlash('success', 'Poprawnie dodano nowy rekord');
 
             return $this->redirect($this->generateUrl('admin_pages_list', $request->query->all()));
         }
 
-        return $this->render('backend/Pages/form.html.twig', array(
+        return $this->render('backend/pages/new.html.twig', array(
             'form' => $form->createView(),
-            'pageId' => $id,
+            'page' => $page,
+        ));
+    }
+
+    public function editAction(Request $request, Page $page)
+    {
+        $form = $this->createForm(PageType::class, $page);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($page);
+            $em->flush();
+
+            $this->addFlash('success', 'Rekord został zaktualizowany');
+
+            return $this->redirect($this->generateUrl('admin_pages_list', $request->query->all()));
+        }
+
+        return $this->render('backend/pages/edit.html.twig', array(
+            'form' => $form->createView(),
             'page' => $page,
         ));
     }

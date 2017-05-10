@@ -8,8 +8,8 @@
             <h3 class="panel-title">Logowanie</h3>
         </div>
         <div class="panel-body">
-            {% include 'frontend/Partials/flashMsg.html.twig' %}
-            {% form_theme loginForm 'backend/Form/form_theme.html.twig' %}
+            {% include 'frontend/partials/flash_msg.html.twig' %}
+            {% form_theme loginForm 'backend/form/form_theme.html.twig' %}
             {{ form(loginForm, {'action' : path("_check_path")}) }}
         </div>
     </div>

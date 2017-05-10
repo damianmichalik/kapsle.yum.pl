@@ -8,10 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
- *
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
@@ -101,7 +100,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $roles;
 
     /**
-     * @ORM\Column(type="datetime", name="last_login")
+     * @ORM\Column(type="datetime", name="last_login", nullable=true)
      */
     private $lastLogin;
 

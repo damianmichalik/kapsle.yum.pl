@@ -1,0 +1,41 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block pageContent %}
+    
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Nowa strona
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="glyphicon glyphicon-dashboard"></i>  
+                <a href="{{ path('admin_homepage') }}">Kokpit</a>
+            </li>            
+            <li>
+                <i class="fa fa-file-o"></i>
+                <a href="{{ path('admin_pages_list') }}">Zarządzanie stronami</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i>
+                Nowa strona
+            </li>
+        </ol>    
+    </div>
+</div>       
+
+<div class="row">
+
+    <div class="col-lg-12">
+
+        {% form_theme form with 'backend/form/form_theme.html.twig' %}
+
+        {{ form(form) }}
+
+        <a href="{{ path('admin_pages_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
+
+    </div>
+
+</div>
+
+{% endblock %}

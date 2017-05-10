@@ -1,0 +1,9 @@
+{% macro delete(url, message, deleteTokenName, resourceId = null) %}
+    <form action="{{ url }}" method="post" class="delete-item-form">
+        <input type="hidden" name="_method" value="DELETE">
+        <button name="{{ message }}" class="btn btn-danger btn-sm" type="submit" data-confirmAction="Czy na pewno chcesz usunąć wybrany rekord?">
+            <span class="glyphicon glyphicon-trash"></span>
+        </button>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(deleteTokenName|format(resourceId)) }}" />
+    </form>
+{% endmacro %}

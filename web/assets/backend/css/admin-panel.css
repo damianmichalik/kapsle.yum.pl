@@ -30,3 +30,14 @@ ul.facts {
     margin: 0;
     padding: 0;
 }
+.delete-item-form {
+    float: left;
+}
+.btn-group .btn {
+    border-radius: 0;
+}
+.btn-white {
+    color: inherit;
+    background: white;
+    border: 1px solid #e7eaec;
+}

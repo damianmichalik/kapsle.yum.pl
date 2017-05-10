@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Podgląd strony  #{{ page.id }}
+            Podgląd użytkownika #{{ user.id }}
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -15,12 +15,12 @@
                 <a href="{{ path('admin_homepage') }}">Kokpit</a>
             </li>            
             <li>
-                <i class="fa fa-file-o"></i>
-                <a href="{{ path('admin_pages_list') }}">Zarządzanie stronami</a>
+                <i class="fa fa-user"></i>
+                <a href="{{ path('admin_users_list') }}">Zarządzanie użytkownikami</a>
             </li>
             <li class="active">
                 <i class="fa fa-file"></i> 
-                Podgląd strony  #{{ page.id }}
+                Podgląd użytkownika #{{ user.id }}
             </li>
         </ol>    
     </div>
@@ -36,26 +36,30 @@
                 <tbody>
                     <tr>
                         <th>ID</th>
-                        <td>{{ page.id }}</td>
+                        <td>{{ user.id }}</td>
                     </tr>
                     <tr>
-                        <th>Nazwa</th>
-                        <td>{{ page.name }}</td>
+                        <th>Login</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
                     </tr>
                     <tr>
                         <th>&nbsp;</th>
                         <td>
                             <div class="btn-group">                                
-                                <a href="{{ path('admin_edit_page', {'id' : page.id}) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
-                                {% set deleteUrl = path('admin_delete_page', app.request.query.all|merge({'id': page.id})) %}
-                                {{ buttons.delete(deleteUrl, 'Usuń', deleteTokenName, page.id) }}
+                                <a href="{{ path('admin_edit_user', {'id' : user.id}) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
+                                {% set deleteUrl = path('admin_delete_user', {'id': user.id}) %}
+                                {{ buttons.delete(deleteUrl, 'Usuń', deleteTokenName, user.id) }}
                             </div>
                         </td>
                     </tr>                   
                 </tbody>
             </table>
                     
-            <a href="{{ path('admin_pages_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
+            <a href="{{ path('admin_users_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
 
         </div>
 

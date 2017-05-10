@@ -26,7 +26,7 @@ class SubscribeController extends Controller
             }
         }
 
-        return $this->render('frontend/Subscribe/form.html.twig', array(
+        return $this->render('frontend/subscribe/form.html.twig', array(
             'subscribeForm' => $subscribeForm->createView(),
             'hideFooterSubscriberForm' => true,
         ));

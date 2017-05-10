@@ -5,11 +5,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            {% if countryId is not null %}
-                Edycja kraju #{{ countryId }}
-            {% else %}
-                Nowy kraj
-            {% endif %}
+            Edycja kraju #{{ country.id }}
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -21,12 +17,8 @@
                 <a href="{{ path('admin_countries_list') }}">Zarządzanie krajami</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> 
-                {% if countryId is not null %}
-                    Edycja kraju #{{ countryId }}
-                {% else %}
-                    Nowy kraj
-                {% endif %}
+                <i class="fa fa-file"></i>
+                Edycja kraju #{{ country.id }}
             </li>
         </ol>    
     </div>
@@ -35,12 +27,17 @@
 <div class="row">
 
     <div class="col-lg-12">
-            
-        {% form_theme form with 'backend/Form/form_theme.html.twig' %}
 
-        {{ form(form) }}
-
-        <a href="{{ path('admin_countries_list', app.request.query.all) }}"><span class="glyphicon glyphicon-arrow-left"> Powrót</span></a>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <a class="btn btn-white" href="{{ path('admin_countries_list', app.request.query.all) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Powrót</a>
+                    <button type="submit" class="btn-success btn">Zapisz</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
 
     </div>
 

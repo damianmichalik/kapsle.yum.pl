@@ -3,6 +3,7 @@
 namespace AppBundle\Twig\Extension;
 
 use AppBundle\Form\SubscriberType;
+use AppBundle\Utils\Tools;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -93,7 +94,26 @@ class AppExtension extends \Twig_Extension
                     'needs_environment' => true,
                 )
             ),
+            new \Twig_SimpleFunction(
+                'display_user_role',
+                array($this, 'displayUserRole'),
+                array(
+                    'is_safe' => array('html'),
+                    'needs_environment' => false,
+                )
+            ),
         );
+    }
+
+    public function displayUserRole($role)
+    {
+        $roles = Tools::getRoles();
+        $roles = array_flip($roles);
+        if (array_key_exists($role, $roles)) {
+            return $roles[$role];
+        }
+
+        return $role;
     }
 
     public function getHtmlTree(\Twig_Environment $env)
@@ -134,7 +154,7 @@ class AppExtension extends \Twig_Extension
                 ->setAction($this->router->generate('subscribe'))
                 ->getForm();
 
-        return $env->render('frontend/Partials/subscribeForm.html.twig', array(
+        return $env->render('frontend/Partials/subscribe_form.html.twig', array(
             'subscribeForm' => $subscribeForm->createView(),
         ));
     }
@@ -144,7 +164,7 @@ class AppExtension extends \Twig_Extension
         $capsRepo = $this->doctrine->getRepository('AppBundle:Cap');
         $newestCapses = $capsRepo->getNewestCaps(5);
 
-        return $env->render('frontend/Partials/newestCapses.html.twig', array(
+        return $env->render('frontend/Partials/newest_capses.html.twig', array(
             'capses' => $newestCapses,
         ));
     }
@@ -154,7 +174,7 @@ class AppExtension extends \Twig_Extension
         $breweriesRepo = $this->doctrine->getRepository('AppBundle:Brewery');
         $topBreweries = $breweriesRepo->getTopBreweries(5);
 
-        return $env->render('frontend/Partials/topBreweries.html.twig', array(
+        return $env->render('frontend/Partials/top_breweries.html.twig', array(
             'breweries' => $topBreweries,
         ));
     }

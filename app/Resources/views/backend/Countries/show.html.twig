@@ -1,5 +1,7 @@
 {% extends 'backend/base.html.twig' %}
 
+{% import "backend/macro/buttons.html.twig" as buttons %}
+
 {% block pageContent %}
     
 <div class="row">
@@ -44,10 +46,9 @@
                         <th>&nbsp;</th>
                         <td>
                             <div class="btn-group">                                
-                                <a href="{{ path('admin_country_form_action', {'id' : country.id}) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
-                                {% set tokenName = csrfProvider.getToken(deleteTokenName|format(country.id)) %}
-                                {% set deleteUrl = path('admin_delete_country', {'id': country.id, 'token': tokenName}) %}
-                                <a href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmaction=""><span class="glyphicon glyphicon-trash"></span></a>
+                                <a href="{{ path('admin_edit_country', {'id' : country.id}) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
+                                {% set deleteUrl = path('admin_delete_country', {'id': country.id}) %}
+                                {{ buttons.delete(deleteUrl, 'Usuń', deleteTokenName, country.id) }}
                             </div>
                         </td>
                     </tr>                   

@@ -15,7 +15,6 @@ class CapsController extends Controller
 
     public function indexAction(Request $request, $page)
     {
-
         $queryParams = array(
             'searchKeyword' => $request->query->get('searchKeyword'),
         );
@@ -32,10 +31,9 @@ class CapsController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($allCaps, $page, $limit);
 
-        return $this->render('backend/Caps/index.html.twig', array(
+        return $this->render('backend/caps/index.html.twig', array(
             'pagination' => $pagination,
             'deleteTokenName' => $this->deleteTokenName,
-            'csrfProvider' => $this->get('security.csrf.token_manager'),
             'queryParams' => $queryParams,
             'limits' => $limits,
             'currLimit' => $limit,
@@ -43,42 +41,29 @@ class CapsController extends Controller
         ));
     }
 
-    public function deleteAction(Request $request, $id, $token)
+    public function deleteAction(Request $request, Cap $cap)
     {
+        $tokenName = sprintf($this->deleteTokenName, $cap->getId());
+        if (!$this->isCsrfTokenValid($tokenName, $request->request->get('_csrf_token'))) {
+            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token');
 
-        $tokenName = sprintf($this->deleteTokenName, $id);
-        $csrfProvider = $this->get('security.csrf.token_manager');
-
-        if (!$csrfProvider->isTokenValid(new CsrfToken($tokenName, $token))) {
-            $this->get('session')->getFlashBag()->add('error', 'Niepoprawny token akcji!');
-        } else {
-            $cap = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
-
-            $this->get('admin.cap_image_handler')->removeCapImage($cap);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($cap);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
+            return $this->redirect($this->generateUrl('admin_caps_list', $request->query->all()));
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($cap);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'Rekord został usunięty');
 
         return $this->redirect($this->generateUrl('admin_caps_list', $request->query->all()));
     }
 
-    public function formAction(Request $request, $id = null)
+    public function editAction(Request $request, Cap $cap)
     {
-
-        if (null == $id) {
-            $cap = new Cap();
-            $newCapForm = true;
-        } else {
-            $cap = $this->getDoctrine()->getRepository('AppBundle:Cap')->find($id);
-        }
-
         $form = $this->createForm(CapType::class, $cap);
-
         $form->handleRequest($request);
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
@@ -87,35 +72,46 @@ class CapsController extends Controller
 
             $this->get('admin.cap_image_handler')->setCapImage($cap);
 
-            $message = (isset($newCapForm)) ? 'Poprawnie dodano nowy rekord': 'Rekord został zaktualizowany';
-            $this->get('session')->getFlashBag()->add('success', $message);
+            $this->addFlash('success', 'Rekord został zaktualizowany');
 
             return $this->redirect($this->generateUrl('admin_caps_list', $request->query->all()));
         }
 
-        return $this->render('backend/Caps/form.html.twig', array(
+        return $this->render('backend/caps/edit.html.twig', array(
             'form' => $form->createView(),
-            'capId' => $id,
+            'cap' => $cap,
         ));
     }
 
-    public function showAction($id)
+    public function newAction(Request $request)
     {
+        $cap = new Cap();
+        $form = $this->createForm(CapType::class, $cap);
+        $form->handleRequest($request);
 
-        $capsRepo = $this->getDoctrine()->getRepository('AppBundle:Cap');
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
 
-        $cap = $capsRepo->find($id);
+            $em->persist($cap);
+            $em->flush();
 
-        if ($cap === null) {
-            $this->get('session')->getFlashBag()->add('error', 'Rekord nie został znaleziony');
+            $this->get('admin.cap_image_handler')->setCapImage($cap);
 
-            return $this->redirect($this->generateUrl('admin_caps_list'));
+            $this->addFlash('success', 'Poprawnie dodano nowy rekord');
+
+            return $this->redirect($this->generateUrl('admin_caps_list', $request->query->all()));
         }
 
-        return $this->render('backend/Caps/show.html.twig', array(
+        return $this->render('backend/caps/new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function showAction(Cap $cap)
+    {
+        return $this->render('backend/caps/show.html.twig', array(
             'cap' => $cap,
             'deleteTokenName' => $this->deleteTokenName,
-            'csrfProvider' => $this->get('security.csrf.token_manager'),
         ));
     }
 }

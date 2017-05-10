@@ -1,5 +1,7 @@
 {% extends 'backend/base.html.twig' %}
 
+{% import "backend/macro/buttons.html.twig" as buttons %}
+
 {% block pageContent %}
     
 <div class="row">
@@ -64,14 +66,25 @@
                             </td>
                         </tr>
                     {% endif %}
+                    {% if brewery.facts|length > 0 %}
+                    <tr>
+                        <th>Fakty o browarze</th>
+                        <td>
+                            <ol>
+                            {% for fact in brewery.facts %}
+                                <li>{{ fact.year }} - {{ fact.text }}</li>
+                            {% endfor %}
+                            </ol>
+                        </td>
+                    </tr>
+                    {% endif %}
                     <tr>
                         <th>&nbsp;</th>
                         <td>
                             <div class="btn-group">                                
-                                <a href="{{ path('admin_brewery_form_action', {'id' : brewery.id}) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
-                                {% set tokenName = csrfProvider.getToken(deleteTokenName|format(brewery.id)) %}
-                                {% set deleteUrl = path('admin_delete_brewery', {'id': brewery.id, 'token': tokenName}) %}
-                                <a href="{{ deleteUrl }}" class="btn btn-danger btn-sm" data-confirmaction=""><span class="glyphicon glyphicon-trash"></span></a>
+                                <a href="{{ path('admin_edit_brewery', {'id' : brewery.id}) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
+                                {% set deleteUrl = path('admin_delete_brewery', {'id': brewery.id}) %}
+                                {{ buttons.delete(deleteUrl, 'Usuń', deleteTokenName, brewery.id) }}
                             </div>
                         </td>
                     </tr>                   

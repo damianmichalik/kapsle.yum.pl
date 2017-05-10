@@ -3,3 +3,7 @@ services:
         class: DM\TestBundle\Utils\Shortcode\DMShortcode
         tags:
             - { name: app.shortcode }
+    app.listener.admin.menu_builder:
+        class: DM\TestBundle\Menu\MainMenuListener
+        tags:
+            - { name: kernel.event_listener, event: app.menu.admin.main, method: addMenuItems }

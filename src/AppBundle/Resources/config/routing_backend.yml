@@ -3,7 +3,7 @@ admin_homepage:
     defaults: { _controller: AppBundle:Backend/Default:index }
     
 admin_caps_list:
-    path: /kapsle/{page}
+    path: /caps/{page}
     defaults:
         page: 1
         _controller: AppBundle:Backend/Caps:index
@@ -11,19 +11,25 @@ admin_caps_list:
         page: \d+
         
 admin_delete_cap:
-    path: /kapsle/usun/{id}/{token}
+    path: /caps/delete/{id}
     defaults:
         _controller: AppBundle:Backend/Caps:delete
     requirements:
-        id: \d+        
+        id: \d+
+    methods: DELETE
 
-admin_cap_form_action:
-    path: /kapsle/form/{id}
+admin_edit_cap:
+    path: /caps/edit/{id}
     requirements:
         id: \d+
     defaults:
-        _controller: AppBundle:Backend/Caps:form
-        id: null            
+        _controller: AppBundle:Backend/Caps:edit
+
+admin_new_cap:
+    path: /caps/new
+    requirements:
+    defaults:
+        _controller: AppBundle:Backend/Caps:new
        
 admin_show_cap:
     path: /kapsle/pokaz/{id}
@@ -33,7 +39,7 @@ admin_show_cap:
         _controller: AppBundle:Backend/Caps:show
         
 admin_countries_list:
-    path: /kraje/{page}
+    path: /countries/{page}
     defaults:
         page: 1
         _controller: AppBundle:Backend/Countries:index
@@ -41,29 +47,34 @@ admin_countries_list:
         page: \d+   
         
 admin_show_country:
-    path: /kraj/pokaz/{id}
+    path: /countries/show/{id}
     requirements:
         id: \d+
     defaults:
         _controller: AppBundle:Backend/Countries:show
         
 admin_delete_country:
-    path: /kraj/usun/{id}/{token}
+    path: /countries/delete/{id}
     defaults:
         _controller: AppBundle:Backend/Countries:delete
     requirements:
-        id: \d+        
+        id: \d+
+    methods: DELETE
 
-admin_country_form_action:
-    path: /kraj/form/{id}
+admin_edit_country:
+    path: /countries/edit/{id}
     requirements:
         id: \d+
     defaults:
-        _controller: AppBundle:Backend/Countries:form
-        id: null      
+        _controller: AppBundle:Backend/Countries:edit
+
+admin_new_country:
+    path: /countries/new
+    defaults:
+        _controller: AppBundle:Backend/Countries:new
         
 admin_breweries_list:
-    path: /browar/{page}
+    path: /breweries/{page}
     defaults:
         page: 1
         _controller: AppBundle:Backend/Breweries:index
@@ -71,29 +82,34 @@ admin_breweries_list:
         page: \d+   
         
 admin_show_brewery:
-    path: /browar/pokaz/{id}
+    path: /breweries/show/{id}
     requirements:
         id: \d+
     defaults:
         _controller: AppBundle:Backend/Breweries:show
         
 admin_delete_brewery:
-    path: /browar/usun/{id}/{token}
+    path: /breweries/delete/{id}
     defaults:
         _controller: AppBundle:Backend/Breweries:delete
     requirements:
-        id: \d+        
+        id: \d+
+    methods: DELETE
 
-admin_brewery_form_action:
-    path: /browar/form/{id}
+admin_new_brewery:
+    path: /breweries/new
+    defaults:
+        _controller: AppBundle:Backend/Breweries:new
+
+admin_edit_brewery:
+    path: /breweries/edit/{id}
     requirements:
         id: \d+
     defaults:
-        _controller: AppBundle:Backend/Breweries:form
-        id: null
+        _controller: AppBundle:Backend/Breweries:edit
 
 admin_pages_list:
-    path: /strony/{page}
+    path: /pages/{page}
     defaults:
         page: 1
         _controller: AppBundle:Backend/Pages:index
@@ -101,25 +117,31 @@ admin_pages_list:
         page: \d+
 
 admin_show_page:
-    path: /strona/pokaz/{id}
+    path: /pages/show/{id}
     requirements:
         id: \d+
     defaults:
         _controller: AppBundle:Backend/Pages:show
 
 admin_delete_page:
-    path: /strona/usun/{id}/{token}
+    path: /pages/delete/{id}
     defaults:
         _controller: AppBundle:Backend/Pages:delete
     requirements:
         id: \d+
+    methods: DELETE
 
-admin_page_form_action:
-    path: /strona/form/{id}
+admin_new_page:
+    path: /pages/new
+    defaults:
+        _controller: AppBundle:Backend/Pages:new
+
+admin_edit_page:
+    path: /pages/edit/{id}
     requirements:
         id: \d+
     defaults:
-        _controller: AppBundle:Backend/Pages:form
+        _controller: AppBundle:Backend/Pages:edit
         id: null
 
 admin_cache_clear:
@@ -131,3 +153,46 @@ admin_cache:
     path: /cache
     defaults: 
         _controller: AppBundle:Backend/Cache:index
+
+admin_users_list:
+    path: /users/{page}
+    defaults:
+        page: 1
+        _controller: AppBundle:Backend/Users:index
+    requirements:
+        page: \d+
+
+admin_show_user:
+    path: /users/show{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Users:show
+
+admin_delete_user:
+    path: /users/delete/{id}
+    defaults:
+        _controller: AppBundle:Backend/Users:delete
+    requirements:
+        id: \d+
+    methods: DELETE
+
+admin_edit_user:
+    path: /users/edit/{id}
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Users:edit
+
+admin_new_user:
+    path: /users/new
+    requirements:
+        id: \d+
+    defaults:
+        _controller: AppBundle:Backend/Users:new
+        id: null
+
+admin_my_account:
+    path: /my-account
+    defaults:
+        _controller: AppBundle:Backend/Users:myAccount

@@ -5,11 +5,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            {% if pageId is not null %}
-                Edycja strony #{{ pageId }}
-            {% else %}
-                Nowa strona
-            {% endif %}
+            Edycja strony #{{ page.id }}
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -21,12 +17,8 @@
                 <a href="{{ path('admin_pages_list') }}">Zarządzanie stronami</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> 
-                {% if pageId is not null %}
-                    Edycja strony #{{ pageId }}
-                {% else %}
-                    Nowa strona
-                {% endif %}
+                <i class="fa fa-file"></i>
+                Edycja strony #{{ page.id }}
             </li>
         </ol>    
     </div>
@@ -36,7 +28,7 @@
 
     <div class="col-lg-12">
 
-        {% form_theme form with 'backend/Form/form_theme.html.twig' %}
+        {% form_theme form with 'backend/form/form_theme.html.twig' %}
 
         {{ form(form) }}
 
